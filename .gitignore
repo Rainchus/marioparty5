@@ -1,0 +1,5 @@
+tools/elf2dol
+tools/elf2rel
+tools/mwcc_compiler
+build/
+main.dol
