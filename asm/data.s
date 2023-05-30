@@ -32476,8 +32476,8 @@ lbl_801CA1D8:
 	.4byte 0x008C0003
 	.4byte 0x008C0003
 
-.global lbl_801CA21C
-lbl_801CA21C:
+.global capsuleRelatedStruct # RAM 0x801CA21C [capsule/orb](structs are 0x1C in size. 0x14 is price)
+capsuleRelatedStruct:
 
 	# ROM: 0x1C721C
 	.4byte 0x000B0000
@@ -32487,6 +32487,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0x00000005
 	.4byte 0x41000000
+
 	.4byte 0x000B0001
 	.4byte 0x000B001C
 	.4byte 0x00390001
@@ -32494,6 +32495,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0x0000000A
 	.4byte 0x42000000
+
 	.4byte 0x000B0002
 	.4byte 0x000B001C
 	.4byte 0x00390002
@@ -32501,6 +32503,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0x00000005
 	.4byte 0x41000000
+
 	.4byte 0x000B0003
 	.4byte 0x000B001C
 	.4byte 0x00390003
@@ -32508,6 +32511,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0x0000000A
 	.4byte 0x41000000
+
 	.4byte 0x000B0004
 	.4byte 0x000B001C
 	.4byte 0x00390004
@@ -32515,6 +32519,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0x0000000A
 	.4byte 0x42000000
+
 	.4byte 0x000B0005
 	.4byte 0x000B001C
 	.4byte 0x00390005
@@ -32522,6 +32527,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0x0000000A
 	.4byte 0x43000000
+
 	.4byte 0x000B0006
 	.4byte 0x000B001C
 	.4byte 0x00390006
@@ -32529,6 +32535,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0x00000014
 	.4byte 0x45010000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32536,6 +32543,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32543,6 +32551,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32550,6 +32559,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0x000B0007
 	.4byte 0x000B001D
 	.4byte 0x00390007
@@ -32557,6 +32567,7 @@ lbl_801CA21C:
 	.4byte 0x00000001
 	.4byte 0x00000005
 	.4byte 0x41000000
+
 	.4byte 0x000B0008
 	.4byte 0x000B001D
 	.4byte 0x00390008
@@ -32564,6 +32575,7 @@ lbl_801CA21C:
 	.4byte 0x00000001
 	.4byte 0x00000005
 	.4byte 0x41000000
+
 	.4byte 0x000B0009
 	.4byte 0x000B001D
 	.4byte 0x00390009
@@ -32571,6 +32583,7 @@ lbl_801CA21C:
 	.4byte 0x00000001
 	.4byte 0x00000005
 	.4byte 0x42000000
+
 	.4byte 0x000B000A
 	.4byte 0x000B001D
 	.4byte 0x0039000A
@@ -32578,6 +32591,7 @@ lbl_801CA21C:
 	.4byte 0x00000001
 	.4byte 0x0000000A
 	.4byte 0x44000000
+
 	.4byte 0x000B000B
 	.4byte 0x000B001D
 	.4byte 0x0039000B
@@ -32585,6 +32599,7 @@ lbl_801CA21C:
 	.4byte 0x00000001
 	.4byte 0x0000000A
 	.4byte 0x45010000
+
 	.4byte 0x000B000C
 	.4byte 0x000B001D
 	.4byte 0x0039000C
@@ -32592,6 +32607,7 @@ lbl_801CA21C:
 	.4byte 0x00000001
 	.4byte 0x00000005
 	.4byte 0x43000000
+
 	.4byte 0x000B000D
 	.4byte 0x000B001D
 	.4byte 0x0039000D
@@ -32599,6 +32615,7 @@ lbl_801CA21C:
 	.4byte 0x00000001
 	.4byte 0
 	.4byte 0x42010000
+
 	.4byte 0x000B000E
 	.4byte 0x000B001D
 	.4byte 0x0039000E
@@ -32606,6 +32623,7 @@ lbl_801CA21C:
 	.4byte 0x00000001
 	.4byte 0x0000000A
 	.4byte 0x41010000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32613,6 +32631,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32620,6 +32639,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0x000B000F
 	.4byte 0x000B001E
 	.4byte 0x0039000F
@@ -32627,6 +32647,7 @@ lbl_801CA21C:
 	.4byte 0x00000002
 	.4byte 0x0000000A
 	.4byte 0x42000000
+
 	.4byte 0x000B0010
 	.4byte 0x000B001E
 	.4byte 0x00390010
@@ -32634,6 +32655,7 @@ lbl_801CA21C:
 	.4byte 0x00000002
 	.4byte 0x00000005
 	.4byte 0x43000000
+
 	.4byte 0x000B0011
 	.4byte 0x000B001D
 	.4byte 0x00390011
@@ -32641,6 +32663,7 @@ lbl_801CA21C:
 	.4byte 0x00000001
 	.4byte 0x00000005
 	.4byte 0x42000000
+
 	.4byte 0x000B0012
 	.4byte 0x000B001E
 	.4byte 0x00390012
@@ -32648,6 +32671,7 @@ lbl_801CA21C:
 	.4byte 0x00000002
 	.4byte 0x0000000A
 	.4byte 0x43000000
+
 	.4byte 0x000B0013
 	.4byte 0x000B001E
 	.4byte 0x00390013
@@ -32655,6 +32679,7 @@ lbl_801CA21C:
 	.4byte 0x00000002
 	.4byte 0x0000000A
 	.4byte 0x43000000
+
 	.4byte 0x000B0014
 	.4byte 0x000B001E
 	.4byte 0x00390014
@@ -32662,6 +32687,7 @@ lbl_801CA21C:
 	.4byte 0x00000002
 	.4byte 0x0000000A
 	.4byte 0x42000000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32669,6 +32695,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32676,6 +32703,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32683,6 +32711,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32690,6 +32719,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0x000B0015
 	.4byte 0x000B001F
 	.4byte 0x00390015
@@ -32697,6 +32727,7 @@ lbl_801CA21C:
 	.4byte 0x00000003
 	.4byte 0x0000000F
 	.4byte 0x44010000
+
 	.4byte 0x000B0016
 	.4byte 0x000B001F
 	.4byte 0x00390016
@@ -32704,6 +32735,7 @@ lbl_801CA21C:
 	.4byte 0x00000003
 	.4byte 0x0000000A
 	.4byte 0x44000000
+
 	.4byte 0x000B0017
 	.4byte 0x000B001F
 	.4byte 0x00390017
@@ -32711,6 +32743,7 @@ lbl_801CA21C:
 	.4byte 0x00000003
 	.4byte 0x0000000F
 	.4byte 0x44010000
+
 	.4byte 0x000B0018
 	.4byte 0x000B001F
 	.4byte 0x00390018
@@ -32718,6 +32751,7 @@ lbl_801CA21C:
 	.4byte 0x00000003
 	.4byte 0xFFFFFFFF
 	.4byte 0x43010000
+
 	.4byte 0x000B0019
 	.4byte 0x000B0020
 	.4byte 0x00390019
@@ -32725,6 +32759,7 @@ lbl_801CA21C:
 	.4byte 0x00000003
 	.4byte 0xFFFFFFFF
 	.4byte 0x43000000
+
 	.4byte 0x000B001A
 	.4byte 0x000B001F
 	.4byte 0x0039001A
@@ -32732,6 +32767,7 @@ lbl_801CA21C:
 	.4byte 0x00000003
 	.4byte 0x00000014
 	.4byte 0x45010000
+
 	.4byte 0x000B001B
 	.4byte 0x000B001F
 	.4byte 0x0039001B
@@ -32739,6 +32775,7 @@ lbl_801CA21C:
 	.4byte 0x00000003
 	.4byte 0xFFFFFFFF
 	.4byte 0x45010000
+
 	.4byte 0x000B001B
 	.4byte 0x000B001F
 	.4byte 0x0039001C
@@ -32746,6 +32783,7 @@ lbl_801CA21C:
 	.4byte 0x00000003
 	.4byte 0xFFFFFFFF
 	.4byte 0x5A010000
+
 	.4byte 0x000B001B
 	.4byte 0x000B001F
 	.4byte 0x0039001D
@@ -32753,6 +32791,7 @@ lbl_801CA21C:
 	.4byte 0x00000003
 	.4byte 0xFFFFFFFF
 	.4byte 0x5A010000
+
 	.4byte 0
 	.4byte 0
 	.4byte 0x0039001E
@@ -32760,6 +32799,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0x000B001B
 	.4byte 0x000B001F
 	.4byte 0x0039001E
@@ -32767,6 +32807,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0x000B001B
 	.4byte 0x000B001F
 	.4byte 0x0039001E
@@ -32774,6 +32815,7 @@ lbl_801CA21C:
 	.4byte 0
 	.4byte 0
 	.4byte 0x5A010000
+
 	.4byte 0x000B001B
 	.4byte 0x000B001F
 	.4byte 0x0039001E

@@ -895,16 +895,16 @@ lbl_80288314:
 	# ROM: 0x1D53B4
 	.4byte 0xFFFFFFFF
 
-.global lbl_80288318
-lbl_80288318:
+.global curPlayerIndexUsedItem # RAM 0x80288318
+curPlayerIndexUsedItem:
 
 	# ROM: 0x1D53B8
 	.4byte 0xFFFFFFFF
 
-.global lbl_8028831C
-lbl_8028831C:
+.global curItemUsedID
+curItemUsedID:
 
-	# ROM: 0x1D53BC
+	# ROM: 0x1D53BC # RAM 0x8028831C
 	.4byte 0xFFFFFFFF
 
 .global lbl_80288320

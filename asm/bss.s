@@ -343,8 +343,8 @@ lbl_8022A030:
 lbl_8022A048:
 	.skip 0x28
 
-.global func_8022A070
-func_8022A070:
+.global gPlayers
+gPlayers:
 	.skip 0x420
 
 .global func_8022A490
