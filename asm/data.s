@@ -91,8 +91,7 @@ lbl_801AB748:
 lbl_801AB759:
 
 	# ROM: 0x1A8759
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/bdemo.bin"
+	.asciz "data/bdemo.bin"
 
 .global lbl_801AB768
 lbl_801AB768:
@@ -122,15 +121,13 @@ lbl_801AB79C:
 lbl_801AB7AD:
 
 	# ROM: 0x1A87AD
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/blast5.bin"
+	.asciz "data/blast5.bin"
 
 .global lbl_801AB7BD
 lbl_801AB7BD:
 
 	# ROM: 0x1A87BD
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/board.bin"
+	.asciz "data/board.bin"
 
 .global lbl_801AB7CC
 lbl_801AB7CC:
@@ -148,8 +145,7 @@ lbl_801AB7DC:
 lbl_801AB7EF:
 
 	# ROM: 0x1A87EF
-	.byte 0x64
-	.asciz "ata/capsule.bin"
+	.asciz "data/capsule.bin"
 
 .global lbl_801AB800
 lbl_801AB800:
@@ -200,22 +196,19 @@ lbl_801AB87C:
 lbl_801AB88B:
 
 	# ROM: 0x1A888B
-	.byte 0x64
-	.asciz "ata/daisymdl0.bin"
+	.asciz "data/daisymdl0.bin"
 
 .global lbl_801AB89E
 lbl_801AB89E:
 
 	# ROM: 0x1A889E
-	.byte 0x64, 0x61
-	.asciz "ta/daisymdl1.bin"
+	.asciz "data/daisymdl1.bin"
 
 .global lbl_801AB8B1
 lbl_801AB8B1:
 
 	# ROM: 0x1A88B1
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/daisymdl2.bin"
+	.asciz "data/daisymdl2.bin"
 
 .global lbl_801AB8C4
 lbl_801AB8C4:
@@ -227,15 +220,13 @@ lbl_801AB8C4:
 lbl_801AB8D7:
 
 	# ROM: 0x1A88D7
-	.byte 0x64
-	.asciz "ata/daisymot.bin"
+	.asciz "data/daisymot.bin"
 
 .global lbl_801AB8E9
 lbl_801AB8E9:
 
 	# ROM: 0x1A88E9
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/decathlon.bin"
+	.asciz "data/decathlon.bin"
 
 .global lbl_801AB8FC
 lbl_801AB8FC:
@@ -277,15 +268,13 @@ lbl_801AB95C:
 lbl_801AB96F:
 
 	# ROM: 0x1A896F
-	.byte 0x64
-	.asciz "ata/e3boot.bin"
+	.asciz "data/e3boot.bin"
 
 .global lbl_801AB97F
 lbl_801AB97F:
 
 	# ROM: 0x1A897F
-	.byte 0x64
-	.asciz "ata/e3setup.bin"
+	.asciz "data/e3setup.bin"
 
 .global lbl_801AB990
 lbl_801AB990:
@@ -303,50 +292,43 @@ lbl_801AB9A0:
 lbl_801AB9B1:
 
 	# ROM: 0x1A89B1
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/gamemes.bin"
+	.asciz "data/gamemes.bin"
 
 .global lbl_801AB9C2
 lbl_801AB9C2:
 
 	# ROM: 0x1A89C2
-	.byte 0x64, 0x61
-	.asciz "ta/guide.bin"
+	.asciz "data/guide.bin"
 
 .global lbl_801AB9D1
 lbl_801AB9D1:
 
 	# ROM: 0x1A89D1
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/inst.bin"
+	.asciz "data/inst.bin"
 
 .global lbl_801AB9DF
 lbl_801AB9DF:
 
 	# ROM: 0x1A89DF
-	.byte 0x64
-	.asciz "ata/instfont.bin"
+	.asciz "data/instfont.bin"
 
 .global lbl_801AB9F1
 lbl_801AB9F1:
 
 	# ROM: 0x1A89F1
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/instpic.bin"
+	.asciz "data/instpic.bin"
 
 .global lbl_801ABA02
 lbl_801ABA02:
 
 	# ROM: 0x1A8A02
-	.byte 0x64, 0x61
-	.asciz "ta/kinopio.bin"
+	.asciz "data/kinopio.bin"
 
 .global lbl_801ABA13
 lbl_801ABA13:
 
 	# ROM: 0x1A8A13
-	.byte 0x64
-	.asciz "ata/kinopiomdl0.bin"
+	.asciz "data/kinopiomdl0.bin"
 
 .global lbl_801ABA28
 lbl_801ABA28:
@@ -358,43 +340,37 @@ lbl_801ABA28:
 lbl_801ABA3D:
 
 	# ROM: 0x1A8A3D
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/kinopiomdl2.bin"
+	.asciz "data/kinopiomdl2.bin"
 
 .global lbl_801ABA52
 lbl_801ABA52:
 
 	# ROM: 0x1A8A52
-	.byte 0x64, 0x61
-	.asciz "ta/kinopiomdl3.bin"
+	.asciz "data/kinopiomdl3.bin"
 
 .global lbl_801ABA67
 lbl_801ABA67:
 
 	# ROM: 0x1A8A67
-	.byte 0x64
-	.asciz "ata/kinopiomot.bin"
+	.asciz "data/kinopiomot.bin"
 
 .global lbl_801ABA7B
 lbl_801ABA7B:
 
 	# ROM: 0x1A8A7B
-	.byte 0x64
-	.asciz "ata/luigi.bin"
+	.asciz "data/luigi.bin"
 
 .global lbl_801ABA8A
 lbl_801ABA8A:
 
 	# ROM: 0x1A8A8A
-	.byte 0x64, 0x61
-	.asciz "ta/luigimdl0.bin"
+	.asciz "data/luigimdl0.bin"
 
 .global lbl_801ABA9D
 lbl_801ABA9D:
 
 	# ROM: 0x1A8A9D
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/luigimdl1.bin"
+	.asciz "data/luigimdl1.bin"
 
 .global lbl_801ABAB0
 lbl_801ABAB0:
@@ -406,15 +382,13 @@ lbl_801ABAB0:
 lbl_801ABAC3:
 
 	# ROM: 0x1A8AC3
-	.byte 0x64
-	.asciz "ata/luigimdl3.bin"
+	.asciz "data/luigimdl3.bin"
 
 .global lbl_801ABAD6
 lbl_801ABAD6:
 
 	# ROM: 0x1A8AD6
-	.byte 0x64, 0x61
-	.asciz "ta/luigimot.bin"
+	.asciz "data/luigimot.bin"
 
 .global lbl_801ABAE8
 lbl_801ABAE8:
@@ -426,8 +400,7 @@ lbl_801ABAE8:
 lbl_801ABAF6:
 
 	# ROM: 0x1A8AF6
-	.byte 0x64, 0x61
-	.asciz "ta/m416.bin"
+	.asciz "data/m416.bin"
 
 .global lbl_801ABB04
 lbl_801ABB04:
@@ -966,8 +939,7 @@ lbl_801ABF72:
 lbl_801ABF81:
 
 	# ROM: 0x1A8F81
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/mariomdl0.bin"
+	.asciz "data/mariomdl0.bin"
 
 .global lbl_801ABF94
 lbl_801ABF94:
@@ -979,29 +951,25 @@ lbl_801ABF94:
 lbl_801ABFA7:
 
 	# ROM: 0x1A8FA7
-	.byte 0x64
-	.asciz "ata/mariomdl2.bin"
+	.asciz "data/mariomdl2.bin"
 
 .global lbl_801ABFBA
 lbl_801ABFBA:
 
 	# ROM: 0x1A8FBA
-	.byte 0x64, 0x61
-	.asciz "ta/mariomdl3.bin"
+	.asciz "data/mariomdl3.bin"
 
 .global lbl_801ABFCD
 lbl_801ABFCD:
 
 	# ROM: 0x1A8FCD
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/mariomot.bin"
+	.asciz "data/mariomot.bin"
 
 .global lbl_801ABFDF
 lbl_801ABFDF:
 
 	# ROM: 0x1A8FDF
-	.byte 0x64
-	.asciz "ata/mbrushi.bin"
+	.asciz "data/mbrushi.bin"
 
 .global lbl_801ABFF0
 lbl_801ABFF0:
@@ -1013,29 +981,25 @@ lbl_801ABFF0:
 lbl_801AC001:
 
 	# ROM: 0x1A9001
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/mdcard.bin"
+	.asciz "data/mdcard.bin"
 
 .global lbl_801AC011
 lbl_801AC011:
 
 	# ROM: 0x1A9011
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/mdmini.bin"
+	.asciz "data/mdmini.bin"
 
 .global lbl_801AC021
 lbl_801AC021:
 
 	# ROM: 0x1A9021
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/mdomake.bin"
+	.asciz "data/mdomake.bin"
 
 .global lbl_801AC032
 lbl_801AC032:
 
 	# ROM: 0x1A9032
-	.byte 0x64, 0x61
-	.asciz "ta/mdoption.bin"
+	.asciz "data/mdoption.bin"
 
 .global lbl_801AC044
 lbl_801AC044:
@@ -1047,8 +1011,7 @@ lbl_801AC044:
 lbl_801AC055:
 
 	# ROM: 0x1A9055
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/mdsel.bin"
+	.asciz "data/mdsel.bin"
 
 .global lbl_801AC064
 lbl_801AC064:
@@ -1060,29 +1023,25 @@ lbl_801AC064:
 lbl_801AC075:
 
 	# ROM: 0x1A9075
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/mgconst.bin"
+	.asciz "data/mgconst.bin"
 
 .global lbl_801AC086
 lbl_801AC086:
 
 	# ROM: 0x1A9086
-	.byte 0x64, 0x61
-	.asciz "ta/mgfree.bin"
+	.asciz "data/mgfree.bin"
 
 .global lbl_801AC096
 lbl_801AC096:
 
 	# ROM: 0x1A9096
-	.byte 0x64, 0x61
-	.asciz "ta/mgmatch.bin"
+	.asciz "data/mgmatch.bin"
 
 .global lbl_801AC0A7
 lbl_801AC0A7:
 
 	# ROM: 0x1A90A7
-	.byte 0x64
-	.asciz "ata/mgshare.bin"
+	.asciz "data/mgshare.bin"
 
 .global lbl_801AC0B8
 lbl_801AC0B8:
@@ -1106,15 +1065,13 @@ lbl_801AC0D8:
 lbl_801AC0EB:
 
 	# ROM: 0x1A90EB
-	.byte 0x64
-	.asciz "ata/minikoopaB.bin"
+	.asciz "data/minikoopaB.bin"
 
 .global lbl_801AC0FF
 lbl_801AC0FF:
 
 	# ROM: 0x1A90FF
-	.byte 0x64
-	.asciz "ata/minikoopaBmdl0.bin"
+	.asciz "data/minikoopaBmdl0.bin"
 
 .global lbl_801AC117
 lbl_801AC117:
@@ -1367,50 +1324,43 @@ lbl_801AC3D8:
 lbl_801AC3ED:
 
 	# ROM: 0x1A93ED
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/system.bin"
+	.asciz "data/system.bin"
 
 .global lbl_801AC3FD
 lbl_801AC3FD:
 
 	# ROM: 0x1A93FD
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/teresa.bin"
+	.asciz "data/teresa.bin"
 
 .global lbl_801AC40D
 lbl_801AC40D:
 
 	# ROM: 0x1A940D
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/teresamdl0.bin"
+	.asciz "data/teresamdl0.bin"
 
 .global lbl_801AC421
 lbl_801AC421:
 
 	# ROM: 0x1A9421
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/teresamdl1.bin"
+	.asciz "data/teresamdl1.bin"
 
 .global lbl_801AC435
 lbl_801AC435:
 
 	# ROM: 0x1A9435
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/teresamdl2.bin"
+	.asciz "data/teresamdl2.bin"
 
 .global lbl_801AC449
 lbl_801AC449:
 
 	# ROM: 0x1A9449
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/teresamdl3.bin"
+	.asciz "data/teresamdl3.bin"
 
 .global lbl_801AC45D
 lbl_801AC45D:
 
 	# ROM: 0x1A945D
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/teresamot.bin"
+	.asciz "data/teresamot.bin"
 
 .global lbl_801AC470
 lbl_801AC470:
@@ -1422,8 +1372,7 @@ lbl_801AC470:
 lbl_801AC47F:
 
 	# ROM: 0x1A947F
-	.byte 0x64
-	.asciz "ata/w01.bin"
+	.asciz "data/w01.bin"
 
 .global lbl_801AC48C
 lbl_801AC48C:
@@ -1435,29 +1384,25 @@ lbl_801AC48C:
 lbl_801AC49A:
 
 	# ROM: 0x1A949A
-	.byte 0x64, 0x61
-	.asciz "ta/w02.bin"
+	.asciz "data/w02.bin"
 
 .global lbl_801AC4A7
 lbl_801AC4A7:
 
 	# ROM: 0x1A94A7
-	.byte 0x64
-	.asciz "ata/w02s.bin"
+	.asciz "data/w02s.bin"
 
 .global lbl_801AC4B5
 lbl_801AC4B5:
 
 	# ROM: 0x1A94B5
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/w03.bin"
+	.asciz "data/w03.bin"
 
 .global lbl_801AC4C2
 lbl_801AC4C2:
 
 	# ROM: 0x1A94C2
-	.byte 0x64, 0x61
-	.asciz "ta/w03s.bin"
+	.asciz "data/w03s.bin"
 
 .global lbl_801AC4D0
 lbl_801AC4D0:
@@ -1469,15 +1414,13 @@ lbl_801AC4D0:
 lbl_801AC4DD:
 
 	# ROM: 0x1A94DD
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/w04s.bin"
+	.asciz "data/w04s.bin"
 
 .global lbl_801AC4EB
 lbl_801AC4EB:
 
 	# ROM: 0x1A94EB
-	.byte 0x64
-	.asciz "ata/w05.bin"
+	.asciz "data/w05.bin"
 
 .global lbl_801AC4F8
 lbl_801AC4F8:
@@ -1489,29 +1432,25 @@ lbl_801AC4F8:
 lbl_801AC506:
 
 	# ROM: 0x1A9506
-	.byte 0x64, 0x61
-	.asciz "ta/w06.bin"
+	.asciz "data/w06.bin"
 
 .global lbl_801AC513
 lbl_801AC513:
 
 	# ROM: 0x1A9513
-	.byte 0x64
-	.asciz "ata/w06s.bin"
+	.asciz "data/w06s.bin"
 
 .global lbl_801AC521
 lbl_801AC521:
 
 	# ROM: 0x1A9521
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/w07.bin"
+	.asciz "data/w07.bin"
 
 .global lbl_801AC52E
 lbl_801AC52E:
 
 	# ROM: 0x1A952E
-	.byte 0x64, 0x61
-	.asciz "ta/w07s.bin"
+	.asciz "data/w07s.bin"
 
 .global lbl_801AC53C
 lbl_801AC53C:
@@ -1523,22 +1462,19 @@ lbl_801AC53C:
 lbl_801AC549:
 
 	# ROM: 0x1A9549
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/w20.bin"
+	.asciz "data/w20.bin"
 
 .global lbl_801AC556
 lbl_801AC556:
 
 	# ROM: 0x1A9556
-	.byte 0x64, 0x61
-	.asciz "ta/waluigi.bin"
+	.asciz "data/waluigi.bin"
 
 .global lbl_801AC567
 lbl_801AC567:
 
 	# ROM: 0x1A9567
-	.byte 0x64
-	.asciz "ata/waluigimdl0.bin"
+	.asciz "data/waluigimdl0.bin"
 
 .global lbl_801AC57C
 lbl_801AC57C:
@@ -1550,43 +1486,37 @@ lbl_801AC57C:
 lbl_801AC591:
 
 	# ROM: 0x1A9591
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/waluigimdl2.bin"
+	.asciz "data/waluigimdl2.bin"
 
 .global lbl_801AC5A6
 lbl_801AC5A6:
 
 	# ROM: 0x1A95A6
-	.byte 0x64, 0x61
-	.asciz "ta/waluigimdl3.bin"
+	.asciz "data/waluigimdl3.bin"
 
 .global lbl_801AC5BB
 lbl_801AC5BB:
 
 	# ROM: 0x1A95BB
-	.byte 0x64
-	.asciz "ata/waluigimot.bin"
+	.asciz "data/waluigimot.bin"
 
 .global lbl_801AC5CF
 lbl_801AC5CF:
 
 	# ROM: 0x1A95CF
-	.byte 0x64
-	.asciz "ata/wario.bin"
+	.asciz "data/wario.bin"
 
 .global lbl_801AC5DE
 lbl_801AC5DE:
 
 	# ROM: 0x1A95DE
-	.byte 0x64, 0x61
-	.asciz "ta/wariomdl0.bin"
+	.asciz "data/wariomdl0.bin"
 
 .global lbl_801AC5F1
 lbl_801AC5F1:
 
 	# ROM: 0x1A95F1
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/wariomdl1.bin"
+	.asciz "data/wariomdl1.bin"
 
 .global lbl_801AC604
 lbl_801AC604:
@@ -1598,15 +1528,13 @@ lbl_801AC604:
 lbl_801AC617:
 
 	# ROM: 0x1A9617
-	.byte 0x64
-	.asciz "ata/wariomdl3.bin"
+	.asciz "data/wariomdl3.bin"
 
 .global lbl_801AC62A
 lbl_801AC62A:
 
 	# ROM: 0x1A962A
-	.byte 0x64, 0x61
-	.asciz "ta/wariomot.bin"
+	.asciz "data/wariomot.bin"
 
 .global lbl_801AC63C
 lbl_801AC63C:
@@ -1618,8 +1546,7 @@ lbl_801AC63C:
 lbl_801AC649:
 
 	# ROM: 0x1A9649
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/yoshi.bin"
+	.asciz "data/yoshi.bin"
 
 .global lbl_801AC658
 lbl_801AC658:
@@ -1631,22 +1558,19 @@ lbl_801AC658:
 lbl_801AC66B:
 
 	# ROM: 0x1A966B
-	.byte 0x64
-	.asciz "ata/yoshimdl1.bin"
+	.asciz "data/yoshimdl1.bin"
 
 .global lbl_801AC67E
 lbl_801AC67E:
 
 	# ROM: 0x1A967E
-	.byte 0x64, 0x61
-	.asciz "ta/yoshimdl2.bin"
+	.asciz "data/yoshimdl2.bin"
 
 .global lbl_801AC691
 lbl_801AC691:
 
 	# ROM: 0x1A9691
-	.byte 0x64, 0x61, 0x74
-	.asciz "a/yoshimdl3.bin"
+	.asciz "data/yoshimdl3.bin"
 
 .global lbl_801AC6A4
 lbl_801AC6A4:
