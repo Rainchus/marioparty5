@@ -28,7 +28,7 @@ from tools.project import (
 # Game versions
 DEFAULT_VERSION = 0
 VERSIONS = [
-    "GAMEID",  # 0
+    "GP5E01",  # 0
 ]
 
 parser = argparse.ArgumentParser()
@@ -205,7 +205,8 @@ cflags_rel = [
 ]
 
 config.linker_version = "GC/1.3.2"
-
+config.rel_strip_partial = False
+config.rel_empty_file = "REL/empty.c"
 
 # Helper function for Dolphin libraries
 def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
