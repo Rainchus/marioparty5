@@ -204,6 +204,14 @@ cflags_rel = [
     "-sdata2 0",
 ]
 
+# Game flags
+cflags_game = [
+    *cflags_base,
+    "-O0,p",
+    "-char unsigned",
+    "-fp_contract off",
+]
+
 config.linker_version = "GC/2.6"
 config.rel_strip_partial = False
 config.rel_empty_file = "REL/empty.c"
@@ -237,6 +245,15 @@ Equivalent = config.non_matching  # Object should be linked when configured with
 config.warn_missing_config = True
 config.warn_missing_source = False
 config.libs = [
+    {
+        "lib": "Game",
+        "mw_version": config.linker_version,
+        "cflags": cflags_game,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "game/frand.c"), #doesn't build for some reason currently
+        ],
+    },
     {
         "lib": "Runtime.PPCEABI.H",
         "mw_version": config.linker_version,
