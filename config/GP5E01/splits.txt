@@ -16,4 +16,4 @@ Sections:
 game/frand.c:
 	.text       start:0x8003AF88 end:0x8003B1A0
 	.sbss       start:0x80288898 end:0x802888A0
-	.sdata2     start:0x802898B0 end:0x802898C0
+	.sdata2     start:0x802898A8 end:0x802898B8
