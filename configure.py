@@ -252,7 +252,7 @@ config.libs = [
         "cflags": cflags_game,
         "host": False,
         "objects": [
-            Object(Matching, "game/frand.c"), #doesn't build for some reason currently
+            Object(Matching, "game/frand.c"),
         ],
     },
     {
