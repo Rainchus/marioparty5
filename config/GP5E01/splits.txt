@@ -13,7 +13,74 @@ Sections:
 	.sdata2     type:rodata align:16
 	.sbss2      type:bss align:32
 
+game/main.c:
+	.text       start:0x800058A0 end:0x80005AEC
+	.data       start:0x801AB5A0 end:0x801AB5D0
+	.sdata      start:0x80288000 end:0x80288010
+	.sbss       start:0x802885A0 end:0x802885B0
+	.sdata2     start:0x80289480 end:0x80289488
+
+game/pad.c:
+	.text       start:0x80005AEC end:0x8000668C
+	.data       start:0x801AB5D0 end:0x801AB5E0
+	.bss        start:0x801D80A0 end:0x801D80E0
+	.sdata      start:0x80288010 end:0x80288018
+	.sbss       start:0x802885B0 end:0x80288640
+
+game/dvd.c:
+	.text       start:0x8000668C end:0x80006D30
+	.data       start:0x801AB5E0 end:0x801AB738
+	.sdata      start:0x80288018 end:0x80288020
+	.sbss       start:0x80288640 end:0x80288648
+
+game/data.c:
+	.text       start:0x80006D30 end:0x80009518
+	.data       start:0x801AB738 end:0x801ACFC8
+	.bss        start:0x801D80E0 end:0x801DB2E0
+	.sdata      start:0x80288020 end:0x80288030
+	.sbss       start:0x80288648 end:0x80288658
+
+game/decode.c:
+	.text       start:0x80009518 end:0x80009D88
+	.data       start:0x801ACFC8 end:0x801AD020
+	.bss        start:0x801DB2E0 end:0x801DB6E0
+	.sdata      start:0x80288030 end:0x80288038
+
 game/frand.c:
 	.text       start:0x8003AF88 end:0x8003B1A0
 	.sbss       start:0x80288898 end:0x802888A0
 	.sdata2     start:0x802898A8 end:0x802898B8
+
+game/zlib/adler32.c:
+	.text       start:0x801365DC end:0x80136788
+
+game/zlib/inflate.c:
+	.text       start:0x80136788 end:0x80137114
+	.data       start:0x801CC978 end:0x801CCA20
+	.sdata      start:0x802883E0 end:0x802883E8
+
+game/zlib/infblock.c:
+	.text       start:0x80137114 end:0x801383FC
+	.rodata     start:0x801AA980 end:0x801AA9D0
+	.data       start:0x801CCA20 end:0x801CCAB8
+
+game/zlib/infcodes.c:
+	.text       start:0x801383FC end:0x80138F40
+	.data       start:0x801CCAB8 end:0x801CCB18
+
+game/zlib/infutil.c:
+	.text       start:0x80138F40 end:0x801390D8
+	.data       start:0x801CCB18 end:0x801CCB60
+
+game/zlib/inftrees.c:
+	.text       start:0x801390D8 end:0x80139ABC
+	.rodata     start:0x801AA9D0 end:0x801AABE8
+	.data       start:0x801CCB60 end:0x801CDD48
+	.sdata      start:0x802883E8 end:0x802883F0
+
+game/zlib/inffast.c:
+	.text       start:0x80139ABC end:0x8013A08C
+	.data       start:0x801CDD48 end:0x801CDD80
+
+game/zlib/zutil.c:
+	.text       start:0x8013A08C end:0x8013A11C
