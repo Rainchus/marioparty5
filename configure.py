@@ -197,6 +197,56 @@ cflags_runtime = [
     "-common off",
     "-inline auto",
 ]
+# Metrowerks library flags
+cflags_msl = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-common off",
+    "-inline auto,deferred",
+]
+
+# Metrowerks library flags
+cflags_trk = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-common off",
+    "-sdata 0",
+    "-sdata2 0",
+    "-inline auto,deferred",
+]
+
+cflags_odemuexi = [
+    *cflags_base,
+    "-inline auto,deferred",
+]
+
+cflags_amcstub = [
+    *cflags_base,
+    "-inline auto,deferred",
+]
+
+cflags_odenotstub = [
+    *cflags_base,
+    "-inline auto,deferred",
+]
+
+cflags_musyx = [
+    "-proc gekko",
+    "-nodefaults",
+    "-nosyspath",
+    "-i include",
+    "-i extern/musyx/include",
+    "-inline auto",
+    "-O4,p",
+    "-fp hard",
+    "-enum int",
+    "-Cpp_exceptions off",
+    "-str reuse,pool,readonly",
+    "-fp_contract off",
+    "-DMUSY_TARGET=MUSY_TARGET_DOLPHIN",
+]
 
 # REL flags
 cflags_rel = [
@@ -444,8 +494,70 @@ config.libs = [
         "cflags": cflags_runtime,
         "host": False,
         "objects": [
+            Object(NonMatching, "Runtime.PPCEABI.H/__va_arg.c"),
             Object(NonMatching, "Runtime.PPCEABI.H/global_destructor_chain.c"),
+            Object(NonMatching, "Runtime.PPCEABI.H/__mem.c"),
+            Object(NonMatching, "Runtime.PPCEABI.H/New.cp"),
+            Object(NonMatching, "Runtime.PPCEABI.H/NewMore.cp"),
+            Object(NonMatching, "Runtime.PPCEABI.H/NMWException.cp"),
+            Object(NonMatching, "Runtime.PPCEABI.H/runtime.c"),
             Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp"),
+            Object(NonMatching, "Runtime.PPCEABI.H/Gecko_ExceptionPPC.cp"),
+            Object(NonMatching, "Runtime.PPCEABI.H/GCN_mem_alloc.c"),
+        ],
+    },
+    {
+        "lib": "MSL_C.PPCEABI.bare.H",
+        "mw_version": config.linker_version,
+        "cflags": cflags_msl,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/abort_exit.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/alloc.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/errno.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/ansi_files.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/ansi_fp.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/arith.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/buffer_io.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/ctype.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/direct_io.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/file_io.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/FILE_POS.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/mbstring.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/mem.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/mem_funcs.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/misc_io.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/printf.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/float.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/signal.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/string.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/uart_console_io.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/wchar_io.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/e_acos.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/e_asin.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/e_atan2.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/e_fmod.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/e_pow.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/e_rem_pio2.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/k_cos.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/k_rem_pio2.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/k_sin.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/k_tan.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/s_atan.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/s_copysign.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/s_cos.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/s_floor.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/s_frexp.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/s_ldexp.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/s_modf.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/s_sin.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/s_tan.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/w_acos.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/w_asin.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/w_atan2.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/w_fmod.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/w_pow.c"),
+            Object(NonMatching, "MSL_C.PPCEABI.bare.H/math_ppc.c"),
         ],
     },
     {
