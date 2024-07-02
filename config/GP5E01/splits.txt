@@ -120,6 +120,7 @@ game/hsfman.c:
 	.bss        start:0x801FE2F0 end:0x80226DD8
 	.sbss       start:0x80288798 end:0x802887E0
 	.sdata2     start:0x802895D8 end:0x80289650
+	.sbss2      start:0x8028BEE0 end:0x8028BEE8
 
 game/hsfmotion.c:
 	.text       start:0x80028028 end:0x8002C5D8
@@ -948,3 +949,199 @@ TRK_MINNOW_DOLPHIN/target_options.c:
 
 TRK_MINNOW_DOLPHIN/mslsupp.c:
 	.text       start:0x8017C4F8 end:0x8017C670
+
+musyx/runtime/seq.c:
+	.text       start:0x8017C670 end:0x8018063C
+	.data       start:0x801D23C0 end:0x801D2410
+	.bss        start:0x8025F8B8 end:0x8026D1F8
+	.sbss       start:0x802892A8 end:0x802892C8
+	.sdata2     start:0x8028BC70 end:0x8028BC90
+
+musyx/runtime/synth.c:
+	.text       start:0x8018063C end:0x80183AD8
+	.bss        start:0x8026D1F8 end:0x8026E7E0
+	.sbss       start:0x802892C8 end:0x80289310
+	.sdata2     start:0x8028BC90 end:0x8028BCD0
+
+musyx/runtime/seq_api.c:
+	.text       start:0x80183AD8 end:0x80183D58
+
+musyx/runtime/snd_synthapi.c:
+	.text       start:0x80183D58 end:0x80184300
+
+musyx/runtime/stream.c:
+	.text       start:0x80184300 end:0x80187F04
+	.bss        start:0x8026E7E0 end:0x802700E0
+	.sbss       start:0x80289310 end:0x80289318
+	.sdata2     start:0x8028BCD0 end:0x8028BCE8
+
+musyx/runtime/synthdata.c:
+	.text       start:0x80187F04 end:0x80189C9C
+	.bss        start:0x802700E0 end:0x8027A718
+	.sbss       start:0x80289318 end:0x80289360
+
+musyx/runtime/synthmacros.c:
+	.text       start:0x80189C9C end:0x8018EC3C
+	.data       start:0x801D2410 end:0x801D2858
+	.bss        start:0x8027A718 end:0x8027A738
+	.sbss       start:0x80289360 end:0x80289380
+	.sdata2     start:0x8028BCE8 end:0x8028BD10
+
+musyx/runtime/synthvoice.c:
+	.text       start:0x8018EC3C end:0x801909A0
+	.bss        start:0x8027A738 end:0x8027B6F8
+	.sbss       start:0x80289380 end:0x80289398
+
+musyx/runtime/synth_ac.c:
+	.text       start:0x801909A0 end:0x80190AC0
+	.data       start:0x801D2858 end:0x801D2C58
+	.sdata2     start:0x8028BD10 end:0x8028BD28
+
+musyx/runtime/synth_dbtab.c:
+	.data       start:0x801D2C58 end:0x801D33E0
+
+musyx/runtime/synth_adsr.c:
+	.text       start:0x80190AC0 end:0x80191280
+	.sdata2     start:0x8028BD28 end:0x8028BD50
+
+musyx/runtime/synth_vsamples.c:
+	.text       start:0x80191280 end:0x80191A34
+	.bss        start:0x8027B6F8 end:0x8027C048
+
+musyx/runtime/s_data.c:
+	.text       start:0x80191A34 end:0x80192624
+	.bss        start:0x8027C048 end:0x8027C660
+	.sbss       start:0x80289398 end:0x802893A8
+
+musyx/runtime/hw_dspctrl.c:
+	.text       start:0x80192624 end:0x80195BF8
+	.rodata     start:0x801AB328 end:0x801AB360
+	.data       start:0x801D33E0 end:0x801D4E38
+	.bss        start:0x8027C660 end:0x8027CD40
+	.sbss       start:0x802893A8 end:0x802893E8
+
+musyx/runtime/hw_volconv.c:
+	.text       start:0x80195BF8 end:0x801962E8
+	.data       start:0x801D4E38 end:0x801D5060
+	.sdata2     start:0x8028BD50 end:0x8028BD88
+
+musyx/runtime/snd3d.c:
+	.text       start:0x801962E8 end:0x80198520
+	.bss        start:0x8027CD40 end:0x8027DF90
+	.sbss       start:0x802893E8 end:0x80289408
+	.sdata2     start:0x8028BD88 end:0x8028BDD8
+
+musyx/runtime/snd_init.c:
+	.text       start:0x80198520 end:0x8019867C
+
+musyx/runtime/snd_math.c:
+	.text       start:0x8019867C end:0x80198A3C
+	.sdata2     start:0x8028BDD8 end:0x8028BDF8
+
+musyx/runtime/snd_midictrl.c:
+	.text       start:0x80198A3C end:0x8019AD3C
+	.rodata     start:0x801AB360 end:0x801AB470
+	.data       start:0x801D5060 end:0x801D50F0
+	.bss        start:0x8027DF90 end:0x80284D90
+
+musyx/runtime/snd_service.c:
+	.text       start:0x8019AD3C end:0x8019B010
+	.rodata     start:0x801AB470 end:0x801AB4A0
+	.data       start:0x801D50F0 end:0x801D5900
+	.sdata      start:0x80288578 end:0x80288580
+
+musyx/runtime/hardware.c:
+	.text       start:0x8019B010 end:0x8019C0A4
+	.rodata     start:0x801AB4A0 end:0x801AB5A0
+	.sdata      start:0x80288580 end:0x80288590
+	.sbss       start:0x80289408 end:0x80289418
+	.sdata2     start:0x8028BDF8 end:0x8028BE20
+
+musyx/runtime/dsp_import.c:
+	.data       start:0x801D5900 end:0x801D77C0
+	.sdata      start:0x80288590 end:0x80288598
+
+musyx/runtime/hw_aramdma.c:
+	.text       start:0x8019C0A4 end:0x8019CD84
+	.bss        start:0x80284D90 end:0x802856A0
+	.sbss       start:0x80289418 end:0x80289438
+
+musyx/runtime/hw_dolphin.c:
+	.text       start:0x8019CD84 end:0x8019D27C
+	.bss        start:0x802856A0 end:0x80287700
+	.sbss       start:0x80289438 end:0x80289460
+
+musyx/runtime/hw_memory.c:
+	.text       start:0x8019D27C end:0x8019D2D0
+
+musyx/runtime/CheapReverb/creverb_fx.c:
+	.text       start:0x8019D2D0 end:0x8019D38C
+
+musyx/runtime/CheapReverb/creverb.c:
+	.text       start:0x8019D38C end:0x8019DC48
+	.data       start:0x801D77C0 end:0x801D77D0
+	.sdata2     start:0x8028BE20 end:0x8028BE60
+
+musyx/runtime/StdReverb/reverb_fx.c:
+	.text       start:0x8019DC48 end:0x8019DD08
+
+musyx/runtime/StdReverb/reverb.c:
+	.text       start:0x8019DD08 end:0x8019EA40
+	.data       start:0x801D77D0 end:0x801D77F0
+	.sdata2     start:0x8028BE60 end:0x8028BEA8
+
+musyx/runtime/Delay/delay_fx.c:
+	.text       start:0x8019EA40 end:0x8019EDEC
+
+musyx/runtime/Chorus/chorus_fx.c:
+	.text       start:0x8019EDEC end:0x8019F654
+	.data       start:0x801D77F0 end:0x801D7FF0
+	.sdata2     start:0x8028BEA8 end:0x8028BEB0
+
+OdemuExi2/DebuggerDriver.c:
+	.text       start:0x8019F654 end:0x801A00D4
+	.sdata      start:0x80288598 end:0x80288599
+	.sbss       start:0x80289460 end:0x80289475
+
+amcstubs/AmcExi2Stubs.c:
+	.text       start:0x801A00D4 end:0x801A0104
+
+odenotstub/odenotstub.c:
+	.text       start:0x801A0104 end:0x801A010C
+
+libhu/setvf.c:
+	.text       start:0x801A010C end:0x801A011C
+
+libhu/subvf.c:
+	.text       start:0x801A011C end:0x801A0150
+
+msm/msmsys.c:
+	.text       start:0x801A0150 end:0x801A23D0
+	.bss        start:0x80287700 end:0x80287C10
+	.sdata2     start:0x8028BEB0 end:0x8028BEB8
+
+msm/msmmem.c:
+	.text       start:0x801A23D0 end:0x801A2600
+	.bss        start:0x80287C10 end:0x80287C40
+
+msm/msmfio.c:
+	.text       start:0x801A2600 end:0x801A26F0
+	.bss        start:0x80287C40 end:0x80287C50
+
+msm/msmmus.c:
+	.text       start:0x801A26F0 end:0x801A35A8
+	.bss        start:0x80287C50 end:0x80287DC8
+
+msm/msmse.c:
+	.text       start:0x801A35A8 end:0x801A4C00
+	.bss        start:0x80287DC8 end:0x80287EC0
+	.sdata2     start:0x8028BEB8 end:0x8028BED0
+
+msm/msmstream.c:
+	.text       start:0x801A4C00 end:0x801A7E90
+	.bss        start:0x80287EC0 end:0x80287F20
+
+game/code_801A7E90.c:
+	.text       start:0x801A7E90 end:0x801A811C
+	.data       start:0x801D7FF0 end:0x801D8090
+	.bss        start:0x80287F20 end:0x80288000
