@@ -263,6 +263,19 @@ cflags_game = [
     "-fp_contract off",
 ]
 
+# Game flags
+cflags_libhu = [
+    *cflags_base,
+    "-O0,p",
+    "-char unsigned",
+    "-fp_contract off",
+]
+
+# Game flags
+cflags_msm = [
+    *cflags_base,
+]
+
 config.linker_version = "GC/2.6"
 config.rel_strip_partial = False
 config.rel_empty_file = "REL/empty.c"
@@ -277,7 +290,22 @@ def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "objects": objects,
     }
 
-
+def MusyX(objects, mw_version="GC/1.3.2", debug=False, major=1, minor=5, patch=4):
+    cflags = cflags_musyx if not debug else cflags_musyx_debug
+    return {
+        "lib": "musyx",
+        "mw_version": mw_version,
+        "src_dir": "extern/musyx/src",
+        "host": False,
+        "cflags": [
+            *cflags,
+            f"-DMUSY_VERSION_MAJOR={major}",
+            f"-DMUSY_VERSION_MINOR={minor}",
+            f"-DMUSY_VERSION_PATCH={patch}",
+        ],
+        "objects": objects,
+    }
+   
 # Helper function for REL script objects
 def Rel(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
@@ -337,6 +365,7 @@ config.libs = [
             Object(NonMatching, "game/zlib/inftrees.c"),
             Object(NonMatching, "game/zlib/inffast.c"),
             Object(NonMatching, "game/zlib/zutil.c"),
+            Object(NonMatching, "game/code_801A7E90.c"),
         ],
     },
     DolphinLib(
@@ -611,6 +640,92 @@ config.libs = [
             Object(NonMatching, "TRK_MINNOW_DOLPHIN/targcont.c"),
             Object(NonMatching, "TRK_MINNOW_DOLPHIN/target_options.c"),
             Object(NonMatching, "TRK_MINNOW_DOLPHIN/mslsupp.c"),
+        ],
+    },
+    MusyX(
+        objects={
+            Object(NonMatching, "musyx/runtime/seq.c"),
+            Object(NonMatching, "musyx/runtime/synth.c"),
+            Object(NonMatching, "musyx/runtime/seq_api.c"),
+            Object(NonMatching, "musyx/runtime/snd_synthapi.c"),
+            Object(NonMatching, "musyx/runtime/stream.c"),
+            Object(NonMatching, "musyx/runtime/synthdata.c"),
+            Object(NonMatching, "musyx/runtime/synthmacros.c"),
+            Object(NonMatching, "musyx/runtime/synthvoice.c"),
+            Object(NonMatching, "musyx/runtime/synth_ac.c"),
+            Object(NonMatching, "musyx/runtime/synth_dbtab.c"),
+            Object(NonMatching, "musyx/runtime/synth_adsr.c"),
+            Object(NonMatching, "musyx/runtime/synth_vsamples.c"),
+            Object(NonMatching, "musyx/runtime/s_data.c"),
+            Object(NonMatching, "musyx/runtime/hw_dspctrl.c"),
+            Object(NonMatching, "musyx/runtime/hw_volconv.c"),
+            Object(NonMatching, "musyx/runtime/snd3d.c"),
+            Object(NonMatching, "musyx/runtime/snd_init.c"),
+            Object(NonMatching, "musyx/runtime/snd_math.c"),
+            Object(NonMatching, "musyx/runtime/snd_midictrl.c"),
+            Object(NonMatching, "musyx/runtime/snd_service.c"),
+            Object(NonMatching, "musyx/runtime/hardware.c"),
+            Object(NonMatching, "musyx/runtime/dsp_import.c"),
+            Object(NonMatching, "musyx/runtime/hw_aramdma.c"),
+            Object(NonMatching, "musyx/runtime/hw_dolphin.c"),
+            Object(NonMatching, "musyx/runtime/hw_memory.c"),
+            Object(NonMatching, "musyx/runtime/CheapReverb/creverb_fx.c"),
+            Object(NonMatching, "musyx/runtime/CheapReverb/creverb.c"),
+            Object(NonMatching, "musyx/runtime/StdReverb/reverb_fx.c"),
+            Object(NonMatching, "musyx/runtime/StdReverb/reverb.c"),
+            Object(NonMatching, "musyx/runtime/Delay/delay_fx.c"),
+            Object(NonMatching, "musyx/runtime/Chorus/chorus_fx.c"),
+        }
+    ),
+    {
+        "lib": "OdemuExi2",
+        "mw_version": config.linker_version,
+        "cflags": cflags_odemuexi,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "OdemuExi2/DebuggerDriver.c"),
+        ],
+    },
+    {
+        "lib": "amcstubs",
+        "mw_version": config.linker_version,
+        "cflags": cflags_amcstub,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "amcstubs/AmcExi2Stubs.c"),
+        ],
+    },
+    {
+        "lib": "odenotstub",
+        "mw_version": config.linker_version,
+        "cflags": cflags_odenotstub,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "odenotstub/odenotstub.c"),
+        ],
+    },
+    {
+        "lib": "libhu",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libhu,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "libhu/setvf.c"),
+            Object(NonMatching, "libhu/subvf.c"),
+        ],
+    },
+    {
+        "lib": "msm",
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_msm,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "msm/msmsys.c"),
+            Object(NonMatching, "msm/msmmem.c"),
+            Object(NonMatching, "msm/msmfio.c"),
+            Object(NonMatching, "msm/msmmus.c"),
+            Object(NonMatching, "msm/msmse.c"),
+            Object(NonMatching, "msm/msmstream.c"),
         ],
     },
     {
