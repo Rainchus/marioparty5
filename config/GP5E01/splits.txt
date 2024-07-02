@@ -46,6 +46,81 @@ game/decode.c:
 	.bss        start:0x801DB2E0 end:0x801DB6E0
 	.sdata      start:0x80288030 end:0x80288038
 
+game/font.c:
+	.data       start:0x801AD020 end:0x801AF020
+
+game/init.c:
+	.text       start:0x80009D88 end:0x8000A728
+	.data       start:0x801AF020 end:0x801AF170
+	.bss        start:0x801DB6E0 end:0x801DB720
+	.sdata      start:0x80288038 end:0x80288050
+	.sbss       start:0x80288658 end:0x80288688
+	.sdata2     start:0x80289488 end:0x80289498
+
+game/jmp.c:
+	.text       start:0x8000A728 end:0x8000A81C
+
+game/malloc.c:
+	.text       start:0x8000A81C end:0x8000AC6C
+	.data       start:0x801AF170 end:0x801AF1F8
+	.bss        start:0x801DB720 end:0x801DB738
+
+game/memory.c:
+	.text       start:0x8000AC6C end:0x8000B364
+	.data       start:0x801AF1F8 end:0x801AF360
+
+game/printfunc.c:
+	.text       start:0x8000B364 end:0x8000C918
+	.data       start:0x801AF360 end:0x801AF3A0
+	.bss        start:0x801DB738 end:0x801E2038
+	.sbss       start:0x80288688 end:0x80288698
+	.sdata2     start:0x80289498 end:0x802894E8
+
+game/process.c:
+	.text       start:0x8000C918 end:0x8000D7BC
+	.data       start:0x801AF3A0 end:0x801AF3F0
+	.bss        start:0x801E2038 end:0x801E2130
+	.sbss       start:0x80288698 end:0x802886A8
+
+game/sprman.c:
+	.text       start:0x8000D7BC end:0x8000FE00
+	.rodata     start:0x801A9BA0 end:0x801A9BB0
+	.data       start:0x801AF3F0 end:0x801AF548
+	.bss        start:0x801E2130 end:0x801F3170
+	.sdata      start:0x80288050 end:0x80288060
+	.sbss       start:0x802886A8 end:0x802886B0
+	.sdata2     start:0x802894E8 end:0x80289510
+
+game/sprput.c:
+	.text       start:0x8000FE00 end:0x80011510
+	.rodata     start:0x801A9BB0 end:0x801A9BC0
+	.data       start:0x801AF548 end:0x801AF578
+	.bss        start:0x801F3170 end:0x801F31F0
+	.sbss       start:0x802886B0 end:0x802886B8
+	.sdata2     start:0x80289510 end:0x80289548
+
+game/hsfload.c:
+	.text       start:0x80011510 end:0x800149F8
+	.data       start:0x801AF578 end:0x801AF5E8
+	.bss        start:0x801F31F0 end:0x801F37B0
+	.sbss       start:0x802886B8 end:0x802886F0
+
+game/hsfdraw.c:
+	.text       start:0x800149F8 end:0x80020E2C
+	.rodata     start:0x801A9BC0 end:0x801A9BD0
+	.data       start:0x801AF5E8 end:0x801AF800
+	.bss        start:0x801F37B0 end:0x801FE2F0
+	.sdata      start:0x80288060 end:0x80288078
+	.sbss       start:0x802886F0 end:0x80288798
+	.sdata2     start:0x80289548 end:0x802895D8
+
+game/hsfman.c:
+	.text       start:0x80020E2C end:0x80028028
+	.data       start:0x801AF800 end:0x801BA8D8
+	.bss        start:0x801FE2F0 end:0x80226DD8
+	.sbss       start:0x80288798 end:0x802887E0
+	.sdata2     start:0x802895D8 end:0x80289650
+
 game/frand.c:
 	.text       start:0x8003AF88 end:0x8003B1A0
 	.sbss       start:0x80288898 end:0x802888A0
