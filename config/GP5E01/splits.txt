@@ -250,6 +250,67 @@ game/armem.c:
 	.bss        start:0x802329C0 end:0x802330A0
 	.sbss       start:0x80288980 end:0x80288990
 
+game/chrman.c:
+	.text       start:0x8004FE5C end:0x8005A6C4
+	.data       start:0x801BE380 end:0x801BF4D0
+	.bss        start:0x802330A0 end:0x80233E48
+	.sdata      start:0x802880C8 end:0x80288128
+	.sbss       start:0x80288990 end:0x802889A0
+	.sdata2     start:0x80289B60 end:0x80289CC0
+
+game/mapspace.c:
+	.text       start:0x8005A6C4 end:0x8005E468
+	.bss        start:0x80233E48 end:0x802342C0
+	.sbss       start:0x802889A0 end:0x802889C0
+	.sdata2     start:0x80289CC0 end:0x80289CF0
+
+game/THPSimple.c:
+	.text       start:0x8005E468 end:0x80060650
+	.data       start:0x801BF4D0 end:0x801BF5D0
+	.bss        start:0x802342C0 end:0x802349A0
+	.sdata      start:0x80288128 end:0x80288130
+	.sbss       start:0x802889C0 end:0x802889E8
+	.sdata2     start:0x80289CF0 end:0x80289D00
+
+game/THPDraw.c:
+	.text       start:0x80060650 end:0x80060FA8
+	.sdata2     start:0x80289D00 end:0x80289D18
+
+game/thpmain.c:
+	.text       start:0x80060FA8 end:0x80062038
+	.rodata     start:0x801A9C08 end:0x801A9C18
+	.data       start:0x801BF5D0 end:0x801BF638
+	.bss        start:0x802349A0 end:0x802349E0
+	.sbss       start:0x802889E8 end:0x80288A10
+	.sdata2     start:0x80289D18 end:0x80289D40
+
+game/objsub.c:
+	.text       start:0x80062038 end:0x800626A4
+	.data       start:0x801BF638 end:0x801C1960
+	.bss        start:0x802349E0 end:0x802350B8
+	.sdata      start:0x80288130 end:0x80288148
+	.sbss       start:0x80288A10 end:0x80288A40
+	.sdata2     start:0x80289D40 end:0x80289D58
+
+game/flag.c:
+	.text       start:0x800626A4 end:0x800628BC
+	.bss        start:0x802350B8 end:0x802350E0
+
+game/saveload.c:
+	.text       start:0x800628BC end:0x800684E0
+	.data       start:0x801C1960 end:0x801C1A00
+	.bss        start:0x802350E0 end:0x80249100
+	.sdata      start:0x80288148 end:0x80288170
+	.sbss       start:0x80288A40 end:0x80288A48
+	.sdata2     start:0x80289D58 end:0x80289D88
+
+game/sreset.c:
+	.text       start:0x800684E0 end:0x80069140
+	.data       start:0x801C1A00 end:0x801C8FA0
+	.bss        start:0x80249100 end:0x8024A4A8
+	.sdata      start:0x80288170 end:0x80288188
+	.sbss       start:0x80288A48 end:0x80288A68
+
 game/zlib/adler32.c:
 	.text       start:0x801365DC end:0x80136788
 
