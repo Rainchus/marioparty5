@@ -184,6 +184,72 @@ game/frand.c:
 	.sbss       start:0x80288898 end:0x802888A0
 	.sdata2     start:0x802898A8 end:0x802898B8
 
+game/audio.c:
+	.text       start:0x8003B1A0 end:0x8003D194
+	.data       start:0x801BBD10 end:0x801BC6C8
+	.bss        start:0x8022BA10 end:0x8022BC58
+	.sbss       start:0x802888A0 end:0x802888D0
+	.sdata2     start:0x802898B8 end:0x802898E8
+
+game/EnvelopeExec.c:
+	.text       start:0x8003D194 end:0x8003EA2C
+	.sbss       start:0x802888D0 end:0x80288900
+	.sdata2     start:0x802898E8 end:0x80289900
+
+game/mgmes.c:
+	.text       start:0x8003EA2C end:0x800428D0
+	.data       start:0x801BC6C8 end:0x801BCEF8
+	.bss        start:0x8022BC58 end:0x8022C058
+	.sdata      start:0x802880A0 end:0x802880C0
+	.sbss       start:0x80288900 end:0x80288928
+	.sdata2     start:0x80289900 end:0x802899D8
+
+game/esprite.c:
+	.text       start:0x800428D0 end:0x80042F90
+	.data       start:0x801BCEF8 end:0x801BCF18
+	.bss        start:0x8022C058 end:0x8022D958
+	.sbss       start:0x80288928 end:0x80288930
+
+game/ovllist.c:
+	.data       start:0x801BCF18 end:0x801BDC00
+
+game/ClusterExec.c:
+	.text       start:0x80042F90 end:0x800437F8
+	.sdata2     start:0x802899D8 end:0x802899E8
+
+game/ShapeExec.c:
+	.text       start:0x800437F8 end:0x80043C08
+	.sdata2     start:0x802899E8 end:0x802899F8
+
+game/wipe.c:
+	.text       start:0x80043C08 end:0x80047B38
+	.data       start:0x801BDC00 end:0x801BDC80
+	.bss        start:0x8022D958 end:0x8022D9A0
+	.sbss       start:0x80288930 end:0x80288938
+	.sdata2     start:0x802899F8 end:0x80289AD0
+
+game/window.c:
+	.text       start:0x80047B38 end:0x8004E8C4
+	.data       start:0x801BDC80 end:0x801BE240
+	.bss        start:0x8022D9A0 end:0x802329C0
+	.sdata      start:0x802880C0 end:0x802880C8
+	.sbss       start:0x80288938 end:0x80288978
+	.sdata2     start:0x80289AD0 end:0x80289B60
+
+game/messdata.c:
+	.text       start:0x8004E8C4 end:0x8004E9AC
+
+game/card.c:
+	.text       start:0x8004E9AC end:0x8004EFF0
+	.data       start:0x801BE240 end:0x801BE290
+	.sbss       start:0x80288978 end:0x80288980
+
+game/armem.c:
+	.text       start:0x8004EFF0 end:0x8004FE5C
+	.data       start:0x801BE290 end:0x801BE380
+	.bss        start:0x802329C0 end:0x802330A0
+	.sbss       start:0x80288980 end:0x80288990
+
 game/zlib/adler32.c:
 	.text       start:0x801365DC end:0x80136788
 
