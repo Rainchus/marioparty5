@@ -311,6 +311,46 @@ game/sreset.c:
 	.sdata      start:0x80288170 end:0x80288188
 	.sbss       start:0x80288A48 end:0x80288A68
 
+game/mg/timer.c:
+	.text       start:0x80069140 end:0x8006A49C
+	.rodata     start:0x801A9C18 end:0x801A9E08
+	.sdata      start:0x80288188 end:0x80288190
+	.sdata2     start:0x80289D88 end:0x80289DC0
+
+game/mg/score.c:
+	.text       start:0x8006A49C end:0x8006AE2C
+	.rodata     start:0x801A9E08 end:0x801A9E38
+	.sdata      start:0x80288190 end:0x80288198
+	.sdata2     start:0x80289DC0 end:0x80289DD0
+
+game/mg/seqman.c:
+	.text       start:0x8006AE2C end:0x8006C4A0
+	.data       start:0x801C8FA0 end:0x801C8FB8
+	.bss        start:0x8024A4A8 end:0x8024A708
+	.sbss       start:0x80288A68 end:0x80288A78
+	.sdata2     start:0x80289DD0 end:0x80289DE8
+
+game/mg/colman.c:
+	.text       start:0x8006C4A0 end:0x800784B0
+	.data       start:0x801C8FB8 end:0x801C9060
+	.bss        start:0x8024A708 end:0x8024A848
+	.sbss       start:0x80288A78 end:0x80288A88
+	.sdata2     start:0x80289DE8 end:0x80289E78
+
+game/mg/actman.c:
+	.text       start:0x800784B0 end:0x80080934
+	.data       start:0x801C9060 end:0x801C90F0
+	.bss        start:0x8024A848 end:0x8024A868
+	.sdata2     start:0x80289E78 end:0x80289FC0
+
+game/mg/mess.c:
+	.text       start:0x80080934 end:0x8008BF20
+	.data       start:0x801C90F0 end:0x801C9690
+	.bss        start:0x8024A868 end:0x8024AC90
+	.sdata      start:0x80288198 end:0x80288240
+	.sbss       start:0x80288A88 end:0x80288AB8
+	.sdata2     start:0x80289FC0 end:0x8028A110
+
 game/zlib/adler32.c:
 	.text       start:0x801365DC end:0x80136788
 
