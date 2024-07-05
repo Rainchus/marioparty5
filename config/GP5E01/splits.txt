@@ -351,6 +351,46 @@ game/mg/mess.c:
 	.sbss       start:0x80288A88 end:0x80288AB8
 	.sdata2     start:0x80289FC0 end:0x8028A110
 
+game/board/pauseproc.c:
+	.text       start:0x8008BF20 end:0x8008C09C
+	.sbss       start:0x80288AB8 end:0x80288AC8
+
+game/board/main.c:
+	.text       start:0x8008C09C end:0x8008F550
+	.sdata      start:0x80288240 end:0x80288250
+	.sbss       start:0x80288AC8 end:0x80288AE8
+	.sdata2     start:0x8028A110 end:0x8028A198
+
+game/board/camera.c:
+	.text       start:0x8008F550 end:0x80093520
+	.rodata     start:0x801A9E38 end:0x801A9E50
+	.data       start:0x801C9690 end:0x801C9758
+	.bss        start:0x8024AC90 end:0x8024C2E0
+	.sbss       start:0x80288AE8 end:0x80288AF0
+	.sdata2     start:0x8028A198 end:0x8028A1F8
+
+game/board/player.c:
+	.text       start:0x80093520 end:0x8009D4F8
+	.rodata     start:0x801A9E50 end:0x801AA048
+	.data       start:0x801C9758 end:0x801C9890
+	.bss        start:0x8024C2E0 end:0x8024C390
+	.sdata      start:0x80288250 end:0x802882B0
+	.sbss       start:0x80288AF0 end:0x80288B00
+	.sdata2     start:0x8028A1F8 end:0x8028A2A8
+
+game/board/model.c:
+	.text       start:0x8009D4F8 end:0x800A0388
+	.sbss       start:0x80288B00 end:0x80288B10
+	.sdata2     start:0x8028A2A8 end:0x8028A2C0
+
+game/board/window.c:
+	.text       start:0x800A0388 end:0x800A2BC4
+	.rodata     start:0x801AA048 end:0x801AA058
+	.data       start:0x801C9890 end:0x801C9940
+	.bss        start:0x8024C390 end:0x8024D0B0
+	.sbss       start:0x80288B10 end:0x80288B20
+	.sdata2     start:0x8028A2C0 end:0x8028A2F0
+
 game/zlib/adler32.c:
 	.text       start:0x801365DC end:0x80136788
 
