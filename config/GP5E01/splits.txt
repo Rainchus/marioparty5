@@ -391,6 +391,51 @@ game/board/window.c:
 	.sbss       start:0x80288B10 end:0x80288B20
 	.sdata2     start:0x8028A2C0 end:0x8028A2F0
 
+game/board/audio.c:
+	.text       start:0x800A2BC4 end:0x800A4430
+	.rodata     start:0x801AA058 end:0x801AA070
+	.bss        start:0x8024D0B0 end:0x8024D350
+	.sdata      start:0x802882B0 end:0x802882B8
+	.sbss       start:0x80288B20 end:0x80288B28
+	.sdata2     start:0x8028A2F0 end:0x8028A308
+
+game/board/com.c:
+	.text       start:0x800A4430 end:0x800A4768
+	.sdata2     start:0x8028A308 end:0x8028A310
+
+game/board/mapview.c:
+	.text       start:0x800A4768 end:0x800A8400
+	.rodata     start:0x801AA070 end:0x801AA0C8
+	.data       start:0x801C9940 end:0x801C9968
+	.bss        start:0x8024D350 end:0x8024D5F8
+	.sdata      start:0x802882B8 end:0x802882C8
+	.sbss       start:0x80288B28 end:0x80288B68
+	.sdata2     start:0x8028A310 end:0x8028A3E0
+
+game/board/masu.c:
+	.text       start:0x800A8400 end:0x800AD910
+	.rodata     start:0x801AA0C8 end:0x801AA108
+	.data       start:0x801C9968 end:0x801C9A90
+	.bss        start:0x8024D5F8 end:0x80255918
+	.sdata      start:0x802882C8 end:0x802882D0
+	.sbss       start:0x80288B68 end:0x80288BB0
+	.sdata2     start:0x8028A3E0 end:0x8028A448
+
+game/board/coin.c:
+	.text       start:0x800AD910 end:0x800AF734
+	.data       start:0x801C9A90 end:0x801C9B18
+	.bss        start:0x80255918 end:0x80255B98
+	.sdata      start:0x802882D0 end:0x802882D8
+	.sdata2     start:0x8028A448 end:0x8028A4D8
+
+game/board/star.c:
+	.text       start:0x800AF734 end:0x800B1EE4
+	.rodata     start:0x801AA108 end:0x801AA140
+	.data       start:0x801C9B18 end:0x801C9B80
+	.bss        start:0x80255B98 end:0x80256F20
+	.sbss       start:0x80288BB0 end:0x80288BC0
+	.sdata2     start:0x8028A4D8 end:0x8028A5A8
+
 game/zlib/adler32.c:
 	.text       start:0x801365DC end:0x80136788
 
