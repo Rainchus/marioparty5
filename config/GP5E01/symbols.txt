@@ -1485,6 +1485,7 @@ MBCameraLookAtGetInv = .text:0x80092F78; // type:function size:0x50
 MBCameraFocusPlayerAddAll = .text:0x80092FC8; // type:function size:0x140
 MBCameraPointFocusSet = .text:0x80093108; // type:function size:0x418
 MBPlayerInit = .text:0x80093520; // type:function size:0xA64
+MBPlayerClose = .text:0x80093F84; // type:function size:0xA8
 MBPlayerWorkGet = .text:0x8009402C; // type:function size:0x14
 MBPlayerPreTurnHookSet = .text:0x80094040; // type:function size:0x18
 MBPlayerPostTurnHookSet = .text:0x80094058; // type:function size:0x18
