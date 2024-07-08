@@ -351,7 +351,7 @@ game/mg/mess.c:
 	.sbss       start:0x80288A88 end:0x80288AB8
 	.sdata2     start:0x80289FC0 end:0x8028A110
 
-game/board/pauseproc.c:
+game/board/pausewatch.c:
 	.text       start:0x8008BF20 end:0x8008C09C
 	.sbss       start:0x80288AB8 end:0x80288AC8
 
@@ -435,6 +435,59 @@ game/board/star.c:
 	.bss        start:0x80255B98 end:0x80256F20
 	.sbss       start:0x80288BB0 end:0x80288BC0
 	.sdata2     start:0x8028A4D8 end:0x8028A5A8
+
+game/board/padall.c:
+	.text       start:0x800B1EE4 end:0x800B1FB8
+
+game/board/sai.c:
+	.text       start:0x800B1FB8 end:0x800B6358
+	.rodata     start:0x801AA140 end:0x801AA240
+	.data       start:0x801C9B80 end:0x801C9D18
+	.bss        start:0x80256F20 end:0x80256F48
+	.sdata      start:0x802882D8 end:0x802882E0
+	.sbss       start:0x80288BC0 end:0x80288BC8
+	.sdata2     start:0x8028A5A8 end:0x8028A670
+
+game/board/status.c:
+	.text       start:0x800B6358 end:0x800B92F8
+	.rodata     start:0x801AA240 end:0x801AA258
+	.data       start:0x801C9D18 end:0x801CA000
+	.bss        start:0x80256F48 end:0x80256FF8
+	.sbss       start:0x80288BC8 end:0x80288BD0
+	.sdata2     start:0x8028A670 end:0x8028A6B8
+
+game/board/opening.c:
+	.text       start:0x800B92F8 end:0x800BBBA4
+	.rodata     start:0x801AA258 end:0x801AA308
+	.data       start:0x801CA000 end:0x801CA070
+	.bss        start:0x80256FF8 end:0x80257070
+	.sdata      start:0x802882E0 end:0x802882E8
+	.sbss       start:0x80288BD0 end:0x80288BE0
+	.sdata2     start:0x8028A6B8 end:0x8028A7A8
+
+game/board/pause.c:
+	.text       start:0x800BBBA4 end:0x800BCC0C
+	.rodata     start:0x801AA308 end:0x801AA358
+	.bss        start:0x80257070 end:0x802570F0
+	.sdata      start:0x802882E8 end:0x802882F8
+	.sbss       start:0x80288BE0 end:0x80288BE8
+	.sdata2     start:0x8028A7A8 end:0x8028A7D8
+
+game/board/tutorial.c:
+	.text       start:0x800BCC0C end:0x800BD5D0
+	.rodata     start:0x801AA358 end:0x801AA390
+	.data       start:0x801CA070 end:0x801CA0C8
+	.bss        start:0x802570F0 end:0x80257148
+	.sbss       start:0x80288BE8 end:0x80288BF8
+	.sdata2     start:0x8028A7D8 end:0x8028A7F8
+
+game/board/roulette.c:
+	.text       start:0x800BD5D0 end:0x800BEF50
+	.rodata     start:0x801AA390 end:0x801AA3C8
+	.data       start:0x801CA0C8 end:0x801CA138
+	.sdata      start:0x802882F8 end:0x80288308
+	.sbss       start:0x80288BF8 end:0x80288C18
+	.sdata2     start:0x8028A7F8 end:0x8028A898
 
 game/zlib/adler32.c:
 	.text       start:0x801365DC end:0x80136788
