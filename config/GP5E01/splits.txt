@@ -489,6 +489,32 @@ game/board/roulette.c:
 	.sbss       start:0x80288BF8 end:0x80288C18
 	.sdata2     start:0x8028A7F8 end:0x8028A898
 
+game/board/capmachine.c:
+	.text       start:0x800BEF50 end:0x800C22F0
+	.rodata     start:0x801AA3C8 end:0x801AA3E8
+	.data       start:0x801CA138 end:0x801CA1D8
+	.bss        start:0x80257148 end:0x802572A8
+	.sdata      start:0x80288308 end:0x80288310
+	.sbss       start:0x80288C18 end:0x80288C28
+	.sdata2     start:0x8028A898 end:0x8028A970
+	.sbss2      start:0x8028BEE8 end:0x8028BEF0
+
+game/board/capsule.c:
+	.text       start:0x800C22F0 end:0x800D1C6C
+	.data       start:0x801CA1D8 end:0x801CB360
+	.bss        start:0x802572A8 end:0x80258938
+	.sdata      start:0x80288310 end:0x80288358
+	.sbss       start:0x80288C28 end:0x80288C70
+	.sdata2     start:0x8028A970 end:0x8028AB50
+
+game/board/capmain.c:
+	.text       start:0x800D1C6C end:0x80118DDC
+	.data       start:0x801CB360 end:0x801CBF68
+	.bss        start:0x80258938 end:0x80258978
+	.sdata      start:0x80288358 end:0x80288388
+	.sbss       start:0x80288C70 end:0x80288CC8
+	.sdata2     start:0x8028AB50 end:0x8028B050
+
 game/zlib/adler32.c:
 	.text       start:0x801365DC end:0x80136788
 
