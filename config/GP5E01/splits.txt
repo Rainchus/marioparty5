@@ -515,6 +515,77 @@ game/board/capmain.c:
 	.sbss       start:0x80288C70 end:0x80288CC8
 	.sdata2     start:0x8028AB50 end:0x8028B050
 
+game/board/guide.c:
+	.text       start:0x80118DDC end:0x8011A6DC
+	.rodata     start:0x801AA3E8 end:0x801AA448
+	.bss        start:0x80258978 end:0x802589C0
+	.sdata      start:0x80288388 end:0x80288398
+	.sdata2     start:0x8028B050 end:0x8028B0C0
+
+game/board/path.c:
+	.text       start:0x8011A6DC end:0x8011B71C
+	.bss        start:0x802589C0 end:0x802589D0
+	.sbss       start:0x80288CC8 end:0x80288CD0
+	.sdata2     start:0x8028B0C0 end:0x8028B128
+
+game/board/mg.c:
+	.text       start:0x8011B71C end:0x8011FFCC
+	.rodata     start:0x801AA448 end:0x801AA678
+	.data       start:0x801CBF68 end:0x801CC1E0
+	.bss        start:0x802589D0 end:0x80258A80
+	.sdata      start:0x80288398 end:0x802883A8
+	.sbss       start:0x80288CD0 end:0x80288CE8
+	.sdata2     start:0x8028B128 end:0x8028B270
+
+game/board/effect.c:
+	.text       start:0x8011FFCC end:0x8012244C
+	.data       start:0x801CC1E0 end:0x801CC258
+	.sdata      start:0x802883A8 end:0x802883B8
+	.sbss       start:0x80288CE8 end:0x80288CF0
+	.sdata2     start:0x8028B270 end:0x8028B2C8
+
+game/board/pauseoption.c:
+	.text       start:0x8012244C end:0x80126F1C
+	.rodata     start:0x801AA678 end:0x801AA6E8
+	.data       start:0x801CC258 end:0x801CC688
+	.bss        start:0x80258A80 end:0x80258FF0
+	.sbss       start:0x80288CF0 end:0x80288D08
+	.sdata2     start:0x8028B2C8 end:0x8028B368
+
+game/board/gate.c:
+	.text       start:0x80126F1C end:0x801286CC
+	.data       start:0x801CC688 end:0x801CC698
+	.bss        start:0x80258FF0 end:0x80259030
+	.sdata      start:0x802883B8 end:0x802883C0
+	.sbss       start:0x80288D08 end:0x80288D18
+	.sdata2     start:0x8028B368 end:0x8028B3D0
+
+game/board/story.c:
+	.text       start:0x801286CC end:0x8012F75C
+	.rodata     start:0x801AA6E8 end:0x801AA7D8
+	.data       start:0x801CC698 end:0x801CC8D0
+	.bss        start:0x80259030 end:0x80259140
+	.sdata      start:0x802883C0 end:0x802883D8
+	.sbss       start:0x80288D18 end:0x80288D30
+	.sdata2     start:0x8028B3D0 end:0x8028B4A8
+	.sbss2      start:0x8028BEF0 end:0x8028BEF3
+
+game/board/logo.c:
+	.text       start:0x8012F75C end:0x801322EC
+	.rodata     start:0x801AA7D8 end:0x801AA868
+	.data       start:0x801CC8D0 end:0x801CC978
+	.bss        start:0x80259140 end:0x80259150
+	.sbss       start:0x80288D30 end:0x80288D60
+	.sdata2     start:0x8028B4A8 end:0x8028B560
+
+game/board/mgcircuit.c:
+	.text       start:0x801322EC end:0x801365DC
+	.rodata     start:0x801AA868 end:0x801AA980
+	.bss        start:0x80259150 end:0x80259180
+	.sdata      start:0x802883D8 end:0x802883E0
+	.sbss       start:0x80288D60 end:0x80288D78
+	.sdata2     start:0x8028B560 end:0x8028B610
+
 game/zlib/adler32.c:
 	.text       start:0x801365DC end:0x80136788
 
