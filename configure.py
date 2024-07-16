@@ -795,6 +795,19 @@ config.libs = [
             Object(Matching, "REL/empty.c"),  # Must be marked as matching
         ],
     },
+    Rel(
+        "actmanDLL",
+        objects={
+            Object(NonMatching, "REL/actmanDLL/actman.c"),
+        },
+    ),
+    Rel(
+        "bootDll",
+        objects={
+            Object(NonMatching, "REL/bootDll/boot.c"),
+            Object(NonMatching, "REL/bootDll/nintendospr.c"),
+        },
+    ),
 ]
 
 if args.mode == "configure":
