@@ -801,7 +801,7 @@ config.libs = [
         "cflags": cflags_rel,
         "host": False,
         "objects": [
-            Object(NonMatching, "REL/nintendo/data.c"),  # Must be marked as matching
+            Object(NonMatching, "REL/nintendo/data.c"),
         ],
     },
     Rel(
