@@ -5,3 +5,38 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/carddll/cardmain.c:
+	.text       start:0x00000000 end:0x00008EC8
+	.rodata     start:0x00000000 end:0x00000168
+	.data       start:0x00000000 end:0x00000068
+	.bss        start:0x00000000 end:0x00000320
+
+REL/carddll/card.c:
+	.text       start:0x00008EC8 end:0x0000FA24
+	.rodata     start:0x00000168 end:0x00000220
+	.data       start:0x00000068 end:0x000000B0
+	.bss        start:0x00000320 end:0x00000BE8
+
+REL/carddll/player.c:
+	.text       start:0x0000FA24 end:0x00030E08
+	.rodata     start:0x00000220 end:0x00000518
+	.data       start:0x000000B0 end:0x000007B8
+	.bss        start:0x00000BE8 end:0x00001168
+
+REL/carddll/camera.c:
+	.text       start:0x00030E08 end:0x000325F4
+	.rodata     start:0x00000518 end:0x000005A8
+	.data       start:0x000007B8 end:0x00000810
+	.bss        start:0x00001168 end:0x000011B8
+
+REL/carddll/dice.c:
+	.text       start:0x000325F4 end:0x00036C00
+	.rodata     start:0x000005A8 end:0x000006C0
+	.bss        start:0x000011B8 end:0x000012A8
+
+REL/carddll/status.c:
+	.text       start:0x00036C00 end:0x000504C8
+	.rodata     start:0x000006C0 end:0x00000E1C
+	.data       start:0x00000810 end:0x00000D20
+	.bss        start:0x000012A8 end:0x00002284

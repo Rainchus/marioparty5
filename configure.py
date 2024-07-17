@@ -795,6 +795,15 @@ config.libs = [
             Object(Matching, "REL/empty.c"),  # Must be marked as matching
         ],
     },
+    {
+        "lib": "nintendo_data",
+        "mw_version": config.linker_version,
+        "cflags": cflags_rel,
+        "host": False,
+        "objects": [
+            Object(NonMatching, "REL/nintendo/data.c"),  # Must be marked as matching
+        ],
+    },
     Rel(
         "actmanDLL",
         objects={
@@ -805,7 +814,50 @@ config.libs = [
         "bootDll",
         objects={
             Object(NonMatching, "REL/bootDll/boot.c"),
-            Object(NonMatching, "REL/bootDll/nintendospr.c"),
+        },
+    ),
+    Rel(
+        "carddll",
+        objects={
+            Object(NonMatching, "REL/carddll/cardmain.c"),
+            Object(NonMatching, "REL/carddll/card.c"),
+            Object(NonMatching, "REL/carddll/player.c"),
+            Object(NonMatching, "REL/carddll/camera.c"),
+            Object(NonMatching, "REL/carddll/dice.c"),
+            Object(NonMatching, "REL/carddll/status.c"),
+        },
+    ),
+    Rel(
+        "e3bootdll",
+        objects={
+            Object(NonMatching, "REL/e3bootdll/e3boot.c"),
+        },
+    ),
+    Rel(
+        "e3setupdll",
+        objects={
+            Object(NonMatching, "REL/e3setupdll/e3setup.c"),
+            Object(NonMatching, "REL/e3setupdll/mgname.c"),
+            Object(NonMatching, "REL/e3setupdll/toueidisp.c"),
+            Object(NonMatching, "REL/e3setupdll/model.c"),
+        },
+    ),
+    Rel(
+        "fileseldll",
+        objects={
+            Object(NonMatching, "REL/fileseldll/filesel.c"),
+            Object(NonMatching, "REL/fileseldll/saveload.c"),
+            Object(NonMatching, "REL/fileseldll/filename.c"),
+            Object(NonMatching, "REL/fileseldll/toueidisp.c"),
+        },
+    ),
+    Rel(
+        "instDll",
+        objects={
+            Object(NonMatching, "REL/instDll/inst.c"),
+            Object(NonMatching, "REL/instDll/mgname.c"),
+            Object(NonMatching, "REL/instDll/toueidisp.c"),
+            Object(NonMatching, "REL/instDll/model.c"),
         },
     ),
 ]
