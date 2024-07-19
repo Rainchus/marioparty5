@@ -5,3 +5,49 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/m503Dll/m503.c:
+	.text       start:0x00000000 end:0x00002D4C
+	.rodata     start:0x00000000 end:0x000000A8
+	.data       start:0x00000000 end:0x00000060
+	.bss        start:0x00000000 end:0x00000028
+
+REL/m503Dll/opening.c:
+	.text       start:0x00002D4C end:0x00003440
+	.rodata     start:0x000000A8 end:0x000000E0
+	.data       start:0x00000060 end:0x000000A8
+	.bss        start:0x00000028 end:0x00000030
+
+REL/m503Dll/player.c:
+	.text       start:0x00003440 end:0x00005810
+	.rodata     start:0x000000E0 end:0x00000240
+	.data       start:0x000000A8 end:0x000001E0
+	.bss        start:0x00000030 end:0x00000040
+
+REL/m503Dll/saru.c:
+	.text       start:0x00005810 end:0x0000A6FC
+	.rodata     start:0x00000240 end:0x00000450
+	.data       start:0x000001E0 end:0x00000520
+	.bss        start:0x00000040 end:0x000000B8
+
+REL/m503Dll/stage.c:
+	.text       start:0x0000A6FC end:0x0000C574
+	.rodata     start:0x00000450 end:0x000005A0
+	.data       start:0x00000520 end:0x00000640
+	.bss        start:0x000000B8 end:0x000000C0
+
+REL/m503Dll/particle.c:
+	.text       start:0x0000C574 end:0x0000D1B4
+	.rodata     start:0x000005A0 end:0x00000640
+	.bss        start:0x000000C0 end:0x000000C8
+
+REL/m503Dll/score.c:
+	.text       start:0x0000D1B4 end:0x0000D7B0
+	.rodata     start:0x00000640 end:0x00000668
+	.data       start:0x00000640 end:0x0000069C
+	.bss        start:0x000000C8 end:0x000000D0
+
+REL/m503Dll/actor.c:
+	.text       start:0x0000D7B0 end:0x0000E084
+	.rodata     start:0x00000668 end:0x000006A0
+	.bss        start:0x000000D0 end:0x000000D4

@@ -5,3 +5,52 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/m502dll/m502.c:
+	.text       start:0x00000000 end:0x00001830
+	.rodata     start:0x00000000 end:0x00000028
+	.data       start:0x00000000 end:0x00000B60
+	.bss        start:0x00000000 end:0x00005038
+
+REL/m502dll/camera.c:
+	.text       start:0x00001830 end:0x000021B8
+	.rodata     start:0x00000028 end:0x00000088
+	.data       start:0x00000B60 end:0x00000B80
+
+REL/m502dll/stage.c:
+	.text       start:0x000021B8 end:0x000038E0
+	.rodata     start:0x00000088 end:0x00000138
+	.data       start:0x00000B80 end:0x00000C38
+	.bss        start:0x00005038 end:0x00005048
+
+REL/m502dll/player.c:
+	.text       start:0x000038E0 end:0x000058E0
+	.rodata     start:0x00000138 end:0x000001E8
+	.data       start:0x00000C38 end:0x00000E98
+
+REL/m502dll/input.c:
+	.text       start:0x000058E0 end:0x00006664
+	.rodata     start:0x000001E8 end:0x00000208
+
+REL/m502dll/block.c:
+	.text       start:0x00006664 end:0x00009468
+	.rodata     start:0x00000208 end:0x00000310
+	.data       start:0x00000E98 end:0x00000FE0
+	.bss        start:0x00005048 end:0x00005050
+
+REL/m502dll/opening.c:
+	.text       start:0x00009468 end:0x0000A914
+	.rodata     start:0x00000310 end:0x000003C8
+	.data       start:0x00000FE0 end:0x00001068
+	.bss        start:0x00005050 end:0x00005068
+
+REL/m502dll/ending.c:
+	.text       start:0x0000A914 end:0x0000C468
+	.rodata     start:0x000003C8 end:0x00000498
+	.data       start:0x00001068 end:0x00001138
+	.bss        start:0x00005068 end:0x00005090
+
+REL/m502dll/bat.c:
+	.text       start:0x0000C468 end:0x0000DED8
+	.rodata     start:0x00000498 end:0x00000584
+	.bss        start:0x00005090 end:0x00005092

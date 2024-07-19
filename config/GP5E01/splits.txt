@@ -403,7 +403,7 @@ game/board/com.c:
 	.text       start:0x800A4430 end:0x800A4768
 	.sdata2     start:0x8028A308 end:0x8028A310
 
-game/board/mapview.c:
+game/board/scroll.c:
 	.text       start:0x800A4768 end:0x800A8400
 	.rodata     start:0x801AA070 end:0x801AA0C8
 	.data       start:0x801C9940 end:0x801C9968
@@ -570,7 +570,7 @@ game/board/story.c:
 	.sdata2     start:0x8028B3D0 end:0x8028B4A8
 	.sbss2      start:0x8028BEF0 end:0x8028BEF3
 
-game/board/logo.c:
+game/board/telop.c:
 	.text       start:0x8012F75C end:0x801322EC
 	.rodata     start:0x801AA7D8 end:0x801AA868
 	.data       start:0x801CC8D0 end:0x801CC978
