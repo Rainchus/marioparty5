@@ -5,3 +5,61 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/m504dll/m504.c:
+	.text       start:0x00000000 end:0x000023DC
+	.rodata     start:0x00000000 end:0x00000030
+	.data       start:0x00000000 end:0x000000A8
+	.bss        start:0x00000000 end:0x00007810
+
+REL/m504dll/stage.c:
+	.text       start:0x000023DC end:0x00005934
+	.rodata     start:0x00000030 end:0x000000E8
+	.data       start:0x000000A8 end:0x000000A8
+
+REL/m504dll/player.c:
+	.text       start:0x00005934 end:0x00009680
+	.rodata     start:0x000000E8 end:0x000001E8
+	.data       start:0x000000A8 end:0x00000498
+	.bss        start:0x00007810 end:0x00007820
+
+REL/m504dll/wanwan.c:
+	.text       start:0x00009680 end:0x0000B828
+	.rodata     start:0x000001E8 end:0x000002E8
+	.data       start:0x00000498 end:0x00000528
+
+REL/m504dll/input.c:
+	.text       start:0x0000B828 end:0x0000BC54
+	.data       start:0x00000528 end:0x000045C0
+
+REL/m504dll/com.c:
+	.text       start:0x0000BC54 end:0x0000C3E0
+	.rodata     start:0x000002E8 end:0x00000318
+	.data       start:0x000045C0 end:0x000045E0
+
+REL/m504dll/camera.c:
+	.text       start:0x0000C3E0 end:0x0000D03C
+	.rodata     start:0x00000318 end:0x00000380
+	.data       start:0x000045E0 end:0x000045F0
+
+REL/m504dll/light.c:
+	.text       start:0x0000D03C end:0x0000D10C
+	.data       start:0x000045F0 end:0x00004610
+
+REL/m504dll/particle.c:
+	.text       start:0x0000D10C end:0x0000E14C
+	.rodata     start:0x00000380 end:0x000003F8
+	.data       start:0x00004610 end:0x00004648
+	.bss        start:0x00007820 end:0x00007848
+
+REL/m504dll/opening.c:
+	.text       start:0x0000E14C end:0x000118E8
+	.rodata     start:0x000003F8 end:0x000005E0
+	.data       start:0x00004648 end:0x000048C8
+	.bss        start:0x00007848 end:0x00007A08
+
+REL/m504dll/ending.c:
+	.text       start:0x000118E8 end:0x0001296C
+	.rodata     start:0x000005E0 end:0x00000650
+	.data       start:0x000048C8 end:0x00004A84
+	.bss        start:0x00007A08 end:0x00007A24

@@ -5,3 +5,73 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/m501Dll/m501.cpp:
+	.text       start:0x00000000 end:0x00005E8C
+	.ctors      start:0x00000000 end:0x00000004
+	.rodata     start:0x00000000 end:0x00000080
+	.data       start:0x00000000 end:0x00000230
+	.bss        start:0x00000000 end:0x00000030
+
+REL/m501Dll/asiato.cpp:
+	.text       start:0x00005E8C end:0x00006638
+	.ctors      start:0x00000004 end:0x00000008
+	.rodata     start:0x00000080 end:0x00000098
+	.data       start:0x00000230 end:0x00000238
+	.bss        start:0x00000030 end:0x00000058
+
+REL/m501Dll/gamemaster.cpp:
+	.text       start:0x00006638 end:0x000073C8
+	.ctors      start:0x00000008 end:0x0000000C
+	.rodata     start:0x00000098 end:0x000000D8
+	.data       start:0x00000238 end:0x00000268
+
+REL/m501Dll/aisu.cpp:
+	.text       start:0x000073C8 end:0x0000930C
+	.ctors      start:0x0000000C end:0x00000010
+	.rodata     start:0x000000D8 end:0x00000170
+	.data       start:0x00000268 end:0x00000350
+	.bss        start:0x00000058 end:0x000000C0
+
+REL/m501Dll/joint.cpp:
+	.text       start:0x0000930C end:0x00009B3C
+	.ctors      start:0x00000010 end:0x00000014
+	.data       start:0x00000350 end:0x00000380
+	.bss        start:0x000000C0 end:0x000000D0
+
+REL/m501Dll/camera.cpp:
+	.text       start:0x00009B3C end:0x0000A3A8
+	.rodata     start:0x00000170 end:0x000001B0
+	.data       start:0x00000380 end:0x000003C8
+
+REL/m501Dll/particle.cpp:
+	.text       start:0x0000A3A8 end:0x0000ACCC
+	.rodata     start:0x000001B0 end:0x000001F8
+	.data       start:0x000003C8 end:0x00000408
+	.bss        start:0x000000D0 end:0x000000D8
+
+REL/m501Dll/stage.cpp:
+	.text       start:0x0000ACCC end:0x0000B340
+	.rodata     start:0x000001F8 end:0x00000258
+	.data       start:0x00000408 end:0x00000458
+
+REL/m501Dll/player.cpp:
+	.text       start:0x0000B340 end:0x00010158
+	.ctors      start:0x00000014 end:0x00000018
+	.rodata     start:0x00000258 end:0x00000370
+	.data       start:0x00000458 end:0x0000058B
+	.bss        start:0x000000D8 end:0x00000100
+
+REL/m501Dll/random.cpp:
+	.text       start:0x00010158 end:0x000102B0
+	.ctors      start:0x00000018 end:0x0000001C
+	.bss        start:0x00000100 end:0x00000AC8
+
+REL/global_destructor_chain.c:
+	.text       start:0x000102B0 end:0x00010338
+	.dtors      start:0x00000000 end:0x00000004
+	.bss        start:0x00000AC8 end:0x00000ACC
+
+REL/ptmf.c:
+	.text       start:0x00010338 end:0x00010480
+	.rodata     start:0x00000370 end:0x0000037C
