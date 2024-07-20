@@ -961,7 +961,7 @@ config.libs = [
     Rel(
         "meschkDll",
         objects={
-            Object(NonMatching, "REL/meschkDll/motchk.c"),
+            Object(NonMatching, "REL/meschkDll/meschk.c"),
         },
     ),
     Rel(
@@ -999,6 +999,102 @@ config.libs = [
         "motchkDll",
         objects={
             Object(NonMatching, "REL/motchkDll/motchk.c"),
+        },
+    ),
+    Rel(
+        "w01Dll",
+        objects={
+            Object(NonMatching, "REL/w01Dll/world01.c"),
+        },
+    ),
+    Rel(
+        "w01sDll",
+        objects={
+            Object(NonMatching, "REL/w01sDll/world01.c"),
+        },
+    ),
+    Rel(
+        "w02Dll",
+        objects={
+            Object(NonMatching, "REL/w02Dll/world02.c"),
+        },
+    ),
+    Rel(
+        "w02sDll",
+        objects={
+            Object(NonMatching, "REL/w02sDll/world02.c"),
+        },
+    ),
+    Rel(
+        "w03Dll",
+        objects={
+            Object(NonMatching, "REL/w03Dll/world03.c"),
+        },
+    ),
+    Rel(
+        "w03sDll",
+        objects={
+            Object(NonMatching, "REL/w03sDll/world03.c"),
+        },
+    ),
+    Rel(
+        "w04Dll",
+        objects={
+            Object(NonMatching, "REL/w04Dll/world04.c"),
+        },
+    ),
+    Rel(
+        "w04sDll",
+        objects={
+            Object(NonMatching, "REL/w04sDll/world04.c"),
+        },
+    ),
+    Rel(
+        "w05Dll",
+        objects={
+            Object(NonMatching, "REL/w05Dll/world05.c"),
+        },
+    ),
+    Rel(
+        "w05sDll",
+        objects={
+            Object(NonMatching, "REL/w05sDll/world05.c"),
+        },
+    ),
+    Rel(
+        "w06Dll",
+        objects={
+            Object(NonMatching, "REL/w06Dll/world06.c"),
+        },
+    ),
+    Rel(
+        "w06sDll",
+        objects={
+            Object(NonMatching, "REL/w06sDll/world06.c"),
+        },
+    ),
+    Rel(
+        "w07Dll",
+        objects={
+            Object(NonMatching, "REL/w07Dll/world07.c"),
+        },
+    ),
+    Rel(
+        "w07sDll",
+        objects={
+            Object(NonMatching, "REL/w07sDll/world07.c"),
+        },
+    ),
+    Rel(
+        "w10Dll",
+        objects={
+            Object(NonMatching, "REL/w10Dll/world10.c"),
+        },
+    ),
+    Rel(
+        "w20Dll",
+        objects={
+            Object(NonMatching, "REL/w20Dll/world20.c"),
         },
     ),
 ]

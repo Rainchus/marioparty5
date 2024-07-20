@@ -5,3 +5,9 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/w04Dll/world04.c:
+	.text       start:0x00000000 end:0x00013AE0
+	.rodata     start:0x00000000 end:0x00000260
+	.data       start:0x00000000 end:0x00001260
+	.bss        start:0x00000000 end:0x00007FA4
