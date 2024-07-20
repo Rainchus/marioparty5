@@ -5,3 +5,20 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/mdminiDll/mdmini.c:
+	.text       start:0x00000000 end:0x000188BC
+	.rodata     start:0x00000000 end:0x00000220
+	.data       start:0x00000000 end:0x00000EE8
+	.bss        start:0x00000000 end:0x00000890
+
+REL/mdminiDll/object.c:
+	.text       start:0x000188BC end:0x0001C7C0
+	.rodata     start:0x00000220 end:0x00000338
+	.data       start:0x00000EE8 end:0x000010F0
+	.bss        start:0x00000890 end:0x00000A60
+
+REL/mdminiDll/stage.c:
+	.text       start:0x0001C7C0 end:0x0002136C
+	.rodata     start:0x00000338 end:0x000003C0
+	.data       start:0x000010F0 end:0x0000165C

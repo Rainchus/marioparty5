@@ -5,3 +5,15 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/mgfreeDll/mgfree.c:
+	.text       start:0x00000000 end:0x000046DC
+	.rodata     start:0x00000000 end:0x000000F8
+	.data       start:0x00000000 end:0x00000330
+	.bss        start:0x00000000 end:0x00000948
+
+REL/mgfreeDll/decide.c:
+	.text       start:0x000046DC end:0x0000DAC0
+	.rodata     start:0x000000F8 end:0x000001C4
+	.data       start:0x00000330 end:0x0000096C
+	.bss        start:0x00000948 end:0x00000AC8

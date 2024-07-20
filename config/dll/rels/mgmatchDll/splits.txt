@@ -5,3 +5,20 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/mgmatchDll/mgmatch.c:
+	.text       start:0x00000000 end:0x00012404
+	.rodata     start:0x00000000 end:0x00000220
+	.data       start:0x00000000 end:0x000006C8
+	.bss        start:0x00000000 end:0x00000E38
+
+REL/mgmatchDll/score.c:
+	.text       start:0x00012404 end:0x00015F24
+	.rodata     start:0x00000220 end:0x00000310
+	.data       start:0x000006C8 end:0x00000E40
+	.bss        start:0x00000E38 end:0x00000F08
+
+REL/mgmatchDll/mess.c:
+	.text       start:0x00015F24 end:0x00016EA8
+	.rodata     start:0x00000310 end:0x0000031C
+	.data       start:0x00000E40 end:0x00000E5E

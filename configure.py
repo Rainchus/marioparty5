@@ -830,6 +830,14 @@ config.libs = [
         },
     ),
     Rel(
+        "decathlonDll",
+        objects={
+            Object(NonMatching, "REL/decathlonDll/mgtournament.c"),
+            Object(NonMatching, "REL/decathlonDll/score.c"),
+            Object(NonMatching, "REL/decathlonDll/mess.c"),
+        },
+    ),
+    Rel(
         "e3bootdll",
         objects={
             Object(NonMatching, "REL/e3bootdll/e3boot.c"),
@@ -924,6 +932,73 @@ config.libs = [
         "m505Dll",
         objects={
             Object(NonMatching, "REL/m505Dll/m505.c"),
+        },
+    ),
+    Rel(
+        "mdbeachDll",
+        objects={
+            Object(NonMatching, "REL/mdbeachDll/mdbeach.c"),
+            Object(NonMatching, "REL/mdbeachDll/object.c"),
+            Object(NonMatching, "REL/mdbeachDll/stage.c"),
+        },
+    ),
+    Rel(
+        "mdcardDll",
+        objects={
+            Object(NonMatching, "REL/mdcardDll/mdcard.c"),
+            Object(NonMatching, "REL/mdcardDll/object.c"),
+            Object(NonMatching, "REL/mdcardDll/stage.c"),
+        },
+    ),
+    Rel(
+        "mdminiDll",
+        objects={
+            Object(NonMatching, "REL/mdminiDll/mdmini.c"),
+            Object(NonMatching, "REL/mdminiDll/object.c"),
+            Object(NonMatching, "REL/mdminiDll/stage.c"),
+        },
+    ),
+    Rel(
+        "meschkDll",
+        objects={
+            Object(NonMatching, "REL/meschkDll/motchk.c"),
+        },
+    ),
+    Rel(
+        "mgfreeDll",
+        objects={
+            Object(NonMatching, "REL/mgfreeDll/mgfree.c"),
+            Object(NonMatching, "REL/mgfreeDll/decide.c"),
+        },
+    ),
+    Rel(
+        "mgmatchDll",
+        objects={
+            Object(NonMatching, "REL/mgmatchDll/mgmatch.c"),
+            Object(NonMatching, "REL/mgmatchDll/score.c"),
+            Object(NonMatching, "REL/mgmatchDll/mess.c"),
+        },
+    ),
+    Rel(
+        "mgtourDll",
+        objects={
+            Object(NonMatching, "REL/mgtourDll/mgtournament.c"),
+            Object(NonMatching, "REL/mgtourDll/score.c"),
+            Object(NonMatching, "REL/mgtourDll/mess.c"),
+        },
+    ),
+    Rel(
+        "mgwarsDll",
+        objects={
+            Object(NonMatching, "REL/mgwarsDll/mgwars.c"),
+            Object(NonMatching, "REL/mgwarsDll/score.c"),
+            Object(NonMatching, "REL/mgwarsDll/mess.c"),
+        },
+    ),
+    Rel(
+        "motchkDll",
+        objects={
+            Object(NonMatching, "REL/motchkDll/motchk.c"),
         },
     ),
 ]
