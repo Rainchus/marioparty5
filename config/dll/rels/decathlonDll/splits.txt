@@ -5,3 +5,20 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/decathlonDll/mgtournament.c:
+	.text       start:0x00000000 end:0x000085D4
+	.rodata     start:0x00000000 end:0x00000148
+	.data       start:0x00000000 end:0x000003F8
+	.bss        start:0x00000000 end:0x000006D0
+
+REL/decathlonDll/score.c:
+	.text       start:0x000085D4 end:0x0000A210
+	.rodata     start:0x00000148 end:0x00000170
+	.data       start:0x000003F8 end:0x00000508
+	.bss        start:0x000006D0 end:0x0000072C
+
+REL/decathlonDll/mess.c:
+	.text       start:0x0000A210 end:0x0000ADE8
+	.rodata     start:0x00000170 end:0x00000198
+	.data       start:0x00000508 end:0x0000053C

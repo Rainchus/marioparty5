@@ -5,3 +5,20 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/mdbeachDll/mdbeach.c:
+	.text       start:0x00000000 end:0x000172D4
+	.rodata     start:0x00000000 end:0x00000190
+	.data       start:0x00000000 end:0x00000F30
+	.bss        start:0x00000000 end:0x00000B00
+
+REL/mdbeachDll/object.c:
+	.text       start:0x000172D4 end:0x0001AE94
+	.rodata     start:0x00000190 end:0x00000270
+	.data       start:0x00000F30 end:0x00001138
+	.bss        start:0x00000B00 end:0x00000CD0
+
+REL/mdbeachDll/stage.c:
+	.text       start:0x0001AE94 end:0x0001C930
+	.rodata     start:0x00000270 end:0x00000290
+	.data       start:0x00001138 end:0x00001600

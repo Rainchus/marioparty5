@@ -5,3 +5,19 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/mgwarsDll/mgwars.c:
+	.text       start:0x00000000 end:0x0000E2D0
+	.rodata     start:0x00000000 end:0x00000108
+	.data       start:0x00000000 end:0x00000658
+	.bss        start:0x00000000 end:0x00000418
+
+REL/mgwarsDll/mess.c:
+	.text       start:0x0000E2D0 end:0x0000EF70
+	.data       start:0x00000658 end:0x00000670
+
+REL/mgwarsDll/score.c:
+	.text       start:0x0000EF70 end:0x0000F8A8
+	.rodata     start:0x00000108 end:0x00000130
+	.data       start:0x00000670 end:0x000006FC
+	.bss        start:0x00000418 end:0x0000044C
