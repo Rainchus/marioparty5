@@ -5,3 +5,20 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/mdselDll/mdsel.c:
+	.text       start:0x00000000 end:0x00006960
+	.rodata     start:0x00000000 end:0x000000E0
+	.data       start:0x00000000 end:0x00000748
+	.bss        start:0x00000000 end:0x00000260
+
+REL/mdselDll/object.c:
+	.text       start:0x00006960 end:0x0000A848
+	.rodata     start:0x000000E0 end:0x000001D0
+	.data       start:0x00000748 end:0x00000950
+	.bss        start:0x00000260 end:0x00000430
+
+REL/mdselDll/stage.c:
+	.text       start:0x0000A848 end:0x0000C6B8
+	.rodata     start:0x000001D0 end:0x00000258
+	.data       start:0x00000950 end:0x00000BAC

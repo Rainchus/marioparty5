@@ -5,3 +5,21 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/m506Dll/m506.c:
+	.text       start:0x00000000 end:0x00005F8C
+	.rodata     start:0x00000000 end:0x000001C8
+	.data       start:0x00000000 end:0x00000120
+	.bss        start:0x00000000 end:0x00000018
+
+REL/m506Dll/object.c:
+	.text       start:0x00005F8C end:0x0000C05C
+	.rodata     start:0x000001C8 end:0x00000370
+	.data       start:0x00000120 end:0x00000378
+	.bss        start:0x00000018 end:0x00000268
+
+REL/m506Dll/player.c:
+	.text       start:0x0000C05C end:0x0000EC2C
+	.rodata     start:0x00000370 end:0x00000390
+	.data       start:0x00000378 end:0x000006D0
+	.bss        start:0x00000268 end:0x00000298

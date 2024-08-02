@@ -5,3 +5,56 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/sdroomdll/sdroom.c:
+	.text       start:0x00000000 end:0x00003E8C
+	.rodata     start:0x00000000 end:0x000000E0
+	.data       start:0x00000000 end:0x00000150
+	.bss        start:0x00000000 end:0x00000568
+
+REL/sdroomdll/machine.c:
+	.text       start:0x00003E8C end:0x0000556C
+	.rodata     start:0x000000E0 end:0x00000130
+	.data       start:0x00000150 end:0x00001060
+
+REL/sdroomdll/garage.c:
+	.text       start:0x0000556C end:0x00013B1C
+	.rodata     start:0x00000130 end:0x00000370
+	.data       start:0x00001060 end:0x00001518
+	.bss        start:0x00000568 end:0x00000750
+
+REL/sdroomdll/garagesave.c:
+	.text       start:0x00013B1C end:0x000179D4
+	.rodata     start:0x00000370 end:0x00000498
+	.data       start:0x00001518 end:0x000015F0
+	.bss        start:0x00000750 end:0x000009A0
+
+REL/sdroomdll/filename.c:
+	.text       start:0x000179D4 end:0x00019324
+	.rodata     start:0x00000498 end:0x00000518
+	.data       start:0x000015F0 end:0x00001860
+	.bss        start:0x000009A0 end:0x00000A90
+
+REL/sdroomdll/picture.c:
+	.text       start:0x00019324 end:0x0001C25C
+	.rodata     start:0x00000518 end:0x000006A0
+	.data       start:0x00001860 end:0x00001B60
+	.bss        start:0x00000A90 end:0x00000C00
+
+REL/sdroomdll/tournament.c:
+	.text       start:0x0001C25C end:0x00020870
+	.rodata     start:0x000006A0 end:0x000007D0
+	.data       start:0x00001B60 end:0x00001DE0
+	.bss        start:0x00000C00 end:0x00000C38
+
+REL/sdroomdll/ending.c:
+	.text       start:0x00020870 end:0x000256B4
+	.rodata     start:0x000007D0 end:0x000009B8
+	.data       start:0x00001DE0 end:0x00002188
+	.bss        start:0x00000C38 end:0x00001980
+
+REL/sdroomdll/desk.c:
+	.text       start:0x000256B4 end:0x000282E4
+	.rodata     start:0x000009B8 end:0x00000A6C
+	.data       start:0x00002188 end:0x000021C1
+	.bss        start:0x00001980 end:0x00001A0C
