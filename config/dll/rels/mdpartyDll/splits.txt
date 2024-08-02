@@ -5,3 +5,20 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/mdpartyDll/mdparty.c:
+	.text       start:0x00000000 end:0x0001EC14
+	.rodata     start:0x00000000 end:0x00000238
+	.data       start:0x00000000 end:0x00000E60
+	.bss        start:0x00000000 end:0x000007A8
+
+REL/mdpartyDll/object.c:
+	.text       start:0x0001EC14 end:0x000227F0
+	.rodata     start:0x00000238 end:0x00000348
+	.data       start:0x00000E60 end:0x00001068
+	.bss        start:0x000007A8 end:0x00000978
+
+REL/mdpartyDll/stage.c:
+	.text       start:0x000227F0 end:0x00027704
+	.rodata     start:0x00000348 end:0x000003D0
+	.data       start:0x00001068 end:0x000017EC

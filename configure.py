@@ -935,6 +935,60 @@ config.libs = [
         },
     ),
     Rel(
+        "m506Dll",
+        objects={
+            Object(NonMatching, "REL/m506Dll/m506.c"),
+            Object(NonMatching, "REL/m506Dll/object.c"),
+            Object(NonMatching, "REL/m506Dll/player.c"),
+        },
+    ),
+    Rel(
+        "m507dll",
+        objects={
+            Object(NonMatching, "REL/m507dll/m507.c"),
+            Object(NonMatching, "REL/m507dll/effect.c"),
+        },
+    ),
+    Rel(
+        "m508Dll",
+        objects={
+            Object(NonMatching, "REL/m508Dll/m508.c"),
+            Object(NonMatching, "REL/m508Dll/object.c"),
+        },
+    ),
+    Rel(
+        "m509Dll",
+        objects={
+            Object(NonMatching, "REL/m509Dll/m509.cpp"),
+            Object(NonMatching, "REL/m509Dll/mazedata.cpp"),
+            Object(NonMatching, "REL/m509Dll/maze.cpp"),
+            Object(NonMatching, "REL/m509Dll/gamemaster.cpp"),
+            Object(NonMatching, "REL/m509Dll/startspr.cpp"),
+            Object(NonMatching, "REL/m509Dll/back.cpp"),
+            Object(NonMatching, "REL/m509Dll/camera.cpp"),
+            Object(NonMatching, "REL/m509Dll/player.cpp"),
+            Object(NonMatching, "REL/m509Dll/random.cpp"),
+        },
+    ),
+    Rel(
+        "m510dll",
+        objects={
+            Object(NonMatching, "REL/m510dll/m510.c"),
+            Object(NonMatching, "REL/m510dll/stage.c"),
+            Object(NonMatching, "REL/m510dll/player.c"),
+            Object(NonMatching, "REL/m510dll/playermodel.c"),
+            Object(NonMatching, "REL/m510dll/pitch.c"),
+            Object(NonMatching, "REL/m510dll/ball.c"),
+            Object(NonMatching, "REL/m510dll/pad.c"),
+            Object(NonMatching, "REL/m510dll/camera.c"),
+            Object(NonMatching, "REL/m510dll/light.c"),
+            Object(NonMatching, "REL/m510dll/opening.c"),
+            Object(NonMatching, "REL/m510dll/ending.c"),
+            Object(NonMatching, "REL/m510dll/ball_path.c"),
+            Object(NonMatching, "REL/m510dll/score.c"),
+        },
+    ),
+    Rel(
         "mdbeachDll",
         objects={
             Object(NonMatching, "REL/mdbeachDll/mdbeach.c"),
@@ -956,6 +1010,47 @@ config.libs = [
             Object(NonMatching, "REL/mdminiDll/mdmini.c"),
             Object(NonMatching, "REL/mdminiDll/object.c"),
             Object(NonMatching, "REL/mdminiDll/stage.c"),
+        },
+    ),
+    Rel(
+        "mdomakeDll",
+        objects={
+            Object(NonMatching, "REL/mdomakeDll/mdomake.c"),
+            Object(NonMatching, "REL/mdomakeDll/object.c"),
+            Object(NonMatching, "REL/mdomakeDll/stage.c"),
+        },
+    ),
+    Rel(
+        "mdoptionDll",
+        objects={
+            Object(NonMatching, "REL/mdoptionDll/mdoption.c"),
+            Object(NonMatching, "REL/mdoptionDll/object.c"),
+            Object(NonMatching, "REL/mdoptionDll/stage.c"),
+            Object(NonMatching, "REL/mdoptionDll/record.c"),
+        },
+    ),
+    Rel(
+        "mdpartyDll",
+        objects={
+            Object(NonMatching, "REL/mdpartyDll/mdparty.c"),
+            Object(NonMatching, "REL/mdpartyDll/object.c"),
+            Object(NonMatching, "REL/mdpartyDll/stage.c"),
+        },
+    ),
+    Rel(
+        "mdselDll",
+        objects={
+            Object(NonMatching, "REL/mdselDll/mdsel.c"),
+            Object(NonMatching, "REL/mdselDll/object.c"),
+            Object(NonMatching, "REL/mdselDll/stage.c"),
+        },
+    ),
+    Rel(
+        "mdstoryDll",
+        objects={
+            Object(NonMatching, "REL/mdstoryDll/mdstory.c"),
+            Object(NonMatching, "REL/mdstoryDll/object.c"),
+            Object(NonMatching, "REL/mdstoryDll/stage.c"),
         },
     ),
     Rel(
@@ -993,6 +1088,20 @@ config.libs = [
             Object(NonMatching, "REL/mgwarsDll/mgwars.c"),
             Object(NonMatching, "REL/mgwarsDll/score.c"),
             Object(NonMatching, "REL/mgwarsDll/mess.c"),
+        },
+    ),
+    Rel(
+        "sdroomdll",
+        objects={
+            Object(NonMatching, "REL/sdroomdll/sdroom.c"),
+            Object(NonMatching, "REL/sdroomdll/machine.c"),
+            Object(NonMatching, "REL/sdroomdll/garage.c"),
+            Object(NonMatching, "REL/sdroomdll/garagesave.c"),
+            Object(NonMatching, "REL/sdroomdll/filename.c"),
+            Object(NonMatching, "REL/sdroomdll/picture.c"),
+            Object(NonMatching, "REL/sdroomdll/tournament.c"),
+            Object(NonMatching, "REL/sdroomdll/ending.c"),
+            Object(NonMatching, "REL/sdroomdll/desk.c"),
         },
     ),
     Rel(

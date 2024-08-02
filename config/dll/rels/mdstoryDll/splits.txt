@@ -5,3 +5,20 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/mdstoryDll/mdstory.c:
+	.text       start:0x00000000 end:0x0000AC2C
+	.rodata     start:0x00000000 end:0x00000140
+	.data       start:0x00000000 end:0x00000928
+	.bss        start:0x00000000 end:0x00000490
+
+REL/mdstoryDll/object.c:
+	.text       start:0x0000AC2C end:0x0000EB30
+	.rodata     start:0x00000140 end:0x00000258
+	.data       start:0x00000928 end:0x00000B30
+	.bss        start:0x00000490 end:0x00000660
+
+REL/mdstoryDll/stage.c:
+	.text       start:0x0000EB30 end:0x00012778
+	.rodata     start:0x00000258 end:0x000002E4
+	.data       start:0x00000B30 end:0x00000F44

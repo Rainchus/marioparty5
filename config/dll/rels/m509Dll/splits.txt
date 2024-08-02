@@ -5,3 +5,66 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/m509Dll/m509.cpp:
+	.text       start:0x00000000 end:0x00005A7C
+	.ctors      start:0x00000000 end:0x00000004
+	.rodata     start:0x00000000 end:0x00000078
+	.data       start:0x00000000 end:0x00000210
+	.bss        start:0x00000000 end:0x00000030
+
+REL/m509Dll/mazedata.cpp:
+	.data       start:0x00000210 end:0x00003210
+
+REL/m509Dll/maze.cpp:
+	.text       start:0x00005A7C end:0x0000C2D0
+	.rodata     start:0x00000078 end:0x00000220
+	.data       start:0x00003210 end:0x00003280
+	.bss        start:0x00000030 end:0x00000038
+
+REL/m509Dll/gamemaster.cpp:
+	.text       start:0x0000C2D0 end:0x0000C924
+	.ctors      start:0x00000004 end:0x00000008
+	.rodata     start:0x00000220 end:0x00000230
+	.data       start:0x00003280 end:0x00003308
+	.bss        start:0x00000038 end:0x00000050
+
+REL/m509Dll/startspr.cpp:
+	.text       start:0x0000C924 end:0x0000CED0
+	.rodata     start:0x00000230 end:0x00000278
+	.data       start:0x00003308 end:0x00003398
+	.bss        start:0x00000050 end:0x00000058
+
+REL/m509Dll/back.cpp:
+	.text       start:0x0000CED0 end:0x0000DEEC
+	.ctors      start:0x00000008 end:0x0000000C
+	.rodata     start:0x00000278 end:0x00000318
+	.data       start:0x00003398 end:0x000033D0
+	.bss        start:0x00000058 end:0x00000068
+
+REL/m509Dll/camera.cpp:
+	.text       start:0x0000DEEC end:0x0000EB14
+	.rodata     start:0x00000318 end:0x000003D8
+	.data       start:0x000033D0 end:0x00003438
+	.bss        start:0x00000068 end:0x00000088
+
+REL/m509Dll/player.cpp:
+	.text       start:0x0000EB14 end:0x00012DBC
+	.ctors      start:0x0000000C end:0x00000010
+	.rodata     start:0x000003D8 end:0x00000520
+	.data       start:0x00003438 end:0x000035B3
+	.bss        start:0x00000088 end:0x000000B0
+
+REL/m509Dll/random.cpp:
+	.text       start:0x00012DBC end:0x00012EBC
+	.ctors      start:0x00000010 end:0x00000014
+	.bss        start:0x000000B0 end:0x00000A78
+
+REL/global_destructor_chain.c:
+	.text       start:0x00012EBC end:0x00012F44
+	.dtors      start:0x00000000 end:0x00000004
+	.bss        start:0x00000A78 end:0x00000A7C
+
+REL/ptmf.c:
+	.text       start:0x00012F44 end:0x0001308C
+	.rodata     start:0x00000520 end:0x0000052C
