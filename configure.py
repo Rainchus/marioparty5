@@ -1111,6 +1111,58 @@ config.libs = [
         },
     ),
     Rel(
+        "safDll",
+        objects={
+            Object(NonMatching, "REL/safDll/safold.c"),
+            Object(NonMatching, "REL/safDll/saf.c"),
+            Object(NonMatching, "REL/safDll/saf2.c"),
+        },
+    ),
+    Rel(
+        "sequencedll",
+        objects={
+            Object(NonMatching, "REL/sequencedll/sequence.c"),
+        },
+    ),
+    Rel(
+        "selmenuDll",
+        objects={
+            Object(NonMatching, "REL/selmenuDll/selmenu.c"),
+        },
+    ),
+    Rel(
+        "staffDll",
+        objects={
+            Object(NonMatching, "REL/staffDll/staff.c"),
+        },
+    ),
+    Rel(
+        "storymodedll",
+        objects={
+            Object(NonMatching, "REL/storymodedll/storymode.c"),
+            Object(NonMatching, "REL/storymodedll/opening.c"),
+        },
+    ),
+    Rel(
+        "storyresultdll",
+        objects={
+            Object(NonMatching, "REL/storyresultdll/storyresult.c"),
+            Object(NonMatching, "REL/storyresultdll/rank.c"),
+            Object(NonMatching, "REL/storyresultdll/effect.c"),
+        },
+    ),
+    Rel(
+        "systemDll",
+        objects={
+            Object(NonMatching, "REL/systemDll/nel.c"),
+            Object(NonMatching, "REL/systemDll/object.c"),
+            Object(NonMatching, "REL/systemDll/camera.c"),
+            Object(NonMatching, "REL/systemDll/stage.c"),
+            Object(NonMatching, "REL/systemDll/math.c"),
+            Object(NonMatching, "REL/systemDll/window.c"),
+        },
+    ),
+    Rel(
         "w01Dll",
         objects={
             Object(NonMatching, "REL/w01Dll/world01.c"),

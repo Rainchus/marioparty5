@@ -5,3 +5,36 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/systemDll/nel.c:
+	.text       start:0x00000000 end:0x0001C5A8
+	.rodata     start:0x00000000 end:0x00000158
+	.data       start:0x00000000 end:0x000016A8
+	.bss        start:0x00000000 end:0x00000380
+
+REL/systemDll/object.c:
+	.text       start:0x0001C5A8 end:0x0001CBA8
+	.rodata     start:0x00000158 end:0x00000160
+	.data       start:0x000016A8 end:0x000016D8
+
+REL/systemDll/camera.c:
+	.text       start:0x0001CBA8 end:0x0001DC98
+	.rodata     start:0x00000160 end:0x00000230
+	.data       start:0x000016D8 end:0x000017B0
+
+REL/systemDll/stage.c:
+	.text       start:0x0001DC98 end:0x00026EFC
+	.rodata     start:0x00000230 end:0x00000370
+	.data       start:0x000017B0 end:0x00002128
+	.bss        start:0x00000380 end:0x00000398
+
+REL/systemDll/math.c:
+	.text       start:0x00026EFC end:0x000285DC
+	.rodata     start:0x00000370 end:0x000003C8
+	.data       start:0x00002128 end:0x00002188
+	.bss        start:0x00000398 end:0x000004F8
+
+REL/systemDll/window.c:
+	.text       start:0x000285DC end:0x000298F4
+	.rodata     start:0x000003C8 end:0x00000414
+	.data       start:0x00002188 end:0x00002226
