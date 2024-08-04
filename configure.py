@@ -1091,6 +1091,20 @@ config.libs = [
         },
     ),
     Rel(
+        "sd00dll",
+        objects={
+            Object(NonMatching, "REL/sd00dll/sd00.c"),
+            Object(NonMatching, "REL/sd00dll/machine.c"),
+            Object(NonMatching, "REL/sd00dll/hook.c"),
+            Object(NonMatching, "REL/sd00dll/com.c"),
+            Object(NonMatching, "REL/sd00dll/gun.c"),
+            Object(NonMatching, "REL/sd00dll/stage.c"),
+            Object(NonMatching, "REL/sd00dll/math.c"),
+            Object(NonMatching, "REL/sd00dll/flag.c"),
+            Object(NonMatching, "REL/sd00dll/rabbit.c"),
+        },
+    ),
+    Rel(
         "sdroomdll",
         objects={
             Object(NonMatching, "REL/sdroomdll/sdroom.c"),

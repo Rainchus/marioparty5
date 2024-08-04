@@ -5,3 +5,49 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/sd00dll/sd00.c:
+	.text       start:0x00000000 end:0x0000C5C0
+	.rodata     start:0x00000000 end:0x00000518
+	.data       start:0x00000000 end:0x00000108
+	.bss        start:0x00000000 end:0x00000008
+
+REL/sd00dll/machine.c:
+	.text       start:0x0000C5C0 end:0x00011C64
+	.rodata     start:0x00000518 end:0x000006A0
+	.data       start:0x00000108 end:0x00001018
+
+REL/sd00dll/hook.c:
+	.text       start:0x00011C64 end:0x00011E40
+	.rodata     start:0x000006A0 end:0x000006A8
+
+REL/sd00dll/com.c:
+	.text       start:0x00011E40 end:0x00014F28
+	.rodata     start:0x000006A8 end:0x00000870
+	.data       start:0x00001018 end:0x000010D0
+
+REL/sd00dll/gun.c:
+	.text       start:0x00014F28 end:0x0001F074
+	.rodata     start:0x00000870 end:0x00000D90
+	.data       start:0x000010D0 end:0x00001388
+
+REL/sd00dll/stage.c:
+	.text       start:0x0001F074 end:0x0002EAAC
+	.rodata     start:0x00000D90 end:0x00001318
+	.data       start:0x00001388 end:0x000019C0
+	.bss        start:0x00000008 end:0x00000260
+
+REL/sd00dll/math.c:
+	.text       start:0x0002EAAC end:0x0002F65C
+	.rodata     start:0x00001318 end:0x00001398
+
+REL/sd00dll/flag.c:
+	.text       start:0x0002F65C end:0x00031500
+	.rodata     start:0x00001398 end:0x00001488
+	.data       start:0x000019C0 end:0x000019CB
+	.bss        start:0x00000260 end:0x000002B0
+
+REL/sd00dll/rabbit.c:
+	.text       start:0x00031500 end:0x000343E0
+	.rodata     start:0x00001488 end:0x000015E4
+	.bss        start:0x000002B0 end:0x000004BC
