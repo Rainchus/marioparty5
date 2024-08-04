@@ -1,7 +1,7 @@
 _prolog = .text:0x00000000; // type:function size:0x54 scope:global
 _epilog = .text:0x00000054; // type:function size:0x4C scope:global
 ObjectSetup = .text:0x000000A0; // type:function size:0x54
-W02Main = .text:0x000000F4; // type:function size:0x6EC
+W02Create = .text:0x000000F4; // type:function size:0x6EC
 W02Kill = .text:0x000007E0; // type:function size:0xA8
 W02MainObjExec = .text:0x00000888; // type:function size:0x654 scope:local
 W02LightSetHook = .text:0x00000EDC; // type:function size:0x1B8
