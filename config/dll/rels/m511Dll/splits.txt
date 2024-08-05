@@ -5,3 +5,109 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/m511Dll/boat.cpp:
+	.text       start:0x00000000 end:0x00000884
+	.ctors      start:0x00000000 end:0x00000004
+	.rodata     start:0x00000000 end:0x00000028
+	.data       start:0x00000000 end:0x00000058
+	.bss        start:0x00000000 end:0x00000020
+
+REL/m511Dll/math.cpp:
+	.text       start:0x00000884 end:0x00000B24
+	.rodata     start:0x00000028 end:0x00000060
+
+REL/m511Dll/m511.cpp:
+	.text       start:0x00000B24 end:0x00006B0C
+	.ctors      start:0x00000004 end:0x00000008
+	.rodata     start:0x00000060 end:0x000000D0
+	.data       start:0x00000058 end:0x00000258
+	.bss        start:0x00000020 end:0x00000A10
+
+REL/m511Dll/effring.cpp:
+	.text       start:0x00006B0C end:0x00007C78
+	.rodata     start:0x000000D0 end:0x000001E0
+	.data       start:0x00000258 end:0x00000298
+	.bss        start:0x00000A10 end:0x00000A18
+
+REL/m511Dll/gamemaster.cpp:
+	.text       start:0x00007C78 end:0x00008488
+	.ctors      start:0x00000008 end:0x0000000C
+	.rodata     start:0x000001E0 end:0x000001E8
+	.data       start:0x00000298 end:0x00000338
+	.bss        start:0x00000A18 end:0x00000A38
+
+REL/m511Dll/particle.cpp:
+	.text       start:0x00008488 end:0x000097C8
+	.ctors      start:0x0000000C end:0x00000010
+	.rodata     start:0x000001E8 end:0x00000248
+	.data       start:0x00000338 end:0x00000368
+	.bss        start:0x00000A38 end:0x00000A50
+
+REL/m511Dll/camera.cpp:
+	.text       start:0x000097C8 end:0x0000BD18
+	.rodata     start:0x00000248 end:0x00000340
+	.data       start:0x00000368 end:0x000003F0
+	.bss        start:0x00000A50 end:0x00000A78
+
+REL/m511Dll/boatshadow.cpp:
+	.text       start:0x0000BD18 end:0x0000C55C
+	.rodata     start:0x00000340 end:0x00000360
+	.data       start:0x000003F0 end:0x00000438
+
+REL/m511Dll/stage.cpp:
+	.text       start:0x0000C55C end:0x0000D318
+	.ctors      start:0x00000010 end:0x00000014
+	.rodata     start:0x00000360 end:0x00000388
+	.data       start:0x00000438 end:0x00000478
+	.bss        start:0x00000A78 end:0x00000A90
+
+REL/m511Dll/star.cpp:
+	.text       start:0x0000D318 end:0x0000E8BC
+	.rodata     start:0x00000388 end:0x00000430
+	.data       start:0x00000478 end:0x000004B8
+
+REL/m511Dll/staryaji.cpp:
+	.text       start:0x0000E8BC end:0x0000FACC
+	.ctors      start:0x00000014 end:0x00000018
+	.rodata     start:0x00000430 end:0x00000510
+	.data       start:0x000004B8 end:0x000004F8
+	.bss        start:0x00000A90 end:0x00000AA8
+
+REL/m511Dll/player.cpp:
+	.text       start:0x0000FACC end:0x000159B4
+	.ctors      start:0x00000018 end:0x0000001C
+	.rodata     start:0x00000510 end:0x00000850
+	.data       start:0x000004F8 end:0x00000600
+	.bss        start:0x00000AA8 end:0x00000B00
+
+REL/m511Dll/score.cpp:
+	.text       start:0x000159B4 end:0x00016E40
+	.rodata     start:0x00000850 end:0x000008F0
+	.data       start:0x00000600 end:0x00000658
+
+REL/m511Dll/boatsplash.cpp:
+	.text       start:0x00016E40 end:0x00018A9C
+	.rodata     start:0x000008F0 end:0x000009A0
+	.data       start:0x00000658 end:0x00000678
+
+REL/m511Dll/kibako.cpp:
+	.text       start:0x00018A9C end:0x00019804
+	.ctors      start:0x0000001C end:0x00000020
+	.rodata     start:0x000009A0 end:0x00000A00
+	.data       start:0x00000678 end:0x000006C8
+	.bss        start:0x00000B00 end:0x00000B18
+
+REL/m511Dll/water.cpp:
+	.text       start:0x00019804 end:0x0001CFD4
+	.rodata     start:0x00000A00 end:0x00000B00
+	.data       start:0x000006C8 end:0x00000730
+
+REL/global_destructor_chain.c:
+	.text       start:0x0001CFD4 end:0x0001D05C
+	.dtors      start:0x00000000 end:0x00000004
+	.bss        start:0x00000B18 end:0x00000B1C
+
+REL/ptmf.c:
+	.text       start:0x0001D05C end:0x0001D1A4
+	.rodata     start:0x00000B00 end:0x00000B0C

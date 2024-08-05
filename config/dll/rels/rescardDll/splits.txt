@@ -5,3 +5,20 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/rescardDll/rescard.c:
+	.text       start:0x00000000 end:0x0000A8E0
+	.rodata     start:0x00000000 end:0x00000130
+	.data       start:0x00000000 end:0x00000D88
+	.bss        start:0x00000000 end:0x000005E8
+
+REL/rescardDll/object.c:
+	.text       start:0x0000A8E0 end:0x0000EA68
+	.rodata     start:0x00000130 end:0x00000228
+	.data       start:0x00000D88 end:0x00000FA8
+	.bss        start:0x000005E8 end:0x00000778
+
+REL/rescardDll/stage.c:
+	.text       start:0x0000EA68 end:0x00011064
+	.rodata     start:0x00000228 end:0x0000024C
+	.data       start:0x00000FA8 end:0x00001264
