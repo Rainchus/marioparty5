@@ -5,3 +5,34 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/resultDll/result.c:
+	.text       start:0x00000000 end:0x00005FA8
+	.rodata     start:0x00000000 end:0x00000150
+	.data       start:0x00000000 end:0x00000778
+	.bss        start:0x00000000 end:0x000001A0
+
+REL/resultDll/stage.c:
+	.text       start:0x00005FA8 end:0x000063CC
+	.rodata     start:0x00000150 end:0x00000160
+
+REL/resultDll/toueidisp.c:
+	.text       start:0x000063CC end:0x00006DF0
+	.rodata     start:0x00000160 end:0x000001C0
+	.data       start:0x00000778 end:0x000007F0
+	.bss        start:0x000001A0 end:0x000001E8
+
+REL/resultDll/stagemodel.c:
+	.bss        start:0x000001E8 end:0x00000518
+
+REL/resultDll/battle.c:
+	.text       start:0x00006DF0 end:0x00009D08
+	.rodata     start:0x000001C0 end:0x00000278
+	.data       start:0x000007F0 end:0x00000B58
+	.bss        start:0x00000518 end:0x00001F98
+
+REL/resultDll/team.c:
+	.text       start:0x00009D08 end:0x0000DD5C
+	.rodata     start:0x00000278 end:0x00000348
+	.data       start:0x00000B58 end:0x00000F93
+	.bss        start:0x00001F98 end:0x00002094

@@ -5,3 +5,73 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/m512Dll/m512.cpp:
+	.text       start:0x00000000 end:0x00006074
+	.ctors      start:0x00000000 end:0x00000004
+	.rodata     start:0x00000000 end:0x00000080
+	.data       start:0x00000000 end:0x00000210
+	.bss        start:0x00000000 end:0x000009F0
+
+REL/m512Dll/gamemaster.cpp:
+	.text       start:0x00006074 end:0x00006768
+	.ctors      start:0x00000004 end:0x00000008
+	.data       start:0x00000210 end:0x00000268
+	.bss        start:0x000009F0 end:0x00000A18
+
+REL/m512Dll/objectsetup.cpp:
+	.text       start:0x00006768 end:0x000067FC
+	.ctors      start:0x00000008 end:0x0000000C
+	.bss        start:0x00000A18 end:0x00000A28
+
+REL/m512Dll/camera.cpp:
+	.text       start:0x000067FC end:0x000078A4
+	.rodata     start:0x00000080 end:0x00000128
+	.data       start:0x00000268 end:0x000002F0
+
+REL/m512Dll/dust.cpp:
+	.text       start:0x000078A4 end:0x00008144
+	.ctors      start:0x0000000C end:0x00000010
+	.rodata     start:0x00000128 end:0x00000140
+	.data       start:0x000002F0 end:0x00000330
+	.bss        start:0x00000A28 end:0x00000A40
+
+REL/m512Dll/stage.cpp:
+	.text       start:0x00008144 end:0x00008E48
+	.rodata     start:0x00000140 end:0x000001C8
+	.data       start:0x00000330 end:0x00000370
+
+REL/m512Dll/player.cpp:
+	.text       start:0x00008E48 end:0x0000D178
+	.ctors      start:0x00000010 end:0x00000014
+	.rodata     start:0x000001C8 end:0x00000388
+	.data       start:0x00000370 end:0x00000458
+	.bss        start:0x00000A40 end:0x00000A68
+
+REL/m512Dll/score.cpp:
+	.text       start:0x0000D178 end:0x0000E698
+	.rodata     start:0x00000388 end:0x000003E8
+	.data       start:0x00000458 end:0x000004E8
+
+REL/m512Dll/penguin.cpp:
+	.text       start:0x0000E698 end:0x00010750
+	.ctors      start:0x00000014 end:0x00000018
+	.rodata     start:0x000003E8 end:0x00000558
+	.data       start:0x000004E8 end:0x00000608
+	.bss        start:0x00000A68 end:0x00000AA8
+
+REL/m512Dll/heiho.cpp:
+	.text       start:0x00010750 end:0x00010F3C
+	.ctors      start:0x00000018 end:0x0000001C
+	.rodata     start:0x00000558 end:0x00000588
+	.data       start:0x00000608 end:0x00000717
+	.bss        start:0x00000AA8 end:0x00000AE0
+
+REL/global_destructor_chain.c:
+	.text       start:0x00010F3C end:0x00010FC4
+	.dtors      start:0x00000000 end:0x00000004
+	.bss        start:0x00000AE0 end:0x00000AE4
+
+REL/ptmf.c:
+	.text       start:0x00010FC4 end:0x0001110C
+	.rodata     start:0x00000588 end:0x00000594

@@ -23,7 +23,7 @@ REL/instDll/toueidisp.c:
 	.data       start:0x00000580 end:0x00000608
 	.bss        start:0x00000080 end:0x00000110
 
-REL/instDll/model.c:
+REL/instDll/stage.c:
 	.text       start:0x0000736C end:0x000074E8
 	.data       start:0x00000608 end:0x00000818
 	.bss        start:0x00000110 end:0x00000512
