@@ -53,6 +53,7 @@ void GXSetPixelFmt(GXPixelFmt pix_fmt, GXZFmt16 z_fmt);
 void GXSetTexCopySrc(u16 left, u16 top, u16 wd, u16 ht);
 void GXSetTexCopyDst(u16 wd, u16 ht, GXTexFmt fmt, GXBool mipmap);
 void GXCopyTex(void* dest, GXBool clear);
+f32 GXGetYScaleFactor(u16 efbHeight, u16 xfbHeight);
 
 #ifdef __cplusplus
 }
