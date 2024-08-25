@@ -58,17 +58,17 @@ static void *HuDvdDataReadWait(DVDFileInfo *file, int mode, int param, BOOL asyn
     }
     OSReport("Rest Memory %x\n", HuRestMemGet(HUHEAPTYPE_DVD));
     if(async) {
-        if(len > 0x20000) {
-            len = 0x20000;
+        if(len > HU_DVD_BLOCKSIZE) {
+            len = HU_DVD_BLOCKSIZE;
         }
         DVDReadAsyncPrio(file, buf, OSRoundUp32B(len), 0, HuDataDirReadAsyncCallBack, 3);
     } else {
         u32 readSize;
         u32 readOfs;
-        for(readOfs=readSize=0; readOfs<len; readOfs += 0x20000) {
+        for(readOfs=readSize=0; readOfs<len; readOfs += HU_DVD_BLOCKSIZE) {
             readSize = len-readOfs;
-            if(readSize > 0x20000) {
-                readSize = 0x20000;
+            if(readSize > HU_DVD_BLOCKSIZE) {
+                readSize = HU_DVD_BLOCKSIZE;
             }
             CallBackStatus = 0;
             DVDReadAsyncPrio(file, ((u8 *)buf)+readOfs, OSRoundUp32B(readSize), readOfs, HuDVDReadAsyncCallBack, 2);
