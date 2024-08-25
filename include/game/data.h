@@ -5,18 +5,19 @@
 
 #include "datadir_enum.h"
 
-#define HU_DATA_DECODE_NONE 0
-#define HU_DATA_DECODE_LZ 1
-#define HU_DATA_DECODE_SLIDE 2
-#define HU_DATA_DECODE_FSLIDE_ALT 3
-#define HU_DATA_DECODE_FSLIDE 4
-#define HU_DATA_DECODE_RLE 5
-#define HU_DATA_DECODE_ZLIB 7
+#define HU_DECODE_TYPE_NONE 0
+#define HU_DECODE_TYPE_LZ 1
+#define HU_DECODE_TYPE_SLIDE 2
+#define HU_DECODE_TYPE_FSLIDE_ALT 3
+#define HU_DECODE_TYPE_FSLIDE 4
+#define HU_DECODE_TYPE_RLE 5
+#define HU_DECODE_TYPE_ZLIB 7
 
 #include "dolphin/types.h"
 #include "dolphin/dvd.h"
 
 typedef s32 HU_DATANUM;
+typedef u32 HU_DATANUM_U;
 
 typedef struct HuDataStat_s {
     s32 dirId;
