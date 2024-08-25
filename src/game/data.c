@@ -10,7 +10,7 @@
 #define PTR_OFFSET(ptr, offset) (void *)(((u8 *)(ptr)+(u32)(offset)))
 #define DATA_EFF_SIZE(size) (((size)+1) & ~0x1)
 
-static void **HuDataReadMultiSub(DATA_DATANUM *dataNum, BOOL use_num, s32 num);
+static void **HuDataReadMultiSub(HU_DATANUM *dataNum, BOOL use_num, s32 num);
 
 #define DATA_MAX_READSTAT 128
 
@@ -69,7 +69,7 @@ static s32 HuDataReadStatusGet(void)
     return i;
 }
 
-s32 HuDataReadChk(DATA_DATANUM dirNum)
+s32 HuDataReadChk(HU_DATANUM dirNum)
 {
     s32 i;
     dirNum >>= 16;
@@ -98,7 +98,7 @@ HUDATASTAT *HuDataGetStatus(void *dirP)
     return &ReadDataStat[i];
 }
 
-void *HuDataGetDirPtr(DATA_DATANUM dirNum)
+void *HuDataGetDirPtr(HU_DATANUM dirNum)
 {
     s32 statId = HuDataReadChk(dirNum);
     if(statId < 0) {
@@ -107,7 +107,7 @@ void *HuDataGetDirPtr(DATA_DATANUM dirNum)
     return ReadDataStat[statId].dirP;
 }
 
-HUDATASTAT *HuDataDirRead(DATA_DATANUM dataNum)
+HUDATASTAT *HuDataDirRead(HU_DATANUM dataNum)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -143,7 +143,7 @@ HUDATASTAT *HuDataDirRead(DATA_DATANUM dataNum)
     return readStat;
 }
 
-static HUDATASTAT *HuDataDirReadNum(DATA_DATANUM dataNum, s32 num)
+static HUDATASTAT *HuDataDirReadNum(HU_DATANUM dataNum, s32 num)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -184,7 +184,7 @@ static HUDATASTAT *HuDataDirReadNum(DATA_DATANUM dataNum, s32 num)
     return readStat;
 }
 
-HUDATASTAT *HuDataDirSet(void *dirP, DATA_DATANUM dataNum)
+HUDATASTAT *HuDataDirSet(void *dirP, HU_DATANUM dataNum)
 {
     HUDATASTAT *readStat = HuDataGetStatus(dirP);
     s32 statId;
@@ -255,7 +255,7 @@ BOOL HuDataDirCloseAsync(s16 statId)
 }
 
 
-s32 HuDataDirReadAsync(DATA_DATANUM dataNum)
+s32 HuDataDirReadAsync(HU_DATANUM dataNum)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -288,7 +288,7 @@ s32 HuDataDirReadAsync(DATA_DATANUM dataNum)
     return statId;
 }
 
-s32 HuDataDirReadNumAsync(DATA_DATANUM dataNum, s32 num)
+s32 HuDataDirReadNumAsync(HU_DATANUM dataNum, s32 num)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -335,7 +335,7 @@ static void GetFileInfo(HUDATASTAT *readStat, s32 fileNum)
     readStat->fileDataP = ptr;
 }
 
-void *HuDataRead(DATA_DATANUM dataNum)
+void *HuDataRead(HU_DATANUM dataNum)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -355,7 +355,7 @@ void *HuDataRead(DATA_DATANUM dataNum)
     return buf;
 }
 
-void *HuDataReadNum(DATA_DATANUM dataNum, s32 num)
+void *HuDataReadNum(HU_DATANUM dataNum, s32 num)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -375,7 +375,7 @@ void *HuDataReadNum(DATA_DATANUM dataNum, s32 num)
     return buf;
 }
 
-void *HuDataSelHeapRead(DATA_DATANUM dataNum, HUHEAPTYPE heap)
+void *HuDataSelHeapRead(HU_DATANUM dataNum, HUHEAPTYPE heap)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -411,7 +411,7 @@ void *HuDataSelHeapRead(DATA_DATANUM dataNum, HUHEAPTYPE heap)
     return buf;
 }
 
-void *HuDataSelHeapReadNum(DATA_DATANUM dataNum, s32 num, HUHEAPTYPE heap)
+void *HuDataSelHeapReadNum(HU_DATANUM dataNum, s32 num, HUHEAPTYPE heap)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -447,12 +447,12 @@ void *HuDataSelHeapReadNum(DATA_DATANUM dataNum, s32 num, HUHEAPTYPE heap)
     return buf;
 }
 
-void **HuDataReadMulti(DATA_DATANUM *dataNum)
+void **HuDataReadMulti(HU_DATANUM *dataNum)
 {
     return HuDataReadMultiSub(dataNum, FALSE, 0);
 }
 
-static void **HuDataReadMultiSub(DATA_DATANUM *dataNum, BOOL use_num, s32 num)
+static void **HuDataReadMultiSub(HU_DATANUM *dataNum, BOOL use_num, s32 num)
 {
     s32 *dirIds;
     char **pathTbl;
@@ -524,7 +524,7 @@ static void **HuDataReadMultiSub(DATA_DATANUM *dataNum, BOOL use_num, s32 num)
     return outList;
 }
 
-s32 HuDataGetSize(DATA_DATANUM dataNum)
+s32 HuDataGetSize(HU_DATANUM dataNum)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -592,7 +592,7 @@ void HuDataDirCloseNum(s32 num)
     }
 }
 
-static s32 HuDataDVDdirDirectOpen(DATA_DATANUM dataNum, DVDFileInfo *fileInfo)
+static s32 HuDataDVDdirDirectOpen(HU_DATANUM dataNum, DVDFileInfo *fileInfo)
 {
 	s32 dir = dataNum >> 16;
 	if(dir >= (s32)DataDirMax) {
@@ -669,7 +669,7 @@ static void *HuDataDecodeIt(void *bufP, s32 bufOfs, s32 num, HUHEAPTYPE heap)
     return dest;
 }
 
-void *HuDataReadNumHeapShortForce(DATA_DATANUM dataNum, s32 num, HUHEAPTYPE heap)
+void *HuDataReadNumHeapShortForce(HU_DATANUM dataNum, s32 num, HUHEAPTYPE heap)
 {
 	DVDFileInfo fileInfo;
 	s32 *data_hdr;

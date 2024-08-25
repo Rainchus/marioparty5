@@ -185,31 +185,31 @@ void HuDecodeData(void *src, void *dst, u32 size, s32 decode_type)
     decodeP->dst = dst;
     decodeP->size = size;
     switch(decode_type) {
-        case DATA_DECODE_NONE:
+        case HU_DATA_DECODE_NONE:
             HuDecodeNone(decodeP);
             break;
             
-        case DATA_DECODE_LZ:
+        case HU_DATA_DECODE_LZ:
             HuDecodeLz(decodeP);
             break;
             
-        case DATA_DECODE_SLIDE:
+        case HU_DATA_DECODE_SLIDE:
             HuDecodeSlide(decodeP);
             break;
             
-        case DATA_DECODE_FSLIDE_ALT:
+        case HU_DATA_DECODE_FSLIDE_ALT:
             HuDecodeFslide(decodeP);
             break;
             
-        case DATA_DECODE_FSLIDE:
+        case HU_DATA_DECODE_FSLIDE:
             HuDecodeFslide(decodeP);
             break;
             
-        case DATA_DECODE_RLE:
+        case HU_DATA_DECODE_RLE:
             HuDecodeRle(decodeP);
             break;
             
-        case DATA_DECODE_ZLIB:
+        case HU_DATA_DECODE_ZLIB:
             HuDecodeZlib(decodeP);
             break;
             
