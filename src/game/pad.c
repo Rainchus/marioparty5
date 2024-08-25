@@ -1,9 +1,7 @@
 #include "dolphin.h"
 #include "game/msm.h"
-
+#include "game/main.h"
 #include "game/pad.h"
-
-extern u32 GlobalCounter;
 
 typedef struct PadRumble_s {
     s16 maxTime;

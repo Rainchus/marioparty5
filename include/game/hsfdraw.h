@@ -41,7 +41,7 @@ typedef struct hsf_const_data {
     HsfDrawData *drawData;
     void *dlBuf;
     Mtx matrix;
-    AnimData *hiliteMap;
+    ANIMDATA *hiliteMap;
 } HsfConstData;
 
 

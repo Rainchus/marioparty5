@@ -586,38 +586,38 @@ game/board/mgcircuit.c:
 	.sbss       start:0x80288D60 end:0x80288D78
 	.sdata2     start:0x8028B560 end:0x8028B610
 
-game/zlib/adler32.c:
+zlib/adler32.c:
 	.text       start:0x801365DC end:0x80136788
 
-game/zlib/inflate.c:
+zlib/inflate.c:
 	.text       start:0x80136788 end:0x80137114
 	.data       start:0x801CC978 end:0x801CCA20
 	.sdata      start:0x802883E0 end:0x802883E8
 
-game/zlib/infblock.c:
+zlib/infblock.c:
 	.text       start:0x80137114 end:0x801383FC
 	.rodata     start:0x801AA980 end:0x801AA9D0
 	.data       start:0x801CCA20 end:0x801CCAB8
 
-game/zlib/infcodes.c:
+zlib/infcodes.c:
 	.text       start:0x801383FC end:0x80138F40
 	.data       start:0x801CCAB8 end:0x801CCB18
 
-game/zlib/infutil.c:
+zlib/infutil.c:
 	.text       start:0x80138F40 end:0x801390D8
 	.data       start:0x801CCB18 end:0x801CCB60
 
-game/zlib/inftrees.c:
+zlib/inftrees.c:
 	.text       start:0x801390D8 end:0x80139ABC
 	.rodata     start:0x801AA9D0 end:0x801AABE8
 	.data       start:0x801CCB60 end:0x801CDD48
 	.sdata      start:0x802883E8 end:0x802883F0
 
-game/zlib/inffast.c:
+zlib/inffast.c:
 	.text       start:0x80139ABC end:0x8013A08C
 	.data       start:0x801CDD48 end:0x801CDD80
 
-game/zlib/zutil.c:
+zlib/zutil.c:
 	.text       start:0x8013A08C end:0x8013A11C
 
 dolphin/base/PPCArch.c:
