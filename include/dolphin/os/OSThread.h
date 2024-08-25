@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+#define OS_THREAD_SPECIFIC_MAX 2
+
 typedef struct OSThread OSThread;
 typedef struct OSThreadQueue OSThreadQueue;
 typedef struct OSThreadLink OSThreadLink;
@@ -56,6 +58,8 @@ struct OSThread {
   OSThreadLink linkActive;
   u8* stackBase;
   u32* stackEnd;
+  s32 error;
+  void* specific[OS_THREAD_SPECIFIC_MAX];
 };
 
 enum OS_THREAD_STATE {

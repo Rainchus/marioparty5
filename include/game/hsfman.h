@@ -1,6 +1,8 @@
 #ifndef _GAME_HSFMAN_H
 #define _GAME_HSFMAN_H
 
+#define HU3D_LAYER_MAX 16
+
 #include "game/hsfanim.h"
 #include "game/hsfformat.h"
 #include "game/memory.h"
@@ -153,7 +155,7 @@ void Hu3DModelCameraSet(s16, u16);
 void Hu3DModelLayerSet(s16, s16);
 HsfObject* Hu3DModelObjPtrGet(s16, char *);
 void Hu3DModelTPLvlSet(s16, f32);
-void Hu3DModelHiliteMapSet(s16, AnimData*);
+void Hu3DModelHiliteMapSet(s16, ANIMDATA*);
 void Hu3DModelShadowSet(s16);
 void Hu3DModelShadowReset(s16);
 void Hu3DModelShadowDispOn(s16);
@@ -227,15 +229,15 @@ void Hu3DMipMapSet(char*, s16, s32, f32);
 
 extern ModelData Hu3DData[0x200];
 extern CameraData Hu3DCamera[0x10];
-extern AnimData *reflectAnim[5];
-extern AnimData *hiliteAnim[4];
+extern ANIMDATA *reflectAnim[5];
+extern ANIMDATA *hiliteAnim[4];
 extern ThreeDProjectionStruct Hu3DProjection[4];
 extern ShadowData Hu3DShadowData;
 extern Mtx Hu3DCameraMtx;
 extern Mtx Hu3DCameraMtxXPose;
 extern LightData Hu3DGlobalLight[0x8];
 extern s16 reflectMapNo;
-extern AnimData *toonAnim;
+extern ANIMDATA *toonAnim;
 extern s16 Hu3DShadowCamBit;
 extern s32 Hu3DShadowF;
 extern s32 shadowModelDrawF;

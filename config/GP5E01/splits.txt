@@ -250,7 +250,7 @@ game/armem.c:
 	.bss        start:0x802329C0 end:0x802330A0
 	.sbss       start:0x80288980 end:0x80288990
 
-game/chrman.c:
+game/charman.c:
 	.text       start:0x8004FE5C end:0x8005A6C4
 	.data       start:0x801BE380 end:0x801BF4D0
 	.bss        start:0x802330A0 end:0x80233E48

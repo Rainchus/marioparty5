@@ -48,7 +48,7 @@ typedef struct particle_data {
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ u32 unk_3C;
     /* 0x40 */ s32 unk_40;
-    /* 0x44 */ AnimData *unk_44;
+    /* 0x44 */ ANIMDATA *unk_44;
     /* 0x48 */ HsfanimStruct01 *unk_48;
     /* 0x4C */ Vec *unk_4C;
     /* 0x50 */ void *unk_50;
@@ -78,7 +78,7 @@ typedef struct {
     /* 0x06 */ s16 unk06;
     /* 0x08 */ float unk08;
     /* 0x0C */ float unk0C;
-    /* 0x10 */ AnimData *unk10;
+    /* 0x10 */ ANIMDATA *unk10;
 } Hu3DTexAnimDataStruct; // Size 0x14
 
 typedef struct {
@@ -114,7 +114,7 @@ void Hu3DTexScrollPosMoveSet(s16 arg0, float arg1, float arg2, float arg3);
 void Hu3DTexScrollRotSet(s16 arg0, float arg1);
 void Hu3DTexScrollRotMoveSet(s16 arg0, float arg1);
 void Hu3DTexScrollPauseDisableSet(s16 arg0, s32 arg1);
-s16 Hu3DParticleCreate(AnimData *arg0, s16 arg1);
+s16 Hu3DParticleCreate(ANIMDATA *arg0, s16 arg1);
 void Hu3DParticleScaleSet(s16 arg0, float arg1);
 void Hu3DParticleZRotSet(s16 arg0, float arg1);
 void Hu3DParticleColSet(s16 arg0, u8 arg1, u8 arg2, u8 arg3);
@@ -125,7 +125,7 @@ void Hu3DParticleAttrSet(s16 arg0, u8 arg1);
 void Hu3DParticleAttrReset(s16 arg0, u8 arg1);
 void Hu3DParticleAnimModeSet(s16 arg0, s16 arg1);
 void Hu3DParManInit(void);
-s16 Hu3DParManCreate(AnimData *arg0, s16 arg1, HsfanimStruct00 *arg2);
+s16 Hu3DParManCreate(ANIMDATA *arg0, s16 arg1, HsfanimStruct00 *arg2);
 s16 Hu3DParManLink(s16 arg0, HsfanimStruct00 *arg1);
 void Hu3DParManKill(s16 arg0);
 void Hu3DParManAllKill(void);

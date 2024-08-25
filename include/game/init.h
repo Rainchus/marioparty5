@@ -15,6 +15,6 @@ extern u32 worstVcount;
 
 void HuSysInit(GXRenderModeObj *mode);
 void HuSysBeforeRender();
-void HuSysDoneRender(s32 retrace_count);
+void HuSysDoneRender(s32 retraceCount);
 
 #endif

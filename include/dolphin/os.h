@@ -97,7 +97,6 @@ typedef struct OSStopwatch {
 	OSTime min;
 	OSTime max;
 	OSTime last;
-	BOOL running;
 } OSStopwatch;
 
 void OSInitStopwatch(OSStopwatch* sw, char* name);
