@@ -263,6 +263,13 @@ cflags_game = [
     "-fp_contract off",
 ]
 
+# Zlib flags
+cflags_zlib = [
+    *cflags_base,
+    "-O0,p",
+    "-fp_contract off",
+]
+
 # Game flags
 cflags_libhu = [
     *cflags_base,
@@ -333,11 +340,11 @@ config.libs = [
             Object(NonMatching, "game/main.c"),
             Object(Matching, "game/pad.c"),
             Object(Matching, "game/dvd.c"),
-            Object(NonMatching, "game/data.c"),
-            Object(NonMatching, "game/decode.c"),
-            Object(NonMatching, "game/font.c"),
+            Object(Matching, "game/data.c"),
+            Object(Matching, "game/decode.c"),
+            Object(Matching, "game/font.c"),
             Object(Matching, "game/init.c"),
-            Object(NonMatching, "game/jmp.c"),
+            Object(Matching, "game/jmp.c"),
             Object(Matching, "game/malloc.c"),
             Object(Matching, "game/memory.c"),
             Object(Matching, "game/printfunc.c"),
@@ -352,7 +359,7 @@ config.libs = [
             Object(NonMatching, "game/hsfex.c"),
             Object(Matching, "game/perf.c"),
             Object(NonMatching, "game/objmain.c"),
-            Object(NonMatching, "game/fault.c"),
+            Object(Matching, "game/fault.c"),
             Object(NonMatching, "game/gamework.c"),
             Object(NonMatching, "game/objsysobj.c"),
             Object(NonMatching, "game/objdll.c"),
@@ -367,8 +374,8 @@ config.libs = [
             Object(NonMatching, "game/wipe.c"),
             Object(NonMatching, "game/window.c"),
             Object(NonMatching, "game/messdata.c"),
-            Object(NonMatching, "game/card.c"),
-            Object(NonMatching, "game/armem.c"),
+            Object(Matching, "game/card.c"),
+            Object(Matching, "game/armem.c"),
             Object(NonMatching, "game/charman.c"),
             Object(NonMatching, "game/mapspace.c"),
             Object(NonMatching, "game/THPSimple.c"),
@@ -415,15 +422,24 @@ config.libs = [
             Object(NonMatching, "game/board/story.c"),
             Object(NonMatching, "game/board/telop.c"),
             Object(NonMatching, "game/board/mgcircuit.c"),
-            Object(NonMatching, "game/zlib/adler32.c"),
-            Object(NonMatching, "game/zlib/inflate.c"),
-            Object(NonMatching, "game/zlib/infblock.c"),
-            Object(NonMatching, "game/zlib/infcodes.c"),
-            Object(NonMatching, "game/zlib/infutil.c"),
-            Object(NonMatching, "game/zlib/inftrees.c"),
-            Object(NonMatching, "game/zlib/inffast.c"),
-            Object(NonMatching, "game/zlib/zutil.c"),
+            
             Object(NonMatching, "game/code_801A7E90.c"),
+        ],
+    },
+    {
+        "lib": "zlib",
+        "mw_version": config.linker_version,
+        "cflags": cflags_zlib,
+        "host": False,
+        "objects": [
+            Object(Matching, "zlib/adler32.c"),
+            Object(Matching, "zlib/inflate.c"),
+            Object(Matching, "zlib/infblock.c"),
+            Object(Matching, "zlib/infcodes.c"),
+            Object(Matching, "zlib/infutil.c"),
+            Object(Matching, "zlib/inftrees.c"),
+            Object(Matching, "zlib/inffast.c"),
+            Object(Matching, "zlib/zutil.c"),
         ],
     },
     DolphinLib(

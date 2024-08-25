@@ -5,6 +5,8 @@
 
 #define HuRestMemGet(heap) (HuMemHeapSizeGet((heap))-HuMemUsedMallocSizeGet((heap)))
 
+#define HU_MEMNUM_OVL 0x10000000
+
 typedef enum HuHeapType_e {
     HUHEAPTYPE_HEAP,
     HUHEAPTYPE_SOUND,

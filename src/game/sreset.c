@@ -5,6 +5,7 @@
 #include "game/audio.h"
 #include "game/thpmain.h"
 #include "game/init.h"
+#include "game/main.h"
 
 #define SR_DVD_LOADING 0
 #define SR_DVD_COVER_OPEN 1
@@ -14,9 +15,6 @@
 #define SR_DVD_FATAL_ERROR 5
 
 #define PAD_BTN_SRESET (PAD_BUTTON_START|PAD_BUTTON_X|PAD_BUTTON_B)
-
-extern s32 HuDvdErrWait;
-extern s32 HuSRDisableF;
 
 static s32 SR_PreRstChk[4] = {};
 
@@ -89,7 +87,7 @@ static void ToeDispCheck(void);
 void HuDvdErrDispInit(GXRenderModeObj *rmode, void *xfb1, void *xfb2)
 {
 	BOOL intrOld;
-	HuSRDisableF = 0;
+	HuSRDisableF = FALSE;
 	SR_ResetPad = -1;
 	SR_ExecReset = H_ResetReady = 0;
 	SR_RestartChk = 0;
@@ -98,7 +96,7 @@ void HuDvdErrDispInit(GXRenderModeObj *rmode, void *xfb1, void *xfb2)
 	VIWaitForRetrace();
 	VIWaitForRetrace();
 	HuPreRstChk();
-	HuDvdErrWait = 0;
+	HuDvdErrWait = FALSE;
 	Xfb[0] = xfb1;
 	Xfb[1] = xfb2;
 	if(rmode) {
@@ -149,7 +147,7 @@ static void *ToeThreadFunc(void *param)
         }  else {
             goto proc_reset;
         }
-        if(execPost && !HuSRDisableF) {
+        if(execPost && HuSRDisableF == FALSE) {
             HuSoftResetPostProc();
         }
 		if(SR_ExecReset) {
@@ -183,7 +181,7 @@ static void ToeDispCheck(void)
 			break;
 			
 		case DVD_STATE_END:
-			HuDvdErrWait = 0;
+			HuDvdErrWait = FALSE;
 			trychkBusyWait = FALSE;
 			return;
 			
@@ -218,7 +216,7 @@ static void ToeDispCheck(void)
 		default:
 			return;
 	}
-	HuDvdErrWait = 1;
+	HuDvdErrWait = TRUE;
 	HuPadRumbleAllStop();
 	VISetBlack(FALSE);
 	VIFlush();
@@ -271,7 +269,7 @@ static void _HuDvdErrDispXFB(s32 error)
             }
             resetCancelF[i] = TRUE;
         }
-        if(!HuSRDisableF) {
+        if(HuSRDisableF == FALSE) {
             BOOL resetF;
             if(SR_ExecReset) {
                 resetF = TRUE;

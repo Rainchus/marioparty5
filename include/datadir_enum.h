@@ -1,23 +1,22 @@
 #ifndef DATADIR_ENUM
 #define DATADIR_ENUM
 
-#define DATADIR_DEFINE(name, path) DATADIR_ID_##name,
-
-enum {
-    #include "datadir_table.h"
-    DATADIR_ID_MAX
-};
-
-#undef DATADIR_DEFINE
-
-#define DATADIR_DEFINE(name, path) DATADIR_##name = (DATADIR_ID_##name) << 16,
+#define DATADIR(name) _##name,
 
 enum {
     #include "datadir_table.h"
 };
 
-#undef DATADIR_DEFINE
+#undef DATADIR
 
-#define DATA_MAKE_NUM(dir, file) ((dir)+(file))
+#define DATADIR(name) DATA_##name = (_##name) << 16,
+
+enum {
+    #include "datadir_table.h"
+};
+
+#undef DATADIR
+
+#define DATANUM(dir, file) ((dir)+(file))
 
 #endif

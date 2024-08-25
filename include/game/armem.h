@@ -5,18 +5,21 @@
 #include "game/memory.h"
 #include "game/data.h"
 
+typedef u32 AMEM_PTR;
+
 void HuARInit(void);
-u32 HuARMalloc(u32 size);
-void HuARFree(u32 amemptr);
+AMEM_PTR HuARMalloc(u32 size);
+void HuARFree(AMEM_PTR aMemP);
 void HuAMemDump(void);
 u32 HuAR_DVDtoARAM(u32 dir);
-u32 HuAR_MRAMtoARAM(s32 dir);
-u32 HuAR_MRAMtoARAM2(void *dir_ptr);
-void HuAR_ARAMtoMRAM(u32 amemptr);
-void *HuAR_ARAMtoMRAMNum(u32 amemptr, s32 num);
+AMEM_PTR HuAR_MRAMtoARAM(s32 dir);
+AMEM_PTR HuAR_MRAMtoARAM2(void *dir_ptr);
+void HuAR_ARAMtoMRAM(AMEM_PTR aMemP);
+void *HuAR_ARAMtoMRAMNum(AMEM_PTR aMemP, s32 num);
 s32 HuARDMACheck(void);
-u32 HuARDirCheck(u32 dir);
+AMEM_PTR HuARDirCheck(u32 dir);
 void HuARDirFree(u32 dir);
-void *HuAR_ARAMtoMRAMFileRead(u32 dir, u32 num, HeapID heap);
+void *HuAR_ARAMtoMRAMFileRead(u32 dir, u32 num, HUHEAPTYPE heap);
+
 
 #endif
