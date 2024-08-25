@@ -51,12 +51,12 @@ void HuSprDisp(HUSPRITE *sprite)
 {
     s16 i;
     ANIMDATA *anim = sprite->data;
-    ANIMPAT *pat = sprite->pat_data;
+    ANIMPAT *pat = sprite->patP;
     Vec axis = {0, 0, 1};
     Mtx modelview, rot;
     s16 chanSum;
     
-    GXSetScissor(sprite->scissor_x, sprite->scissor_y, sprite->scissor_w, sprite->scissor_h);
+    GXSetScissor(sprite->scissorX, sprite->scissorY, sprite->scissorW, sprite->scissorH);
     if(sprite->attr & HUSPR_ATTR_FUNC) {
         if(sprite->func) {
             HUSPRFUNC func = sprite->func;
@@ -66,7 +66,7 @@ void HuSprDisp(HUSPRITE *sprite)
         
     } else {
         ANIMLAYER *layer;
-        ANIMBMP *bg_bmp;
+        ANIMBMP *bgBmp;
         GXColor color;
         GXSetNumTexGens(1);
         GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);
@@ -94,34 +94,34 @@ void HuSprDisp(HUSPRITE *sprite)
             GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
         }
         if(sprite->bg) {
-            ANIMPAT *bg_pat;
-            ANIMFRAME *bg_frame;
-            bg_frame = sprite->bg->bank[sprite->bg_bank].frame;
-            bg_pat = &sprite->bg->pat[bg_frame->pat];
-            layer = bg_pat->layer;
-            bg_bmp = &sprite->bg->bmp[layer->bmpNo];
+            ANIMPAT *bgPat;
+            ANIMFRAME *bgFrame;
+            bgFrame = sprite->bg->bank[sprite->bgBank].frame;
+            bgPat = &sprite->bg->pat[bgFrame->pat];
+            layer = bgPat->layer;
+            bgBmp = &sprite->bg->bmp[layer->bmpNo];
             HuSprTexLoad(sprite->bg, layer->bmpNo, 1, GX_CLAMP, GX_CLAMP, GX_NEAR);
             GXSetNumIndStages(1);
-            GXSetTexCoordScaleManually(GX_TEXCOORD0, GX_TRUE, bg_bmp->sizeX*16, bg_bmp->sizeY*16);
+            GXSetTexCoordScaleManually(GX_TEXCOORD0, GX_TRUE, bgBmp->sizeX*16, bgBmp->sizeY*16);
             GXSetIndTexOrder(GX_INDTEXSTAGE0, GX_TEXCOORD0, GX_TEXMAP1);
             GXSetIndTexCoordScale(GX_INDTEXSTAGE0, GX_ITS_16, GX_ITS_16);
             GXSetTevIndTile(GX_TEVSTAGE0, GX_INDTEXSTAGE0, 16, 16, 16, 16, GX_ITF_4, GX_ITM_0, GX_ITB_NONE, GX_ITBA_OFF);
         }
         GXSetAlphaCompare(GX_GEQUAL, 1, GX_AOP_AND, GX_GEQUAL, 1);
         GXSetZCompLoc(GX_FALSE);
-        if(0 != sprite->z_rot) {
-            MTXRotAxisDeg(rot, &axis, sprite->z_rot);
-            MTXScale(modelview, sprite->scale_x, sprite->scale_y, 1.0f);
+        if(0 != sprite->zRot) {
+            MTXRotAxisDeg(rot, &axis, sprite->zRot);
+            MTXScale(modelview, sprite->scaleX, sprite->scaleY, 1.0f);
             MTXConcat(rot, modelview, modelview);
         } else {
-            MTXScale(modelview, sprite->scale_x, sprite->scale_y, 1.0f);
+            MTXScale(modelview, sprite->scaleX, sprite->scaleY, 1.0f);
         }
-        mtxTransCat(modelview, sprite->x, sprite->y, 0);
-        MTXConcat(*sprite->group_mtx, modelview, modelview);
+        mtxTransCat(modelview, sprite->posX, sprite->posY, 0);
+        MTXConcat(*sprite->groupMtx, modelview, modelview);
         GXLoadPosMtxImm(modelview, GX_PNMTX0);
         for(i=pat->layerNum-1; i>=0; i--) {
             float pos[4][2];
-            float texcoord_x1, texcoord_y1, texcoord_x2, texcoord_y2;
+            float uvX1, uvY1, uvX2, uvY2;
             ANIMBMP *bmp;
             layer = &pat->layer[i];
             bmp = &anim->bmp[layer->bmpNo];
@@ -129,7 +129,7 @@ void HuSprDisp(HUSPRITE *sprite)
                 continue;
             }
             GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
-            HuSprTexLoad(anim, layer->bmpNo, 0, sprite->wrap_s, sprite->wrap_t, (sprite->attr & HUSPR_ATTR_LINEAR) ? GX_LINEAR : GX_NEAR);
+            HuSprTexLoad(anim, layer->bmpNo, 0, sprite->wrapS, sprite->wrapT, (sprite->attr & HUSPR_ATTR_LINEAR) ? GX_LINEAR : GX_NEAR);
             if(layer->alpha != 255 || chanSum != 255*4) {
                 color.a = (u16)(sprite->a*layer->alpha) >> 8;
                 GXSetTevColor(GX_TEVSTAGE1, color);
@@ -147,36 +147,36 @@ void HuSprDisp(HUSPRITE *sprite)
                 pos[3][0] = layer->vtx[6]-pat->centerX;
                 pos[3][1] = layer->vtx[7]-pat->centerY;
                 if(layer->flip & ANIM_LAYER_FLIPX) {
-                    texcoord_x2 = layer->startX/(float)bmp->sizeX;
-                    texcoord_x1 = (layer->startX+layer->sizeX)/(float)bmp->sizeX;
+                    uvX2 = layer->startX/(float)bmp->sizeX;
+                    uvX1 = (layer->startX+layer->sizeX)/(float)bmp->sizeX;
                 } else {
-                    texcoord_x1 = layer->startX/(float)bmp->sizeX;
-                    texcoord_x2 = (layer->startX+layer->sizeX)/(float)bmp->sizeX;
+                    uvX1 = layer->startX/(float)bmp->sizeX;
+                    uvX2 = (layer->startX+layer->sizeX)/(float)bmp->sizeX;
                 }
                 if(layer->flip & ANIM_LAYER_FLIPY) {
-                    texcoord_y2 = layer->startY/(float)bmp->sizeY;
-                    texcoord_y1 = (layer->startY+layer->sizeY)/(float)bmp->sizeY;
+                    uvY2 = layer->startY/(float)bmp->sizeY;
+                    uvY1 = (layer->startY+layer->sizeY)/(float)bmp->sizeY;
                 } else {
-                    texcoord_y1 = layer->startY/(float)bmp->sizeY;
-                    texcoord_y2 = (layer->startY+layer->sizeY)/(float)bmp->sizeY;
+                    uvY1 = layer->startY/(float)bmp->sizeY;
+                    uvY2 = (layer->startY+layer->sizeY)/(float)bmp->sizeY;
                 }
             } else {
-                pos[0][0] = pos[3][0] = -(bg_bmp->sizeX*16)/2;
-                pos[0][1] = pos[1][1] = -(bg_bmp->sizeY*16)/2;
-                pos[2][0] = pos[1][0] = pos[0][0]+(bg_bmp->sizeX*16);
-                pos[2][1] = pos[3][1] = pos[0][1]+(bg_bmp->sizeY*16);
-                texcoord_x1 = texcoord_y1 =  1.0/(bg_bmp->sizeX*16);
-                texcoord_x2 = texcoord_y2 = 1.0f;
+                pos[0][0] = pos[3][0] = -(bgBmp->sizeX*16)/2;
+                pos[0][1] = pos[1][1] = -(bgBmp->sizeY*16)/2;
+                pos[2][0] = pos[1][0] = pos[0][0]+(bgBmp->sizeX*16);
+                pos[2][1] = pos[3][1] = pos[0][1]+(bgBmp->sizeY*16);
+                uvX1 = uvY1 =  1.0/(bgBmp->sizeX*16);
+                uvX2 = uvY2 = 1.0f;
             }
             GXBegin(GX_QUADS, GX_VTXFMT0, 4);
             GXPosition3f32(pos[0][0], pos[0][1], 0);
-            GXTexCoord2f32(texcoord_x1*sprite->tex_scale_x, texcoord_y1*sprite->tex_scale_y);
+            GXTexCoord2f32(uvX1*sprite->uvScaleX, uvY1*sprite->uvScaleY);
             GXPosition3f32(pos[1][0], pos[1][1], 0);
-            GXTexCoord2f32(texcoord_x2*sprite->tex_scale_x, texcoord_y1*sprite->tex_scale_y);
+            GXTexCoord2f32(uvX2*sprite->uvScaleX, uvY1*sprite->uvScaleY);
             GXPosition3f32(pos[2][0], pos[2][1], 0);
-            GXTexCoord2f32(texcoord_x2*sprite->tex_scale_x, texcoord_y2*sprite->tex_scale_y);
+            GXTexCoord2f32(uvX2*sprite->uvScaleX, uvY2*sprite->uvScaleY);
             GXPosition3f32(pos[3][0], pos[3][1], 0);
-            GXTexCoord2f32(texcoord_x1*sprite->tex_scale_x, texcoord_y2*sprite->tex_scale_y);
+            GXTexCoord2f32(uvX1*sprite->uvScaleX, uvY2*sprite->uvScaleY);
             GXEnd();
         }
         if(sprite->bg) {
@@ -187,64 +187,64 @@ void HuSprDisp(HUSPRITE *sprite)
     }
 }
 
-void HuSprTexLoad(ANIMDATA *anim, short bmp, short slot, GXTexWrapMode wrap_s, GXTexWrapMode wrap_t, GXTexFilter filter)
+void HuSprTexLoad(ANIMDATA *anim, s16 bmpNo, s16 texMapId, GXTexWrapMode wrapS, GXTexWrapMode wrapT, GXTexFilter filter)
 {
-    GXTexObj tex_obj;
-    GXTlutObj tlut_obj;
-    ANIMBMP *bmp_ptr = &anim->bmp[bmp];
-    short sizeX = bmp_ptr->sizeX;
-    short sizeY = bmp_ptr->sizeY;
-    switch(bmp_ptr->dataFmt & ANIM_BMP_FMTMASK) {
+    GXTexObj texObj;
+    GXTlutObj tlutObj;
+    ANIMBMP *bmp = &anim->bmp[bmpNo];
+    s16 sizeX = bmp->sizeX;
+    s16 sizeY = bmp->sizeY;
+    switch(bmp->dataFmt & ANIM_BMP_FMTMASK) {
         case ANIM_BMP_RGBA8:
-            GXInitTexObj(&tex_obj, bmp_ptr->data, sizeX, sizeY, GX_TF_RGBA8, wrap_s, wrap_t, GX_FALSE);
+            GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_TF_RGBA8, wrapS, wrapT, GX_FALSE);
             break;
             
         case ANIM_BMP_RGB5A3:
         case ANIM_BMP_RGB5A3_DUPE:
-            GXInitTexObj(&tex_obj, bmp_ptr->data, sizeX, sizeY, GX_TF_RGB5A3, wrap_s, wrap_t, GX_FALSE);
+            GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_TF_RGB5A3, wrapS, wrapT, GX_FALSE);
             break;
             
         case ANIM_BMP_C8:
-            GXInitTlutObj(&tlut_obj, bmp_ptr->palData, GX_TL_RGB5A3, bmp_ptr->palNum);
-            GXLoadTlut(&tlut_obj, slot);
-            GXInitTexObjCI(&tex_obj,bmp_ptr->data, sizeX, sizeY, GX_TF_C8, wrap_s, wrap_t, GX_FALSE, slot);
+            GXInitTlutObj(&tlutObj, bmp->palData, GX_TL_RGB5A3, bmp->palNum);
+            GXLoadTlut(&tlutObj, texMapId);
+            GXInitTexObjCI(&texObj,bmp->data, sizeX, sizeY, GX_TF_C8, wrapS, wrapT, GX_FALSE, texMapId);
             break;
             
         case ANIM_BMP_C4:
-            GXInitTlutObj(&tlut_obj, bmp_ptr->palData, GX_TL_RGB5A3, bmp_ptr->palNum);
-            GXLoadTlut(&tlut_obj, slot);
-            GXInitTexObjCI(&tex_obj,bmp_ptr->data, sizeX, sizeY, GX_TF_C4, wrap_s, wrap_t, GX_FALSE, slot);
+            GXInitTlutObj(&tlutObj, bmp->palData, GX_TL_RGB5A3, bmp->palNum);
+            GXLoadTlut(&tlutObj, texMapId);
+            GXInitTexObjCI(&texObj,bmp->data, sizeX, sizeY, GX_TF_C4, wrapS, wrapT, GX_FALSE, texMapId);
             break;
             
         case ANIM_BMP_IA8:
-            GXInitTexObj(&tex_obj, bmp_ptr->data, sizeX, sizeY, GX_TF_IA8, wrap_s, wrap_t, GX_FALSE);
+            GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_TF_IA8, wrapS, wrapT, GX_FALSE);
             break;
             
         case ANIM_BMP_IA4:
-            GXInitTexObj(&tex_obj, bmp_ptr->data, sizeX, sizeY, GX_TF_IA4, wrap_s, wrap_t, GX_FALSE);
+            GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_TF_IA4, wrapS, wrapT, GX_FALSE);
             break;
             
         case ANIM_BMP_I8:
-            GXInitTexObj(&tex_obj, bmp_ptr->data, sizeX, sizeY, GX_TF_I8, wrap_s, wrap_t, GX_FALSE);
+            GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_TF_I8, wrapS, wrapT, GX_FALSE);
             break;
         
         case ANIM_BMP_I4:
-            GXInitTexObj(&tex_obj, bmp_ptr->data, sizeX, sizeY, GX_TF_I4, wrap_s, wrap_t, GX_FALSE);
+            GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_TF_I4, wrapS, wrapT, GX_FALSE);
             break;
             
         case ANIM_BMP_A8:
-            GXInitTexObj(&tex_obj, bmp_ptr->data, sizeX, sizeY, GX_CTF_A8, wrap_s, wrap_t, GX_FALSE);
+            GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_CTF_A8, wrapS, wrapT, GX_FALSE);
             break;
             
         case ANIM_BMP_CMPR:
-            GXInitTexObj(&tex_obj, bmp_ptr->data, sizeX, sizeY, GX_TF_CMPR, wrap_s, wrap_t, GX_FALSE);
+            GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_TF_CMPR, wrapS, wrapT, GX_FALSE);
             break;
             
         default:
             break;
     }
-    GXInitTexObjLOD(&tex_obj, filter, filter, 0, 0, 0, GX_FALSE, GX_FALSE, GX_ANISO_1);
-    GXLoadTexObj(&tex_obj, slot);
+    GXInitTexObjLOD(&texObj, filter, filter, 0, 0, 0, GX_FALSE, GX_FALSE, GX_ANISO_1);
+    GXLoadTexObj(&texObj, texMapId);
 }
 
 void HuSprExecLayerInit(void)
@@ -255,7 +255,7 @@ void HuSprExecLayerInit(void)
     }
 }
 
-void HuSprExecLayerCameraSet(s16 draw_no, s16 camera, s16 layer)
+void HuSprExecLayerCameraSet(s16 drawNo, s16 camera, s16 layer)
 {
     s16 i;
     
@@ -269,11 +269,11 @@ void HuSprExecLayerCameraSet(s16 draw_no, s16 camera, s16 layer)
     }
     HuSprLayer[i].layer = layer;
     HuSprLayer[i].camera = camera;
-    HuSprLayer[i].drawNo = draw_no;
+    HuSprLayer[i].drawNo = drawNo;
     Hu3DLayerHookSet(layer, HuSprLayerHook);
 }
 
-void HuSprExecLayerSet(s16 draw_no, s16 layer)
+void HuSprExecLayerSet(s16 drawNo, s16 layer)
 {
     s16 i;
     
@@ -287,7 +287,7 @@ void HuSprExecLayerSet(s16 draw_no, s16 layer)
     }
     HuSprLayer[i].layer = layer;
     HuSprLayer[i].camera = -1;
-    HuSprLayer[i].drawNo = draw_no;
+    HuSprLayer[i].drawNo = drawNo;
     Hu3DLayerHookSet(layer, HuSprLayerHook);
 }
 
