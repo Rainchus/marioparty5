@@ -360,7 +360,7 @@ config.libs = [
             Object(Matching, "game/perf.c"),
             Object(NonMatching, "game/objmain.c"),
             Object(Matching, "game/fault.c"),
-            Object(NonMatching, "game/gamework.c"),
+            Object(Matching, "game/gamework.c"),
             Object(NonMatching, "game/objsysobj.c"),
             Object(NonMatching, "game/objdll.c"),
             Object(Matching, "game/frand.c"),
