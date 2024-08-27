@@ -2,6 +2,7 @@
 #define _GAMEWORK_H
 
 #include "dolphin.h"
+#include "game/flag.h"
 
 #define GW_PLAYER_MAX 4
 
@@ -62,12 +63,12 @@ typedef struct GwPlayer_s {
     s8 starMasuNum;
     s8 vsMasuNum;
     s16 coin;
-    s16 coinMg;
+    s16 coinTotalMg;
     s16 coinTotal;
     s16 coinMax;
     s16 coinBattle;
-    s16 coinWin;
-    s16 coinBonus;
+    s16 mgCoin;
+    s16 mgCoinBonus;
     s32 mgScore;
     s16 star;
     s16 starMax;
@@ -259,6 +260,22 @@ static inline void GWTeamFSet(BOOL flag)
     GwSystem.teamF = flag;
 }
 
+static inline void GWMgCoinBonusSet(s32 playerNo, s16 mgCoin)
+{
+    if(_CheckFlag(0x1000F)) {
+        return;
+    }
+    GwPlayer[playerNo].mgCoinBonus = mgCoin;
+}
+
+static inline void GWMgCoinSet(s32 playerNo, s16 mgCoin)
+{
+    if(_CheckFlag(0x1000F)) {
+        return;
+    }
+    GwPlayer[playerNo].mgCoin = mgCoin;
+}
+
 static inline void GWBonusStarFSet(BOOL flag)
 {
     GwSystem.bonusStarF = flag;
@@ -287,6 +304,16 @@ static inline void GWMgComFSet(BOOL flag)
 static inline BOOL GWMgComFGet(void)
 {
     return GwSystem.mgComF;
+}
+
+static inline s16 GWMgCoinBonusGet(s32 playerNo)
+{
+    return GwPlayer[playerNo].mgCoinBonus;
+}
+
+static inline s16 GWMgCoinGet(s32 playerNo)
+{
+    return GwPlayer[playerNo].mgCoin;
 }
 
 static inline s32 GWMessSpeedGet(void)
@@ -364,5 +391,8 @@ static inline void GWRumbleFSet(s32 value)
 		HuPadRumbleAllStop();
 	}
 }
+
+#define GWMgCoinBonusAdd(player, value) GWMgCoinBonusSet((player), GWMgCoinBonusGet((player))+(value))
+#define GWMgCoinAdd(player, value) GWMgCoinSet((player), GWMgCoinGet((player))+(value))
 
 #endif
