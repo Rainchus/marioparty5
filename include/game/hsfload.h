@@ -3,9 +3,9 @@
 
 #include "game/hsfformat.h"
 
-HsfData *LoadHSF(void *data);
-void ClusterAdjustObject(HsfData *model, HsfData *src_model);
-char *SetName(u32 *str_ofs);
+HSFDATA *LoadHSF(void *data);
+void ClusterAdjustObject(HSFDATA *model, HSFDATA *srcModel);
+char *SetName(u32 *strOfs);
 char *MakeObjectName(char *name);
 s32 CmpObjectName(char *name1, char *name2);
 

@@ -111,12 +111,12 @@ void HuSprDisp(HUSPRITE *sprite)
         GXSetZCompLoc(GX_FALSE);
         if(0 != sprite->zRot) {
             MTXRotAxisDeg(rot, &axis, sprite->zRot);
-            MTXScale(modelview, sprite->scaleX, sprite->scaleY, 1.0f);
+            MTXScale(modelview, sprite->scale.x, sprite->scale.y, 1.0f);
             MTXConcat(rot, modelview, modelview);
         } else {
-            MTXScale(modelview, sprite->scaleX, sprite->scaleY, 1.0f);
+            MTXScale(modelview, sprite->scale.x, sprite->scale.y, 1.0f);
         }
-        mtxTransCat(modelview, sprite->posX, sprite->posY, 0);
+        mtxTransCat(modelview, sprite->pos.x, sprite->pos.y, 0);
         MTXConcat(*sprite->groupMtx, modelview, modelview);
         GXLoadPosMtxImm(modelview, GX_PNMTX0);
         for(i=pat->layerNum-1; i>=0; i--) {

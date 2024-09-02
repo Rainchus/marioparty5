@@ -88,12 +88,12 @@ void HuSprBegin(void)
     HuSprOrder[0].prio = -1;
     for(i=0; i<HUSPR_GRP_MAX; i++, gp++) {
         if(gp->sprNum != 0) {
-            MTXTrans(temp, gp->centerX*gp->scaleX, gp->centerY*gp->scaleY, 0.0f);
+            MTXTrans(temp, gp->center.x*gp->scale.x, gp->center.y*gp->scale.y, 0.0f);
             MTXRotAxisDeg(rot, &axis, gp->zRot);
             MTXConcat(rot, temp, gp->mtx);
-            MTXScale(temp, gp->scaleX, gp->scaleY, 1.0f);
+            MTXScale(temp, gp->scale.x, gp->scale.y, 1.0f);
             MTXConcat(gp->mtx, temp, gp->mtx);
-            mtxTransCat(gp->mtx, gp->posX, gp->posY, 0);
+            mtxTransCat(gp->mtx, gp->pos.x, gp->pos.y, 0);
             for(j=0; j<gp->sprNum; j++) {
                 if(gp->sprId[j] != -1) {
                     HuSprOrderEntry(i, gp->sprId[j]);
@@ -268,9 +268,9 @@ HUSPRID HuSprCreate(ANIMDATA *anim, s16 prio, s16 bank)
     sp->attr = 0;
     sp->drawNo = 0;
     sp->r = sp->g = sp->b = sp->a = 255;
-    sp->posX = sp->posY = sp->zRot = 0.0f;
+    sp->pos.x = sp->pos.y = sp->zRot = 0.0f;
     sp->prio = prio;
-    sp->scaleX = sp->scaleY = 1.0f;
+    sp->scale.x = sp->scale.y = 1.0f;
     sp->wrapS = sp->wrapT = GX_CLAMP;
     sp->uvScaleX = sp->uvScaleY = 1;
     sp->bg = NULL;
@@ -313,8 +313,8 @@ HUSPRGRPID HuSprGrpCreate(s16 sprNum)
         gp->sprId[j] = HUSPR_NONE;
     }
     gp->sprNum = sprNum;
-    gp->posX = gp->posY = gp->zRot = gp->centerX = gp->centerY = 0.0f;
-    gp->scaleX = gp->scaleY = 1.0f;
+    gp->pos.x = gp->pos.y = gp->zRot = gp->center.x = gp->center.y = 0.0f;
+    gp->scale.x = gp->scale.y = 1.0f;
     return i;
 }
 
@@ -328,13 +328,13 @@ HUSPRGRPID HuSprGrpCopy(HUSPRGRPID grpId)
         return HUSPR_GRP_NONE;
     }
     newGp = &HuSprGrpData[newGrpId];
-    newGp->posX = gp->posX;
-    newGp->posY = gp->posY;
+    newGp->pos.x = gp->pos.x;
+    newGp->pos.y = gp->pos.y;
     newGp->zRot = gp->zRot;
-    newGp->scaleX = gp->scaleX;
-    newGp->scaleY = gp->scaleY;
-    newGp->centerX = gp->centerX;
-    newGp->centerY = gp->centerY;
+    newGp->scale.x = gp->scale.x;
+    newGp->scale.y = gp->scale.y;
+    newGp->center.x = gp->center.x;
+    newGp->center.y = gp->center.y;
     for(i=0; i<gp->sprNum; i++) {
         if(gp->sprId[i] != HUSPR_NONE) {
             HUSPRITE *sp = &HuSprData[gp->sprId[i]];
@@ -448,8 +448,8 @@ u16 HuSprAttrGet(HUSPRGRPID grpId, s16 memberNo)
 void HuSprPosSet(HUSPRGRPID grpId, s16 memberNo, float posX, float posY)
 {
     HUSPRITE *sp = &HuSprData[HuSprGrpData[grpId].sprId[memberNo]];
-    sp->posX = posX;
-    sp->posY = posY;
+    sp->pos.x = posX;
+    sp->pos.y = posY;
     sp->dirty |= SPRITE_DIRTY_XFORM;
 }
 
@@ -463,8 +463,8 @@ void HuSprZRotSet(HUSPRGRPID grpId, s16 memberNo, float zRot)
 void HuSprScaleSet(HUSPRGRPID grpId, s16 memberNo, float scaleX, float scaleY)
 {
     HUSPRITE *sp = &HuSprData[HuSprGrpData[grpId].sprId[memberNo]];
-    sp->scaleX = scaleX;
-    sp->scaleY = scaleY;
+    sp->scale.x = scaleX;
+    sp->scale.y = scaleY;
     sp->dirty |= SPRITE_DIRTY_XFORM;
 }
 
@@ -531,8 +531,8 @@ void HuSprGrpPosSet(HUSPRGRPID grpId, float posX, float posY)
 {
     HUSPRGRP *gp = &HuSprGrpData[grpId];
     s16 i;
-    gp->posX = posX;
-    gp->posY = posY;
+    gp->pos.x = posX;
+    gp->pos.y = posY;
     for(i=0; i<gp->sprNum; i++) {
         if(gp->sprId[i] != -1) {
             HuSprData[gp->sprId[i]].dirty |= SPRITE_DIRTY_XFORM;
@@ -544,8 +544,8 @@ void HuSprGrpCenterSet(HUSPRGRPID grpId, float centerX, float centerY)
 {
     HUSPRGRP *gp = &HuSprGrpData[grpId];
     s16 i;
-    gp->centerX = centerX;
-    gp->centerY = centerY;
+    gp->center.x = centerX;
+    gp->center.y = centerY;
     for(i=0; i<gp->sprNum; i++) {
         if(gp->sprId[i] != HUSPR_NONE) {
             HuSprData[gp->sprId[i]].dirty |= SPRITE_DIRTY_XFORM;
@@ -569,8 +569,8 @@ void HuSprGrpScaleSet(HUSPRGRPID grpId, float scaleX, float scaleY)
 {
     HUSPRGRP *gp = &HuSprGrpData[grpId];
     s16 i;
-    gp->scaleX = scaleX;
-    gp->scaleY = scaleY;
+    gp->scale.x = scaleX;
+    gp->scale.y = scaleY;
     for(i=0; i<gp->sprNum; i++) {
         if(gp->sprId[i] != HUSPR_NONE) {
             HuSprData[gp->sprId[i]].dirty |= SPRITE_DIRTY_XFORM;
