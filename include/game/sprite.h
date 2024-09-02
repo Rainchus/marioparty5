@@ -2,6 +2,7 @@
 #define _GAME_SPRITE_H
 
 #include "dolphin.h"
+#include "humath.h"
 
 #define HUSPR_MAX 400
 #define HUSPR_GRP_MAX 256
@@ -39,11 +40,9 @@ struct HuSprite_s {
     s16 dirty;
     s16 prio;
     float time;
-    float posX;
-    float posY;
+    HuVec2F pos;
     float zRot;
-    float scaleX;
-    float scaleY;
+    HuVec2F scale;
     float speed;
     float a;
     GXTexWrapMode wrapS;
@@ -68,13 +67,10 @@ struct HuSprite_s {
 
 typedef struct HuSprGrp_s {
     s16 sprNum;
-    float posX;
-    float posY;
+    HuVec2F pos;
     float zRot;
-    float scaleX;
-    float scaleY;
-    float centerX;
-    float centerY;
+    HuVec2F scale;
+    HuVec2F center;
     HUSPRID *sprId;
     Mtx mtx;
     s16 work[4];

@@ -351,7 +351,7 @@ config.libs = [
             Object(Matching, "game/process.c"),
             Object(Matching, "game/sprman.c"),
             Object(Matching, "game/sprput.c"),
-            Object(NonMatching, "game/hsfload.c"),
+            Object(Matching, "game/hsfload.c"),
             Object(NonMatching, "game/hsfdraw.c"),
             Object(NonMatching, "game/hsfman.c"),
             Object(NonMatching, "game/hsfmotion.c"),

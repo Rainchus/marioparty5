@@ -34,8 +34,8 @@ typedef struct model_data {
     u16 unk_26;
     u16 unk_28[8];
     s16 unk_38[8];
-    HsfData *unk_48;
-    HsfData *unk_4C;
+    HSFDATA *unk_48;
+    HSFDATA *unk_4C;
     u32 attr;
     u32 motion_attr;
     Point3d unk_58;
@@ -58,10 +58,10 @@ typedef struct model_data {
     f32 unk_A4[4];
     f32 unk_B4[4];
     union {
-        HsfData *hsfData;
+        HSFDATA *HSFDATA;
         ModelHookFunc hook;
     };
-    HsfData *unk_C8;
+    HSFDATA *unk_C8;
     Vec pos;
     Vec rot;
     Vec scale;
@@ -153,7 +153,7 @@ void Hu3DModelClusterAttrSet(s16, s16, s32);
 void Hu3DModelClusterAttrReset(s16, s16, s32);
 void Hu3DModelCameraSet(s16, u16);
 void Hu3DModelLayerSet(s16, s16);
-HsfObject* Hu3DModelObjPtrGet(s16, char *);
+HSFOBJECT* Hu3DModelObjPtrGet(s16, char *);
 void Hu3DModelTPLvlSet(s16, f32);
 void Hu3DModelHiliteMapSet(s16, ANIMDATA*);
 void Hu3DModelShadowSet(s16);
