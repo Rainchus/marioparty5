@@ -20,8 +20,8 @@ typedef struct huvec2f {
     (vec)->y = (y); \
     (vec)->z = (z)
 
-#define HuAddVecF(dst, src1, src2) VECAdd(dst, src1, src2)
-#define HuSubVecF(dst, src1, src2) VECSubtract(dst, src1, src2)
+#define HuAddVecF(dst, src1, src2) VECAdd(src1, src2, dst)
+#define HuSubVecF(dst, src1, src2) VECSubtract(src1, src2, dst)
 
 #define HuCopyVecF(dst, src) \
     (dst)->x = (src)->x; \
@@ -51,19 +51,12 @@ typedef struct huvec2f {
 #define HuDistVec2F(a, b) HuMagPoint2D((a)->x-(b)->x, (a)->y-(b)->y)
 
 #define HuScaleVecF(src, dst, scale) VECScale(src, dst, scale)
-#define HuNormalizeVecF(src, dst) VECNormalize(src, dst)
+#define HuNormVecF(src, dst) VECNormalize(src, dst)
 
-#define HuDirVecF(dst, a, b) \
-    HuSubVecF(dst, a, b) \
-    HuNormalizeVecF(dst, dst)
+#define HuSin(x) sin(M_PI*(float)(x)/180.0)
+#define HuCos(x) cos(M_PI*(float)(x)/180.0)
+#define HuTan(x) tan(M_PI*(float)(x)/180.0)
 
-#define HuMagSetVecF(dst, mag) \
-    HuNormalizeVecF(dst, dst) \
-    VECScale(dst, dst, mag)
-
-#define HuSetMagVecF(dst, a, b)
-#define HuSin(x) sin(M_PI*(x)/180.0)
-#define HuCos(x) cos(M_PI*(x)/180.0)
 #define HuAtan(y, x) (180.0*(atan2((y), (x)) / M_PI))
 
 #endif

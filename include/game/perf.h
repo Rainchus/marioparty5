@@ -3,10 +3,16 @@
 
 #include "dolphin.h"
 
+#define HUPERF_MAX 10
+#define HUPERF_CPU 0
+#define HUPERF_DRAW 1
+#define HUPERF_USR0 2
+#define HUPERF_USR1 3
+
 void HuPerfInit(void);
-s32 HuPerfCreate(char *arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4);
+s32 HuPerfCreate(char *name, u8 r, u8 g, u8 b, u8 a);
 void HuPerfZero(void);
-void HuPerfBegin(s32 arg0);
-void HuPerfEnd(s32 arg0);
+void HuPerfBegin(s32 id);
+void HuPerfEnd(s32 id);
 
 #endif

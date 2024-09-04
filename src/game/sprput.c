@@ -1,6 +1,6 @@
 #include "game/sprite.h"
 #include "game/init.h"
-#include "game/hsfman.h"
+#include "game/hu3d.h"
 #include "dolphin/mtx.h"
 #include "dolphin/gx.h"
 #include "dolphin/vi.h"
@@ -12,7 +12,7 @@ typedef struct HuSprLayer_s {
 } HUSPRLAYER;
 
 static void *bmpNoCC[8];
-static HUSPRLAYER HuSprLayer[HU3D_LAYER_MAX];
+static HUSPRLAYER HuSprLayer[HU3D_LAYER_HOOK_MAX];
 
 static s16 bmpCCIdx;
 
@@ -199,8 +199,8 @@ void HuSprTexLoad(ANIMDATA *anim, s16 bmpNo, s16 texMapId, GXTexWrapMode wrapS, 
             GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_TF_RGBA8, wrapS, wrapT, GX_FALSE);
             break;
             
+        case ANIM_BMP_RGB565:
         case ANIM_BMP_RGB5A3:
-        case ANIM_BMP_RGB5A3_DUPE:
             GXInitTexObj(&texObj, bmp->data, sizeX, sizeY, GX_TF_RGB5A3, wrapS, wrapT, GX_FALSE);
             break;
             
@@ -250,7 +250,7 @@ void HuSprTexLoad(ANIMDATA *anim, s16 bmpNo, s16 texMapId, GXTexWrapMode wrapS, 
 void HuSprExecLayerInit(void)
 {
     s16 i;
-    for(i=0; i<HU3D_LAYER_MAX; i++) {
+    for(i=0; i<HU3D_LAYER_HOOK_MAX; i++) {
         HuSprLayer[i].layer = -1;
     }
 }
@@ -259,12 +259,12 @@ void HuSprExecLayerCameraSet(s16 drawNo, s16 camera, s16 layer)
 {
     s16 i;
     
-    for(i=0; i<HU3D_LAYER_MAX; i++) {
+    for(i=0; i<HU3D_LAYER_HOOK_MAX; i++) {
         if(-1 == HuSprLayer[i].layer) {
             break;
         }
     }
-    if(i == HU3D_LAYER_MAX) {
+    if(i == HU3D_LAYER_HOOK_MAX) {
         return;
     }
     HuSprLayer[i].layer = layer;
@@ -277,12 +277,12 @@ void HuSprExecLayerSet(s16 drawNo, s16 layer)
 {
     s16 i;
     
-    for(i=0; i<HU3D_LAYER_MAX; i++) {
+    for(i=0; i<HU3D_LAYER_HOOK_MAX; i++) {
         if(-1 == HuSprLayer[i].layer) {
             break;
         }
     }
-    if(i == HU3D_LAYER_MAX) {
+    if(i == HU3D_LAYER_HOOK_MAX) {
         return;
     }
     HuSprLayer[i].layer = layer;
@@ -294,12 +294,12 @@ void HuSprExecLayerSet(s16 drawNo, s16 layer)
 static void HuSprLayerHook(short layer)
 {
     s16 i;
-    for(i=0; i<HU3D_LAYER_MAX; i++) {
+    for(i=0; i<HU3D_LAYER_HOOK_MAX; i++) {
         if(layer == HuSprLayer[i].layer) {
             break;
         }
     }
-    if(i == HU3D_LAYER_MAX) {
+    if(i == HU3D_LAYER_HOOK_MAX) {
         return;
     }
     if((Hu3DCameraBit & HuSprLayer[i].camera) == 0) {

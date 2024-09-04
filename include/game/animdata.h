@@ -4,8 +4,8 @@
 #include "dolphin.h"
 
 #define ANIM_BMP_RGBA8 0
-#define ANIM_BMP_RGB5A3 1
-#define ANIM_BMP_RGB5A3_DUPE 2
+#define ANIM_BMP_RGB565 1
+#define ANIM_BMP_RGB5A3 2
 #define ANIM_BMP_C8 3
 #define ANIM_BMP_C4 4
 #define ANIM_BMP_IA8 5

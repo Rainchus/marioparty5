@@ -256,8 +256,8 @@ static void SceneLoad(void)
     if(head.scene.num) {
         fileScene = (HSFSCENE *)((u32)fileptr+head.scene.ofs);
         newScene = fileScene;
-        newScene->end = fileScene->end;
-        newScene->start = fileScene->start;
+        newScene->fogEnd = fileScene->fogEnd;
+        newScene->fogStart = fileScene->fogStart;
         Model.scene = newScene;
         Model.sceneNum = head.scene.num;
     }
