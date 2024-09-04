@@ -4,6 +4,9 @@
 #include "dolphin.h"
 #include "humath.h"
 
+#define HUSPR_DRAWNO_FRONT 0
+#define HUSPR_DRAWNO_BACK 127
+
 #define HUSPR_MAX 400
 #define HUSPR_GRP_MAX 256
 
