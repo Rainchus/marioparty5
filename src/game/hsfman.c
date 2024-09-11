@@ -1,5 +1,6 @@
 #include "string.h"
 #include "game/init.h"
+#include "game/disp.h"
 
 #include "game/hu3d.h"
 #include "game/hsfload.h"
@@ -891,7 +892,7 @@ void Hu3DModelTPLvlSet(HU3DMODELID modelId, float tpLvl)
         HSFOBJECT *obj = objPtr;
         if(obj->type == HSF_OBJ_MESH) {
             HSFCONSTDATA *constData = obj->constData;
-            constData->flags |= HU3D_CONST_XLU;
+            constData->attr |= HU3D_CONST_XLU;
         }
     }
     modelP->attr |= HU3D_ATTR_TPLVL_SET;
@@ -910,7 +911,7 @@ void Hu3DModelHiliteMapSet(HU3DMODELID modelId, ANIMDATA *hiliteMap)
             HSFCONSTDATA *constData;
             obj->flags |= HSF_MATERIAL_HILITE;
             constData = obj->constData;
-            constData->flags |= HU3D_CONST_HILITE;
+            constData->attr |= HU3D_CONST_HILITE;
             constData->hiliteMap = hiliteMap;
         }
     }
@@ -931,7 +932,7 @@ void Hu3DModelShadowSet(HU3DMODELID modelId)
         if(obj->constData) {
             HSFCONSTDATA *constData;
             constData = obj->constData;
-            constData->flags |= HU3D_CONST_SHADOW;
+            constData->attr |= HU3D_CONST_SHADOW;
         }
     }
 }
@@ -951,7 +952,7 @@ void Hu3DModelShadowReset(HU3DMODELID modelId)
         if(obj->constData) {
             HSFCONSTDATA *constData;
             constData = obj->constData;
-            constData->flags &= ~HU3D_CONST_SHADOW;
+            constData->attr &= ~HU3D_CONST_SHADOW;
         }
     }
 }
@@ -977,7 +978,7 @@ void Hu3DModelShadowMapSet(HU3DMODELID modelId)
         if(obj->constData) {
             HSFCONSTDATA *constData;
             constData = obj->constData;
-            constData->flags |= HU3D_CONST_SHADOW_MAP;
+            constData->attr |= HU3D_CONST_SHADOW_MAP;
         }
     }
 }
@@ -994,7 +995,7 @@ void Hu3DModelShadowMapObjSet(HU3DMODELID modelId, char *objName)
         if(obj->constData && !strcmp(name, obj->name)) {
             HSFCONSTDATA *constData;
             constData = obj->constData;
-            constData->flags |= HU3D_CONST_SHADOW_MAP;
+            constData->attr |= HU3D_CONST_SHADOW_MAP;
             break;
         }
     }
@@ -1010,7 +1011,7 @@ void Hu3DModelShadowMapObjReset(HU3DMODELID modelId)
         if(obj->constData) {
             HSFCONSTDATA *constData;
             constData = obj->constData;
-            constData->flags &= ~HU3D_CONST_SHADOW_MAP;
+            constData->attr &= ~HU3D_CONST_SHADOW_MAP;
         }
     }
 }
@@ -1134,13 +1135,13 @@ HU3DCAMERA defCamera = {
     45.0f,
     20.0f,
     5000.0f,
-    1.2f,
+    HU_DISP_ASPECT,
     0.0f,
     {0.0f, 0.0f, 100.0f},
     {0.0f, 1.0f, 0.0f},
     {0.0f, 0.0f, 0.0f},
-    0, 0, 640, 480,
-    0.0f, 0.0f, 640.0f, 480.0f,
+    0, 0, HU_FB_WIDTH, HU_FB_HEIGHT,
+    0.0f, 0.0f, HU_FB_WIDTH, HU_FB_HEIGHT,
     0.0f, 1.0f
 };
 
@@ -1334,14 +1335,14 @@ BOOL Hu3DModelCameraInfoSet(HU3DMODELID modelId, u16 cameraBit)
         upRot = obj->camera.upRot;
         cameraP->upRot = upRot;
         HuSubVecF(&up, &obj->camera.pos, &obj->camera.target);
-        upOfs.x = ((up.x * up.y * (1.0 - HuCos(upRot))) - (up.z * HuSin(upRot)));
-        upOfs.y = ((up.y * up.y) + (1.0f - (up.y * up.y)) * HuCos(upRot));
-        upOfs.z = (((up.y * up.z) * (1.0 - HuCos(upRot))) + (up.x * HuSin(upRot)));
+        upOfs.x = ((up.x * up.y * (1-HuCos(upRot))) - (up.z * HuSin(upRot)));
+        upOfs.y = ((up.y * up.y) + (1-HuSquare(up.y)) * HuCos(upRot));
+        upOfs.z = (((up.y * up.z) * (1-HuCos(upRot))) + (up.x * HuSin(upRot)));
         HuNormVecF(&upOfs, &up);
         Hu3DCameraPosSet(cameraBit, obj->camera.pos.x, obj->camera.pos.y, obj->camera.pos.z,
             up.x, up.y, up.z,
             obj->camera.target.x, obj->camera.target.y, obj->camera.target.z);
-        Hu3DCameraPerspectiveSet(cameraBit, obj->camera.fov, obj->camera.near, obj->camera.far, 1.2f);
+        Hu3DCameraPerspectiveSet(cameraBit, obj->camera.fov, obj->camera.near, obj->camera.far, HU_DISP_ASPECT);
         modelP->camInfoBit = cameraBit;
         Hu3DModelAttrSet(modelId, HU3D_ATTR_CAMERA_MOTON);
         return TRUE;
@@ -1955,7 +1956,7 @@ void Hu3DShadowMultiCreate(float fov, float near, float far, s16 cameraBit)
             shadowP->camUp.x = -1;
             shadowP->camUp.y = 1;
             shadowP->camUp.z = 0;
-            MTXLightPerspective(shadowP->projMtx, fov, 1.2f, 0.5f, -0.5f, 0.5f, 0.5f);
+            MTXLightPerspective(shadowP->projMtx, fov, HU_DISP_ASPECT, 0.5f, -0.5f, 0.5f, 0.5f);
             HuNormVecF(&shadowP->camUp, &shadowP->camUp);
             shadowP->color.r = shadowP->color.g = shadowP->color.b = 0;
             shadowP->color.a = 128;
@@ -2053,7 +2054,7 @@ static void Hu3DShadowExec(BOOL bgColorF)
     s32 dataSize;
     Hu3DDrawPreInit();
     GXSetCopyClear(black, GX_MAX_Z24);
-    MTXPerspective(proj, Hu3DShadow->fov, 1.2f, Hu3DShadow->near, Hu3DShadow->far);
+    MTXPerspective(proj, Hu3DShadow->fov, HU_DISP_ASPECT, Hu3DShadow->near, Hu3DShadow->far);
     GXSetProjection(proj, GX_PERSPECTIVE);
     if(Hu3DShadow->size <= 240) {
         GXSetScissor(2, 2, (Hu3DShadow->size*2)-4, (Hu3DShadow->size*2)-4);
@@ -2274,7 +2275,7 @@ HU3DPROJID Hu3DProjectionCreate(ANIMDATA *anim, float fov, float near, float far
     projP->camUp.x = -1;
     projP->camUp.y = 1;
     projP->camUp.z = 0;
-    MTXLightPerspective(projP->projMtx, fov, 1.2f, 0.5f, -0.5f, 0.5f, 0.5f);
+    MTXLightPerspective(projP->projMtx, fov, HU_DISP_ASPECT, 0.5f, -0.5f, 0.5f, 0.5f);
     HuNormVecF(&projP->camUp, &projP->camUp);
     projP->alpha = 128;
     Hu3DProjectionNum++;
@@ -2432,7 +2433,7 @@ void Hu3DZClear(void)
     GXLoadPosMtxImm(modelview, GX_PNMTX0);
     z = cameraP->far-1;
     pos.x = pos.y = z*HuTan(cameraP->fov/2);
-    pos.x *= 1.2f;
+    pos.x *= HU_DISP_ASPECT;
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
     GXPosition3f32(-pos.x, -pos.y, -z);
     GXPosition3f32(pos.x, -pos.y, -z);

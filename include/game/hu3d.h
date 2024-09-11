@@ -19,7 +19,7 @@
 #define HU3D_GLIGHT_MAX 8
 #define HU3D_LLIGHT_MAX 48
 #define HU3D_PROJ_MAX 4
-#define HU3D_MOTION_MAX 256
+#define HU3D_MOTION_MAX 384
 #define HU3D_TEXANIM_MAX 256
 #define HU3D_TEXSCROLL_MAX 16
 #define HU3D_PARMAN_MAX 64
@@ -39,6 +39,7 @@
 #define HU3D_MOTATTR_OVL_LOOP 0x40000200
 #define HU3D_MOTATTR_OVL_PAUSE 0x40000400
 #define HU3D_MOTATTR_OVL_REV 0x40000800
+#define HU3D_MOTATTR_EXECSHIFT 0x40001000
 
 //Cluster Attributes
 #define HU3D_CLUSTER_ATTR ((s32)0xC0000000)
@@ -93,6 +94,7 @@
 #define HU3D_CAM14 (1 << 14)
 #define HU3D_CAM15 (1 << 15)
 #define HU3D_CAM_ALL 0xFFFF
+#define HU3D_CAM_NONE 0
 #define HU3D_CAM_MAX 16
 
 
@@ -109,8 +111,9 @@
 #define HU3D_MOTID_NONE -1
 #define HU3D_LIGHTID_NONE -1
 #define HU3D_PROJID_NONE -1
+#define HU3D_CLUSTER_NONE -1
 
-//HSFCONSTDATA flag values
+//HSFCONSTDATA attribute values
 #define HU3D_CONST_XLU (1 << 0)
 #define HU3D_CONST_KCOLOR_XLU (1 << 1)
 #define HU3D_CONST_REFLECT (1 << 2)
@@ -150,7 +153,7 @@ typedef struct Hu3DParticle_s HU3DPARTICLE;
 //Function pointer declarations
 typedef void (*HU3DLAYERHOOK)(s16 layerNo);
 typedef void (*HU3DMODELHOOK)(HU3DMODEL *model, Mtx *mtx);
-typedef void (*HU3DTIMINGHOOK)(s16 modelId, s16 motionId, BOOL firstF);
+typedef void (*HU3DTIMINGHOOK)(HU3DMODELID modelId, HU3DMOTID motId, BOOL lagF);
 typedef void (*HU3DMATHOOK)(HU3DDRAWOBJ *drawObj, HSFMATERIAL *material);
 typedef void (*HU3DPARTICLEHOOK)(HU3DMODEL *model, HU3DPARTICLE *particle, Mtx mtx);
 
@@ -167,11 +170,11 @@ typedef struct Hu3DAttrAnim_s {
     s16 texAnimNo;
     s16 texScrollNo;
     HuVecF trans3D;
-    HuVecF rot3D;
+    HuVecF rot;
     HuVecF scale3D;
+    HuVec2F scale;
     HuVec2F trans;
-    HuVec2F rot;
-    HSFBITMAP *bitmapPtr;
+    HSFBITMAP *bitMapPtr;
     u32 unk40;
 } HU3DATTRANIM;
 
@@ -183,7 +186,7 @@ typedef struct HsfDrawData_s {
 } HSFDRAWDATA;
 
 typedef struct HsfConstData_s {
-    u32 flags;
+    u32 attr;
     HU3DMODELID hookMdlId;
     HSFDRAWDATA *drawData;
     void *dlBuf;
@@ -307,7 +310,7 @@ typedef struct Hu3DLight_s {
 } HU3DLIGHT;
 
 typedef struct Hu3DMotion_s {
-    s16 useNum;
+    u16 attr;
     HU3DMODELID modelId;
     HSFDATA *hsf;
 } HU3DMOTION;
@@ -537,61 +540,72 @@ void Hu3DZClear(void);
 void Hu3DZClearLayerSet(s16 layerNo);
 
 void Hu3DMotionInit(void);
-s16 Hu3DMotionCreate(void *arg0);
-s16 Hu3DMotionModelCreate(s16 arg0);
-s32 Hu3DMotionKill(s16 arg0);
+HU3DMOTID Hu3DMotionCreate(void *data);
+HU3DMOTID Hu3DMotionModelCreate(HU3DMODELID modelId);
+BOOL Hu3DMotionKill(HU3DMOTID motId);
 void Hu3DMotionAllKill(void);
-void Hu3DMotionSet(s16 arg0, s16 arg1);
-void Hu3DMotionOverlaySet(s16 arg0, s16 arg1);
-void Hu3DMotionOverlayReset(s16 arg0);
-float Hu3DMotionOverlayTimeGet(s16 arg0);
-void Hu3DMotionOverlayTimeSet(s16 arg0, float arg1);
-void Hu3DMotionOverlaySpeedSet(s16 arg0, float arg1);
-void Hu3DMotionShiftSet(s16 arg0, s16 arg1, float arg2, float arg3, u32 arg4);
-void Hu3DMotionShapeSet(s16 arg0, s16 arg1);
-s16 Hu3DMotionShapeIDGet(s16 arg0);
-void Hu3DMotionShapeSpeedSet(s16 arg0, float arg1);
-void Hu3DMotionShapeTimeSet(s16 arg0, float arg1);
-float Hu3DMotionShapeMaxTimeGet(s16 arg0);
-void Hu3DMotionShapeStartEndSet(s16 arg0, float arg1, float arg2);
-s16 Hu3DMotionClusterSet(s16 arg0, s16 arg1);
-s16 Hu3DMotionClusterNoSet(s16 arg0, s16 arg1, s16 arg2);
-void Hu3DMotionShapeReset(s16 arg0);
-void Hu3DMotionClusterReset(s16 arg0, s16 arg1);
-s16 Hu3DMotionIDGet(s16 arg0);
-s16 Hu3DMotionShiftIDGet(s16 arg0);
-void Hu3DMotionTimeSet(s16 arg0, float arg1);
-float Hu3DMotionTimeGet(s16 arg0);
-float Hu3DMotionShiftTimeGet(s16 arg0);
-float Hu3DMotionMaxTimeGet(s16 arg0);
-float Hu3DMotionShiftMaxTimeGet(s16 arg0);
-void Hu3DMotionShiftStartEndSet(s16 arg0, float arg1, float arg2);
-float Hu3DMotionMotionMaxTimeGet(s16 arg0);
-void Hu3DMotionStartEndSet(s16 arg0, float arg1, float arg2);
-s32 Hu3DMotionEndCheck(s16 arg0);
-void Hu3DMotionSpeedSet(s16 arg0, float arg1);
-void Hu3DMotionShiftSpeedSet(s16 arg0, float arg1);
-void Hu3DMotionNoMotSet(s16 arg0, char *arg1, u32 arg2);
-void Hu3DMotionNoMotReset(s16 arg0, char *arg1, u32 arg2);
-void Hu3DMotionForceSet(s16 arg0, char *arg1, u32 arg2, float arg3);
-void Hu3DMotionNext(s16 arg0);
-void Hu3DMotionExec(s16 arg0, s16 arg1, float arg2, s32 arg3);
-void Hu3DCameraMotionExec(s16 arg0);
-void Hu3DSubMotionExec(s16 arg0);
-float *GetObjTRXPtr(HSFOBJECT *arg0, u16 arg1);
-void SetObjMatMotion(s16 arg0, HSFTRACK *arg1, float arg2);
-void SetObjAttrMotion(s16 arg0, HSFTRACK *arg1, float arg2);
-void SetObjCameraMotion(s16 arg0, HSFTRACK *arg1, float arg2);
-void SetObjLightMotion(s16 arg0, HSFTRACK *arg1, float arg2);
-float GetCurve(HSFTRACK *arg0, float arg1);
-float GetConstant(s32 arg0, float *arg1, float arg2);
-float GetLinear(s32 arg0, float arg1[][2], float arg2);
-float GetBezier(s32 arg0, HSFTRACK *arg1, float arg2);
-HSFBITMAP *GetBitMap(s32 arg0, HSFBITMAPKEY *arg1, float arg2);
-s16 Hu3DJointMotion(s16 arg0, void *arg1);
-void JointModel_Motion(s16 arg0, s16 arg1);
-void Hu3DMotionCalc(s16 arg0);
-
+void Hu3DMotionSet(HU3DMODELID modelId, HU3DMOTID motId);
+void Hu3DMotionOverlaySet(HU3DMODELID modelId, HU3DMOTID motId);
+void Hu3DMotionOverlayReset(HU3DMODELID modelId);
+float Hu3DMotionOverlayTimeGet(HU3DMODELID modelId);
+float Hu3DMotionOverlayMaxTimeGet(HU3DMODELID modelId);
+BOOL Hu3DMotionOverlayEndCheck(HU3DMODELID modelId);
+void Hu3DMotionOverlayTimeSet(HU3DMODELID modelId, float time);
+void Hu3DMotionOverlaySpeedSet(HU3DMODELID modelId, float speed);
+void Hu3DMotionShiftSet(HU3DMODELID modelId, HU3DMOTID motId, float start, float end, u32 attr);
+void Hu3DMotionShapeSet(HU3DMODELID modelId, HU3DMOTID motId);
+HU3DMOTID Hu3DMotionShapeIDGet(HU3DMODELID modelId);
+void Hu3DMotionShapeSpeedSet(HU3DMODELID modelId, float speed);
+void Hu3DMotionShapeTimeSet(HU3DMODELID modelId, float time);
+float Hu3DMotionShapeMaxTimeGet(HU3DMODELID modelId);
+void Hu3DMotionShapeStartEndSet(HU3DMODELID modelId, float start, float end);
+s16 Hu3DMotionClusterSet(HU3DMODELID modelId, HU3DMOTID motId);
+s16 Hu3DMotionClusterNoSet(HU3DMODELID modelId, HU3DMOTID motId, s16 clusterNo);
+void Hu3DMotionShapeReset(HU3DMODELID modelId);
+void Hu3DMotionClusterReset(HU3DMODELID modelId, s16 clusterNo);
+void Hu3DMotionClusterSpeedSet(HU3DMODELID modelId, s16 clusterNo, float speed);
+void Hu3DMotionClusterTimeSet(HU3DMODELID modelId, s16 clusterNo, float time);
+float Hu3DMotionClusterMaxTimeGet(HU3DMODELID modelId, s16 clusterNo);
+HU3DMOTID Hu3DMotionIDGet(HU3DMODELID modelId);
+HU3DMOTID Hu3DMotionShiftIDGet(HU3DMODELID modelId);
+void Hu3DMotionTimeSet(HU3DMODELID modelId, float time);
+float Hu3DMotionTimeGet(HU3DMODELID modelId);
+float Hu3DMotionShiftTimeGet(HU3DMODELID modelId);
+float Hu3DMotionMaxTimeGet(HU3DMODELID modelId);
+float Hu3DMotionShiftMaxTimeGet(HU3DMODELID modelId);
+void Hu3DMotionShiftStartEndSet(HU3DMODELID modelId, float start, float end);
+float Hu3DMotionMotionMaxTimeGet(HU3DMOTID motId);
+void Hu3DMotionStartEndSet(HU3DMODELID modelId, float start, float end);
+BOOL Hu3DMotionEndCheck(HU3DMODELID modelId);
+void Hu3DMotionSpeedSet(HU3DMODELID modelId, float speed);
+void Hu3DMotionShiftSpeedSet(HU3DMODELID modelId, float speed);
+void Hu3DMotionNoMotSet(HU3DMODELID modelId, char *objName, u32 forceAttr);
+void Hu3DMotionNoMotReset(HU3DMODELID modelId, char *objName, u32 forceAttr);
+void Hu3DMotionForceSet(HU3DMODELID modelId, char *objName, u32 forceAttr, float value);
+void Hu3DMotionTimingHookSet(HU3DMODELID modelId, HU3DTIMINGHOOK timingHook);
+void Hu3DMotionAttrSet(HU3DMOTID motId, u16 attr);
+void Hu3DMotionAttrReset(HU3DMOTID motId, u16 attr);
+void Hu3DMotionNext(HU3DMODELID modelId);
+void Hu3DMotionExec(HU3DMODELID modelId, HU3DMOTID motId, float time, BOOL copyXFormF);
+void Hu3DCameraMotionExec(HU3DMODELID modelId);
+void Hu3DSubMotionExec(HU3DMODELID modelId);
+float *GetObjTRXPtr(HSFOBJECT *objPtr, u16 channel);
+void SetObjMatMotion(HU3DMODELID modelId, HSFTRACK *trackP, float value);
+void SetObjAttrMotion(HU3DMODELID modelId, HSFTRACK *trackP, float value);
+void SetObjCameraMotion(HU3DMODELID modelId, HSFTRACK *trackP, float value);
+void SetObjLightMotion(HU3DMODELID modelId, HSFTRACK *trackP, float value);
+float GetCurve(HSFTRACK *trackP, float time);
+float GetConstant(s32 keyNum, HSFCONSTANTKEY *key, float time);
+float GetLinear(s32 keyNum, HSFLINEARKEY *key, float time);
+float GetBezier(s32 keyNum, HSFTRACK *trackP, float time);
+HSFBITMAP *GetBitMap(s32 keyNum, HSFBITMAPKEY *key, float time);
+HU3DMOTID Hu3DJointMotion(HU3DMODELID modelId, void *data);
+void JointModel_Motion(HU3DMODELID modelId, HU3DMOTID motId);
+void Hu3DMotionCalc(HU3DMODELID modelId);
+void Hu3DSubMotionSet(HU3DMODELID modelId, HU3DMOTID motId, float time);
+void Hu3DSubMotionReset(HU3DMODELID modelId);
+void Hu3DSubMotionTimeSet(HU3DMODELID modelId, float time);
+void Hu3DMotionShiftTimeSet(HU3DMODELID modelId, float time);
 
 void Hu3DAnimInit(void);
 s16 Hu3DAnimCreate(void *arg0, s16 arg1, char *arg2);

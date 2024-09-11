@@ -1,26 +1,31 @@
 #include "dolphin.h"
 #include "game/printfunc.h"
 #include "game/init.h"
+#include "game/disp.h"
+
 #include "stdio.h"
 #include "stdarg.h"
 
 extern u8 ank8x8_4b[];
 
-struct strline_data {
+#define STRLINE_MAX 256
+#define STRLINE_CHARMAX 80
+
+typedef struct strline_s {
     u16 type;
     u16 color;
     s16 x;
     s16 y;
     s16 w;
     s16 h;
-    s16 empstrline_next;
+    s16 empstrline;
     float scale;
-    char str[80];
-    GXColor win_color;
-};
+    char str[STRLINE_CHARMAX];
+    GXColor winColor;
+} STRLINE;
 
-static struct strline_data strline[256];
-static char pfStrBuf[256];
+static STRLINE strline[STRLINE_MAX];
+static char pfStrBuf[STRLINE_MAX];
 
 int fontcolor;
 u16 empstrline;
@@ -51,10 +56,10 @@ static GXColor ATTRIBUTE_ALIGN(32) fcoltbl[16] = {
 void pfInit(void)
 {
     int i;
-    fontcolor = 15;
+    fontcolor = FONT_COLOR_WHITE;
     empstrline = 0;
     
-    for (i = 0; i < 256; i++) {
+    for (i = 0; i < STRLINE_MAX; i++) {
         strline[i].str[0] = 0;
     }
     pfClsScr();
@@ -65,8 +70,8 @@ void pfClsScr(void)
     int i;
     empstrline = 0;
     strlinecnt = 0;
-    for (i = 0; i < 256; i++) {
-        strline[i].empstrline_next = i+1;
+    for (i = 0; i < STRLINE_MAX; i++) {
+        strline[i].empstrline = i+1;
         strline[i].type = 0;
         if (strline[i].str[0] != 0) {
             strline[i].str[0] = 0;
@@ -76,26 +81,26 @@ void pfClsScr(void)
 
 s16 print8(s16 x, s16 y, float scale, char *str, ...)
 {
-    struct strline_data *strline_curr;
+    STRLINE *strlineP;
     char *src = pfStrBuf;
     char *dst;
     s16 ret;
     va_list list;
-    strline_curr = &strline[empstrline];
-    if(strlinecnt >= 256) {
+    strlineP = &strline[empstrline];
+    if(strlinecnt >= STRLINE_MAX) {
         return -1;
     }
     va_start(list, str);
     vsprintf(pfStrBuf, str, list);
     strlinecnt++;
     ret = empstrline;
-    empstrline = strline_curr->empstrline_next;
-    strline_curr->type = 0;
-    strline_curr->color = fontcolor;
-    strline_curr->x = x;
-    strline_curr->y = y;
-    strline_curr->scale = scale;
-    dst = strline_curr->str;
+    empstrline = strlineP->empstrline;
+    strlineP->type = 0;
+    strlineP->color = fontcolor;
+    strlineP->x = x;
+    strlineP->y = y;
+    strlineP->scale = scale;
+    dst = strlineP->str;
     while(*src) {
         *dst++ = *src++;
     }
@@ -106,41 +111,41 @@ s16 print8(s16 x, s16 y, float scale, char *str, ...)
 
 s16 printWin(s16 x, s16 y, s16 w, s16 h, GXColor *color)
 {
-    struct strline_data *strline_curr;
+    STRLINE *strlineP;
     s16 ret;
     char *src = pfStrBuf;
-    strline_curr = &strline[empstrline];
-    if(strlinecnt >= 256) {
+    strlineP = &strline[empstrline];
+    if(strlinecnt >= STRLINE_MAX) {
         return -1;
     }
     strlinecnt++;
     ret = empstrline;
-    empstrline = strline_curr->empstrline_next;
-    strline_curr->type = 1;
-    strline_curr->win_color.r = color->r;
-    strline_curr->win_color.g = color->g;
-    strline_curr->win_color.b = color->b;
-    strline_curr->win_color.a = color->a;
-    strline_curr->x = x;
-    strline_curr->y = y;
-    strline_curr->w = w;
-    strline_curr->h = h;
+    empstrline = strlineP->empstrline;
+    strlineP->type = 1;
+    strlineP->winColor.r = color->r;
+    strlineP->winColor.g = color->g;
+    strlineP->winColor.b = color->b;
+    strlineP->winColor.a = color->a;
+    strlineP->x = x;
+    strlineP->y = y;
+    strlineP->w = w;
+    strlineP->h = h;
     return ret;
 }
 
 void pfDrawFonts(void)
 {
-    GXTexObj font_tex;
+    GXTexObj fontTex;
     Mtx44 proj;
     Mtx modelview;
     int i;
     s16 x, y, w, h;
     
-    u16 strline_count = strlinecnt;
+    u16 num = strlinecnt;
     if(saftyFrameF) {
         WireDraw();
     }
-    MTXOrtho(proj, 0, 480, 0, 640, 0, 10);
+    MTXOrtho(proj, 0, HU_FB_HEIGHT, 0, HU_FB_WIDTH, 0, 10);
     GXSetProjection(proj, GX_ORTHOGRAPHIC);
     MTXIdentity(modelview);
     GXLoadPosMtxImm(modelview, GX_PNMTX0);
@@ -157,9 +162,9 @@ void pfDrawFonts(void)
     GXSetArray(GX_VA_CLR0, fcoltbl, sizeof(GXColor));
     GXSetZMode(GX_FALSE, GX_ALWAYS, GX_FALSE);
     GXInvalidateTexAll();
-    GXInitTexObj(&font_tex, ank8x8_4b, 128, 128, GX_TF_I4, GX_CLAMP, GX_CLAMP, GX_FALSE);
-    GXInitTexObjLOD(&font_tex, GX_NEAR, GX_NEAR, 0, 0, 0, GX_FALSE, GX_FALSE, GX_ANISO_1);
-    GXLoadTexObj(&font_tex, GX_TEXMAP0);
+    GXInitTexObj(&fontTex, ank8x8_4b, 128, 128, GX_TF_I4, GX_CLAMP, GX_CLAMP, GX_FALSE);
+    GXInitTexObjLOD(&fontTex, GX_NEAR, GX_NEAR, 0, 0, 0, GX_FALSE, GX_FALSE, GX_ANISO_1);
+    GXLoadTexObj(&fontTex, GX_TEXMAP0);
     GXSetNumTevStages(1);
     GXSetNumTexGens(1);
     GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
@@ -171,7 +176,7 @@ void pfDrawFonts(void)
     GXSetAlphaCompare(GX_GEQUAL, 1, GX_AOP_AND, GX_GEQUAL, 1);
     GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
     GXSetAlphaUpdate(GX_TRUE);
-    for(i=0; i<256; i++) {
+    for(i=0; i<STRLINE_MAX; i++) {
         x = strline[i].x;
         y = strline[i].y;
         if(strline[i].type == 1) {
@@ -180,7 +185,7 @@ void pfDrawFonts(void)
             GXClearVtxDesc();
             GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
             GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XY, GX_S16, 0);
-            GXSetTevColor(GX_TEVREG0, strline[i].win_color);
+            GXSetTevColor(GX_TEVREG0, strline[i].winColor);
             GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
             GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_C0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO);
             GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
@@ -289,7 +294,7 @@ void pfDrawFonts(void)
                                 GXEnd();
                             }
                             x += char_w;
-                            if(x > 640) {
+                            if(x > HU_FB_WIDTH) {
                                 x = 0;
                                 y += char_h;
                             }
@@ -301,18 +306,21 @@ void pfDrawFonts(void)
     }
 }
 
+#define SAFETY_W 16
+#define SAFETY_H 40
+
 static void WireDraw(void)
 {
     Mtx44 proj;
     Mtx modelview;
-    MTXOrtho(proj, 0, 480, 0, 576, 0, 10);
+    MTXOrtho(proj, 0, HU_DISP_HEIGHT, 0, HU_DISP_WIDTH, 0, 10);
     GXSetProjection(proj, GX_ORTHOGRAPHIC);
     if(RenderMode->field_rendering) {
-        GXSetViewportJitter(0, 0, 640, 480, 0, 1, VIGetNextField());
+        GXSetViewportJitter(0, 0, HU_FB_WIDTH, HU_FB_HEIGHT, 0, 1, VIGetNextField());
     } else {
-        GXSetViewport(0, 0, 640, 480, 0, 1);
+        GXSetViewport(0, 0, HU_FB_WIDTH, HU_FB_HEIGHT, 0, 1);
     }
-    GXSetScissor(0, 0, 640, 480);
+    GXSetScissor(0, 0, HU_FB_WIDTH, HU_FB_HEIGHT);
     GXClearVtxDesc();
     GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
     GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XY, GX_F32, 0);
@@ -331,21 +339,21 @@ static void WireDraw(void)
     MTXIdentity(modelview);
     GXLoadPosMtxImm(modelview, GX_PNMTX0);
     GXBegin(GX_LINES, 0, 8);
-    GXPosition2f32(16, 40);
+    GXPosition2f32(SAFETY_W, SAFETY_H);
     GXColor3u8(255, 0, 0);
-    GXPosition2f32(16, 440);
+    GXPosition2f32(SAFETY_W, HU_DISP_HEIGHT-SAFETY_H);
     GXColor3u8(255, 0, 0);
-    GXPosition2f32(16, 40);
+    GXPosition2f32(SAFETY_W, SAFETY_H);
     GXColor3u8(255, 0, 0);
-    GXPosition2f32(560, 40);
+    GXPosition2f32(HU_DISP_WIDTH-SAFETY_W, SAFETY_H);
     GXColor3u8(255, 0, 0);
-    GXPosition2f32(560, 440);
+    GXPosition2f32(HU_DISP_WIDTH-SAFETY_W, HU_DISP_HEIGHT-SAFETY_H);
     GXColor3u8(255, 0, 0);
-    GXPosition2f32(560, 40);
+    GXPosition2f32(HU_DISP_WIDTH-SAFETY_W, SAFETY_H);
     GXColor3u8(255, 0, 0);
-    GXPosition2f32(560, 440);
+    GXPosition2f32(HU_DISP_WIDTH-SAFETY_W, HU_DISP_HEIGHT-SAFETY_H);
     GXColor3u8(255, 0, 0);
-    GXPosition2f32(16, 440);
+    GXPosition2f32(SAFETY_W, HU_DISP_HEIGHT-SAFETY_H);
     GXColor3u8(255, 0, 0);
     GXEnd();
 }

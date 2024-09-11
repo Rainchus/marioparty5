@@ -38,6 +38,47 @@
 #define HSF_TRACK_MATERIAL 9
 #define HSF_TRACK_ATTRIBUTE 10
 
+//HSF Channel Types
+#define HSF_CHANNEL_LITCOLOR_R 0
+#define HSF_CHANNEL_LITCOLOR_G 1
+#define HSF_CHANNEL_LITCOLOR_B 2
+#define HSF_CHANNEL_POSX 8
+#define HSF_CHANNEL_POSY 9
+#define HSF_CHANNEL_POSZ 10
+#define HSF_CHANNEL_TARGETX 11
+#define HSF_CHANNEL_TARGETY 12
+#define HSF_CHANNEL_TARGETZ 13
+#define HSF_CHANNEL_UPROT 14
+#define HSF_CHANNEL_FOV 15
+#define HSF_CHANNEL_NEAR 17
+#define HSF_CHANNEL_FAR 18
+
+#define HSF_CHANNEL_LOCK 24
+#define HSF_CHANNEL_DISPOFF 26
+#define HSF_CHANNEL_ROTX 28
+#define HSF_CHANNEL_ROTY 29
+#define HSF_CHANNEL_ROTZ 30
+#define HSF_CHANNEL_SCALEX 31
+#define HSF_CHANNEL_SCALEY 32
+#define HSF_CHANNEL_SCALEZ 33
+#define HSF_CHANNEL_MORPH 40
+#define HSF_CHANNEL_LIGHTCOLOR_R 43
+#define HSF_CHANNEL_LIGHTCOLOR_G 44
+#define HSF_CHANNEL_LIGHTCOLOR_B 45
+
+#define HSF_CHANNEL_COLOR_R 49
+#define HSF_CHANNEL_COLOR_G 50
+#define HSF_CHANNEL_COLOR_B 51
+#define HSF_CHANNEL_SHADOWCOLOR_R 52
+#define HSF_CHANNEL_SHADOWCOLOR_G 53
+#define HSF_CHANNEL_SHADOWCOLOR_B 54
+#define HSF_CHANNEL_INVALPHA 57
+#define HSF_CHANNEL_REFALPHA 60
+#define HSF_CHANNEL_KCOLOR 62
+#define HSF_CHANNEL_NBT_TPLVL 63
+#define HSF_CHANNEL_64 64
+#define HSF_CHANNEL_BITMAP 67
+
 //HSF Curve Types
 #define HSF_CURVE_STEP 0
 #define HSF_CURVE_LINEAR 1
@@ -62,6 +103,10 @@
 #define HSF_BMPFMT_CI_RGB565 9
 #define HSF_BMPFMT_CI_RGB5A3 10
 #define HSF_BMPFMT_CI_IA8 11
+
+typedef float HSFCONSTANTKEY[2];
+typedef float HSFLINEARKEY[2];
+typedef float HSFBEZIERKEY[4];
 
 typedef struct HsfObject_s HSFOBJECT;
 
@@ -125,11 +170,11 @@ typedef struct HsfPalette_s {
 
 typedef struct HsfAttribute_s {
     char *name;
-    void *unk04;
+    void *animWorkP;
     u8 unk8[4];
-    float unk0C;
+    float kColor;
     u8 unk10[4];
-    float unk14;
+    float nbtTpLvl;
     u8 unk18[8];
     float unk20;
     u8 unk24[4];
@@ -367,7 +412,7 @@ typedef struct HsfTrack_s {
         struct {
             union {
                 s16 attrIdx;
-                u16 objType;
+                u16 index;
             };
             union {
                 u16 channel;
@@ -391,7 +436,7 @@ typedef struct HsfMotion_s {
     char *name;
     s32 numTracks;
     HSFTRACK *track;
-    float len;
+    float maxTime;
 } HSFMOTION;
 
 typedef struct HsfMapAttr_s {
