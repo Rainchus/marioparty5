@@ -1,6 +1,7 @@
 #include "game/sprite.h"
 #include "game/init.h"
 #include "game/hu3d.h"
+#include "game/disp.h"
 #include "dolphin/mtx.h"
 #include "dolphin/gx.h"
 #include "dolphin/vi.h"
@@ -29,14 +30,14 @@ void HuSprDispInit(void)
     }
     bmpCCIdx = 0;
     GXInvalidateTexAll();
-    MTXOrtho(proj, 0, 480, 0, 576, 0, 10);
+    MTXOrtho(proj, 0, HU_DISP_HEIGHT, 0, HU_DISP_WIDTH, 0, 10);
     GXSetProjection(proj, GX_ORTHOGRAPHIC);
     if(RenderMode->field_rendering) {
-        GXSetViewportJitter(0, 0, 640, 480, 0, 1, VIGetNextField());
+        GXSetViewportJitter(0, 0, HU_FB_WIDTH, HU_FB_HEIGHT, 0, 1, VIGetNextField());
     } else {
-        GXSetViewport(0, 0, 640, 480, 0, 1);
+        GXSetViewport(0, 0, HU_FB_WIDTH, HU_FB_HEIGHT, 0, 1);
     }
-    GXSetScissor(0, 0, 640, 480);
+    GXSetScissor(0, 0, HU_FB_WIDTH, HU_FB_HEIGHT);
     GXClearVtxDesc();
     GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
     GXSetVtxDesc(GX_VA_TEX0, GX_DIRECT);
