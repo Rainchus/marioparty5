@@ -29,6 +29,7 @@
 #define HSF_MATERIAL_DISPOFF (1 << 10)
 #define HSF_MATERIAL_NEAR (1 << 12)
 #define HSF_MATERIAL_MATHOOK (1 << 13)
+#define HSF_MATERIAL_REFLECTMODEL (1 << 14)
 
 //HSF Track Types
 #define HSF_TRACK_TRANSFORM 2
@@ -86,6 +87,10 @@
 #define HSF_CURVE_BITMAP 3
 #define HSF_CURVE_CONST 4
 
+//HSF Attribute Flags
+#define HSF_FLAG_NEAR 0x40
+#define HSF_FLAG_MIPMAP 0x80
+
 #define HSF_MATERIAL_SETHILITETYPE(matPtr, hiliteType) ((matPtr)->pass = (((matPtr)->pass & 0xF)|(hiliteType)))
 
 #define HSF_MATERIAL_SETPASS(matPtr, passNo) ((matPtr)->pass = (((matPtr)->pass & 0xF0)|(passNo)))
@@ -107,6 +112,12 @@
 typedef float HSFCONSTANTKEY[2];
 typedef float HSFLINEARKEY[2];
 typedef float HSFBEZIERKEY[4];
+
+typedef struct HsfS8Vec_s {
+    s8 x;
+    s8 y;
+    s8 z;
+} HSFS8VEC;
 
 typedef struct HsfObject_s HSFOBJECT;
 
@@ -156,7 +167,7 @@ typedef struct HsfBitmap_s {
     s16 sizeY;
     s16 palSize;
     GXColor tint;
-    void *palData;
+    u16 *palData;
     u32 unk;
     void *data;
 } HSFBITMAP;
@@ -178,13 +189,11 @@ typedef struct HsfAttribute_s {
     u8 unk18[8];
     float unk20;
     u8 unk24[4];
-    float unk28;
-    float unk2C;
-    float unk30;
-    float unk34;
+    HuVec2F scale;
+    HuVec2F trans;
     u8 unk38[44];
-    u32 wrap_s;
-    u32 wrap_t;
+    u32 wrapS;
+    u32 wrapT;
     u8 unk6C[12];
     u32 unk78;
     u32 flag;
@@ -199,15 +208,15 @@ typedef struct HsfMaterial_s {
     u8 litColor[3];
     u8 color[3];
     u8 shadowColor[3];
-    float hilite_scale;
+    float hiliteScale;
     float unk18;
     float invAlpha;
     float unk20[2];
     float refAlpha;
     float unk2C;
     u32 flags;
-    u32 numAttrs;
-    s32 *attrs;
+    u32 attrNum;
+    s32 *attr;
 } HSFMATERIAL;
 
 typedef struct HsfBuffer_s {

@@ -207,21 +207,21 @@ static void MaterialLoad(void)
             newMat->shadowColor[0] = currMat->shadowColor[0];
             newMat->shadowColor[1] = currMat->shadowColor[1];
             newMat->shadowColor[2] = currMat->shadowColor[2];
-            newMat->hilite_scale = currMat->hilite_scale;
+            newMat->hiliteScale = currMat->hiliteScale;
             newMat->unk18 = currMat->unk18;
             newMat->invAlpha = currMat->invAlpha;
             newMat->unk20[0] = currMat->unk20[0];
             newMat->unk20[1] = currMat->unk20[1];
             newMat->refAlpha = currMat->refAlpha;
             newMat->unk2C = currMat->unk2C;
-            newMat->numAttrs = currMat->numAttrs;
-            newMat->attrs = (s32 *)(NSymIndex+((u32)currMat->attrs));
+            newMat->attrNum = currMat->attrNum;
+            newMat->attr = (s32 *)(NSymIndex+((u32)currMat->attr));
             rgba[i].r = newMat->litColor[0];
             rgba[i].g = newMat->litColor[1];
             rgba[i].b = newMat->litColor[2];
             rgba[i].a = 255;
-            for(j=0; j<newMat->numAttrs; j++) {
-                newMat->attrs[j] = newMat->attrs[j];
+            for(j=0; j<newMat->attrNum; j++) {
+                newMat->attr[j] = newMat->attr[j];
             }
         }
     }

@@ -500,7 +500,7 @@ HU3DMODELID Hu3DModelCreate(void *data)
     modelP->layerNo = 0;
     modelP->hookData = NULL;
     modelP->lightNum = 0;
-    modelP->unk03 = 0;
+    modelP->hiliteIdx = 0;
     modelP->ambR = modelP->ambG = modelP->ambB = 1;
     modelP->reflectType = HU3D_REFLECT_TYPE_NONE;
     modelP->linkMdlId = HU3D_MODELID_NONE;
@@ -579,7 +579,7 @@ HU3DMODELID Hu3DModelLink(HU3DMODELID linkMdlId)
     modelP->layerNo = 0;
     modelP->hookData = NULL;
     modelP->lightNum = 0;
-    modelP->unk03 = 0;
+    modelP->hiliteIdx = 0;
     modelP->projBit = 0;
     modelP->ambR = modelP->ambG = modelP->ambB = 1;
     modelP->reflectType = HU3D_REFLECT_TYPE_NONE;
@@ -626,7 +626,7 @@ HU3DMODELID Hu3DHookFuncCreate(HU3DMODELHOOK hookFunc)
     modelP->layerNo = 0;
     modelP->hookData = NULL;
     modelP->lightNum = 0;
-    modelP->unk03 = 0;
+    modelP->hiliteIdx = 0;
     modelP->linkMdlId = HU3D_MODELID_NONE;
     modelP->projBit = 0;
     modelP->reflectType = HU3D_REFLECT_TYPE_NONE;
@@ -1650,9 +1650,9 @@ static void Hu3DLightPASet(HU3DLIGHT *lightP, float posX, float posY, float posZ
     lightP->pos.x = posX;
     lightP->pos.y = posY;
     lightP->pos.z = posZ;
-    lightP->dir.x = HuSin(angleY-180.0)*HuCos(angleX);
+    lightP->dir.x = HuSin((float)(angleY-180.0))*HuCos(angleX);
     lightP->dir.y = -HuSin(angleX);
-    lightP->dir.z = HuCos(angleY-180.0)*HuCos(angleX);
+    lightP->dir.z = HuCos((float)(angleY-180.0))*HuCos(angleX);
     HuNormVecF(&lightP->dir, &lightP->dir);
 }
 

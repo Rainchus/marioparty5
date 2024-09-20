@@ -53,9 +53,9 @@ typedef struct huvec2f {
 #define HuScaleVecF(src, dst, scale) VECScale(src, dst, scale)
 #define HuNormVecF(src, dst) VECNormalize(src, dst)
 
-#define HuSin(x) sin(M_PI*(float)(x)/180.0)
-#define HuCos(x) cos(M_PI*(float)(x)/180.0)
-#define HuTan(x) tan(M_PI*(float)(x)/180.0)
+#define HuSin(x) sin(M_PI*(x)/180.0)
+#define HuCos(x) cos(M_PI*(x)/180.0)
+#define HuTan(x) tan(M_PI*(x)/180.0)
 
 #define HuAtan(y, x) (180.0*(atan2((y), (x)) / M_PI))
 
