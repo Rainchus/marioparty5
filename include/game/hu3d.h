@@ -75,6 +75,7 @@
 #define HU3D_ATTR_CULL_FRONT (1 << 23)
 #define HU3D_ATTR_REFLECT_MODEL (1 << 24)
 #define HU3D_ATTR_MOTION_MODEL (1 << 25)
+#define HU3D_ATTR_COLOR_NOUPDATE (1 << 26)
 
 //Camera attributes
 #define HU3D_CAM0 (1 << 0)
@@ -114,6 +115,7 @@
 #define HU3D_CLUSTER_NONE -1
 
 //HSFCONSTDATA attribute values
+#define HU3D_CONST_NONE 0
 #define HU3D_CONST_XLU (1 << 0)
 #define HU3D_CONST_KCOLOR_XLU (1 << 1)
 #define HU3D_CONST_REFLECT (1 << 2)
@@ -131,6 +133,9 @@
 #define HU3D_CONST_XLUVERTEX (1 << 14)
 #define HU3D_CONST_HILITE (1 << 15)
 #define HU3D_CONST_NEAR (1 << 16)
+#define HU3D_CONST_MATHOOK (1 << 17)
+#define HU3D_CONST_REFLECTMODEL (1 << 18)
+
 
 #define Hu3DModelCreateFile(dataNum) (Hu3DModelCreate(HuDataSelHeapReadNum((dataNum), MEMORY_DEFAULT_NUM, HEAP_DATA)))
 #define Hu3DJointMotionFile(model, dataNum) (Hu3DJointMotion((model), HuDataSelHeapReadNum((dataNum), MEMORY_DEFAULT_NUM, HEAP_DATA)))
@@ -192,6 +197,7 @@ typedef struct HsfConstData_s {
     void *dlBuf;
     Mtx matrix;
     ANIMDATA *hiliteMap;
+    u32 triCnt;
 } HSFCONSTDATA;
 
 typedef struct Hu3DMotWork_s {
@@ -205,7 +211,7 @@ struct Hu3DModel_s {
     u8 tick;
     u8 camInfoBit;
     u8 projBit;
-    u8 unk03;
+    u8 hiliteIdx;
     s8 reflectType;
     s16 layerNo;
     HU3DMOTID motId;
@@ -315,7 +321,7 @@ typedef struct Hu3DMotion_s {
     HSFDATA *hsf;
 } HU3DMOTION;
 
-typedef struct Hu3DParticleData_s{
+typedef struct Hu3DParticleData_s {
     s16 time;
     HU3DPARMANID parManId;
     s16 unk04;
@@ -396,27 +402,30 @@ typedef struct Hu3DTexScroll_s {
 
 void Hu3DDrawPreInit(void);
 void Hu3DDraw(HU3DMODEL *model, Mtx matrix, HuVecF *scale);
-s32 ObjCullCheck(HSFDATA *hsf, HSFOBJECT *object, Mtx mtx);
+BOOL ObjCullCheck(HSFDATA *hsf, HSFOBJECT *object, Mtx mtx);
+void Hu3DTevStageNoTexSet(HU3DDRAWOBJ *drawObj, HSFMATERIAL *matP);
+void Hu3DTevStageTexSet(HU3DDRAWOBJ *drawObj, HSFMATERIAL *matP);
+void Hu3DMatLightSet(HU3DMODEL *modelP, u32 flags, float hilitePower);
 void Hu3DDrawPost(void);
-void MakeDisplayList(s16 modelId, u32 mallocNo);
-HSFCONSTDATA *ObjConstantMake(HSFOBJECT *object, u32 mallocNo);
+void MakeDisplayList(HU3DMODELID modelId, u32 mallocno);
+HSFCONSTDATA *ObjConstantMake(HSFOBJECT *object, u32 no);
 void mtxTransCat(Mtx dst, float x, float y, float z);
 void mtxRotCat(Mtx dst, float x, float y, float z);
 void mtxRot(Mtx dst, float x, float y, float z);
 void mtxScaleCat(Mtx dst, float x, float y, float z);
 s16 HmfInverseMtxF3X3(Mtx dst, Mtx src);
 void SetDefLight(HuVecF *pos, HuVecF *dir, u8 colorR, u8 colorG, u8 colorB, u8 ambR, u8 ambG, u8 ambB, u8 matR, u8 matG, u8 matB);
-void Hu3DModelObjPosGet(s16 modelId, char *objName, HuVecF *pos);
-void Hu3DModelObjMtxGet(s16 modelId, char *objName, Mtx mtx);
+void Hu3DModelObjPosGet(HU3DMODELID modelId, char *objName, HuVecF *pos);
+void Hu3DModelObjMtxGet(HU3DMODELID modelId, char *objName, Mtx mtx);
 void PGObjCall(HU3DMODEL *model, HSFOBJECT *object);
 void PGObjCalc(HU3DMODEL *model, HSFOBJECT *object);
 void PGObjReplica(HU3DMODEL *model, HSFOBJECT *object);
-HSFOBJECT *Hu3DObjDuplicate(HSFDATA *arg0, u32 mallocNo);
-void Hu3DAttrDuplicate(HSFDATA *arg0, u32 mallocNo);
-void Hu3DMatDuplicate(HSFDATA *arg0, u32 mallocNo);
-
+HSFOBJECT *Hu3DObjDuplicate(HSFDATA *hsf, u32 mallocNo);
+HSFATTRIBUTE *Hu3DAttrDuplicate(HSFDATA *hsf, u32 mallocNo);
+HSFMATERIAL *Hu3DMatDuplicate(HSFDATA *hsf, u32 mallocNo);
 void Hu3DModelObjDrawInit(void);
-void Hu3DModelObjDraw(s16 modelId, char *objName, Mtx mtx);
+void Hu3DModelObjDraw(HU3DMODELID modelId, char *objName, Mtx mtx);
+void Hu3DModelObjPtrDraw(HU3DMODELID modelId, HSFOBJECT *objPtr, Mtx mtx);
 
 void Hu3DInit(void);
 void Hu3DPreProc(void);

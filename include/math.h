@@ -54,6 +54,7 @@ _MATH_INLINE float cosf(float x) { return (float)cos((double)x); }
 _MATH_INLINE float atan2f(float y, float x) { return (float)atan2((double)y, (double)x); }
 _MATH_INLINE float atanf(float x) { return (float)atan((double)x); }
 _MATH_INLINE float asinf(float x) { return (float)asin((double)x); }
+_MATH_INLINE float acosf(float x) { return (float)acos((double)x); }
 
 _MATH_INLINE float fmodf(float x, float m) { return (float)fmod((double)x, (double)m); }
 

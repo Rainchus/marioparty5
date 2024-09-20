@@ -104,8 +104,7 @@ typedef struct GwSystem_s {
     s16 subGameNo;
     u16 bankCoin;
     s16 masuCapsule[256];
-    u8 flag[3][16];
-    u8 unk2[0x52];
+    u8 flag[8][16];
 } GWSYSTEM;
 
 typedef struct GwDecaScore_s {
