@@ -16,8 +16,6 @@
 #include "dolphin/types.h"
 #include "dolphin/dvd.h"
 
-typedef s32 HU_DATANUM;
-typedef u32 HU_DATANUM_U;
 
 typedef struct HuDataStat_s {
     s32 dirId;
@@ -34,27 +32,27 @@ typedef struct HuDataStat_s {
 } HUDATASTAT;
 
 void HuDataInit(void);
-s32 HuDataReadChk(HU_DATANUM dataNum);
+s32 HuDataReadChk(int dataNum);
 HUDATASTAT *HuDataGetStatus(void *dirP);
-void *HuDataGetDirPtr(HU_DATANUM dirNum);
-HUDATASTAT *HuDataDirRead(HU_DATANUM dirNum);
-HUDATASTAT *HuDataDirReadNum(HU_DATANUM dirNum, s32 num);
-HUDATASTAT *HuDataDirSet(void *dir_ptr, HU_DATANUM data_num);
+void *HuDataGetDirPtr(int dirNum);
+HUDATASTAT *HuDataDirRead(int dirNum);
+HUDATASTAT *HuDataDirReadNum(int dirNum, s32 num);
+HUDATASTAT *HuDataDirSet(void *dir_ptr, int data_num);
 void HuDataDirReadAsyncCallBack(s32 result, DVDFileInfo* fileInfo);
-s32 HuDataDirReadAsync(HU_DATANUM data_num);
-s32 HuDataDirReadNumAsync(HU_DATANUM data_num, s32 num);
+s32 HuDataDirReadAsync(int data_num);
+s32 HuDataDirReadNumAsync(int data_num, s32 num);
 BOOL HuDataGetAsyncStat(s32 status);
-void *HuDataRead(HU_DATANUM data_num);
-void *HuDataReadNum(HU_DATANUM data_num, s32 num);
-void *HuDataSelHeapRead(HU_DATANUM data_num, HUHEAPTYPE heap);
-void *HuDataSelHeapReadNum(HU_DATANUM data_num, s32 num, HUHEAPTYPE heap);
-void **HuDataReadMulti(HU_DATANUM *data_ids);
-s32 HuDataGetSize(HU_DATANUM dataNum);
+void *HuDataRead(int data_num);
+void *HuDataReadNum(int data_num, s32 num);
+void *HuDataSelHeapRead(int data_num, HUHEAPTYPE heap);
+void *HuDataSelHeapReadNum(int data_num, s32 num, HUHEAPTYPE heap);
+void **HuDataReadMulti(int *data_ids);
+s32 HuDataGetSize(int dataNum);
 void HuDataClose(void *ptr);
 void HuDataCloseMulti(void **ptrs);
-void HuDataDirClose(HU_DATANUM dataNum);
+void HuDataDirClose(int dataNum);
 void HuDataDirCloseNum(s32 num);
-void *HuDataReadNumHeapShortForce(HU_DATANUM dataNum, s32 num, HUHEAPTYPE heap);
+void *HuDataReadNumHeapShortForce(int dataNum, s32 num, HUHEAPTYPE heap);
 
 void HuDecodeData(void *src, void *dst, u32 size, s32 decode_type);
 
