@@ -81,7 +81,7 @@ HUPROCESS *HuPrcCreate(void (*func)(void), u16 prio, u32 stackSize, s32 heapSize
     gcsetjmp(&process->jump);
     process->jump.lr = (u32)func;
     process->jump.sp = process->spBase;
-    process->dtor = NULL;
+    process->destructor = NULL;
     process->property = NULL;
     LinkProcess(&processtop, process);
     process->child = NULL;
@@ -176,8 +176,8 @@ void HuPrcChildKill(HUPROCESS *process)
 
 static void gcTerminateProcess(HUPROCESS *process)
 {
-    if(process->dtor) {
-        process->dtor();
+    if(process->destructor) {
+        process->destructor();
     }
     UnlinkProcess(&processtop, process);
     processcnt--;
@@ -216,13 +216,13 @@ void HuPrcWakeup(HUPROCESS *process)
 
 void HuPrcDestructorSet2(HUPROCESS *process, void (*func)(void))
 {
-    process->dtor = func;
+    process->destructor = func;
 }
 
 void HuPrcDestructorSet(void (*func)(void))
 {
     HUPROCESS *process = HuPrcCurrentGet();
-    process->dtor = func;
+    process->destructor = func;
 }
 
 void HuPrcCall(s32 tick)

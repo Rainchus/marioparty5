@@ -6,9 +6,9 @@
 #include "game/sprite.h"
 
 void espInit(void);
-s16 espEntry(HU_DATANUM_U dataNum, s16 prio, s16 bank);
+s16 espEntry(unsigned int dataNum, s16 prio, s16 bank);
 void espKill(s16 espId);
-s16 espGrpIDGet(void);
+HUSPRGRPID espGrpIDGet(void);
 void espDispOn(s16 espId);
 void espDispOff(s16 espId);
 void espAttrSet(s16 espId, u16 attr);

@@ -10,14 +10,14 @@
 #define PTR_OFFSET(ptr, offset) (void *)(((u8 *)(ptr)+(u32)(offset)))
 #define DATA_EFF_SIZE(size) (((size)+1) & ~0x1)
 
-static void **HuDataReadMultiSub(HU_DATANUM *dataNum, BOOL use_num, s32 num);
+static void **HuDataReadMultiSub(int *dataNum, BOOL use_num, s32 num);
 
 #define DATA_MAX_READSTAT 128
 
 
 typedef struct DataDirStat_s {
     char *name;
-    s32 fileId;
+    s32 entryNum;
 } DATADIRSTAT;
 
 #define DATADIR(name) { "data/" #name ".bin", -1 },
@@ -40,7 +40,7 @@ void HuDataInit(void)
     DATADIRSTAT *dirStat = DataDirStat;
     HUDATASTAT *readStat;
     while(dirStat->name) {
-        if((dirStat->fileId = DVDConvertPathToEntrynum(dirStat->name)) == -1) {
+        if((dirStat->entryNum = DVDConvertPathToEntrynum(dirStat->name)) == -1) {
             OSReport("data.c: Data File Error(%s)\n", dirStat->name);
             OSPanic("data.c", 66, "\n");
         }
@@ -69,7 +69,7 @@ static s32 HuDataReadStatusGet(void)
     return i;
 }
 
-s32 HuDataReadChk(HU_DATANUM dirNum)
+s32 HuDataReadChk(int dirNum)
 {
     s32 i;
     dirNum >>= 16;
@@ -98,7 +98,7 @@ HUDATASTAT *HuDataGetStatus(void *dirP)
     return &ReadDataStat[i];
 }
 
-void *HuDataGetDirPtr(HU_DATANUM dirNum)
+void *HuDataGetDirPtr(int dirNum)
 {
     s32 statId = HuDataReadChk(dirNum);
     if(statId < 0) {
@@ -107,7 +107,7 @@ void *HuDataGetDirPtr(HU_DATANUM dirNum)
     return ReadDataStat[statId].dirP;
 }
 
-HUDATASTAT *HuDataDirRead(HU_DATANUM dataNum)
+HUDATASTAT *HuDataDirRead(int dataNum)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -131,7 +131,7 @@ HUDATASTAT *HuDataDirRead(HU_DATANUM dataNum)
                 return NULL;
             }
             readStat = &ReadDataStat[statId];
-            readStat->dirP = HuDvdDataFastRead(DataDirStat[dirId].fileId);
+            readStat->dirP = HuDvdDataFastRead(DataDirStat[dirId].entryNum);
             if(readStat->dirP) {
                 readStat->dirId = dirId;
             }
@@ -143,7 +143,7 @@ HUDATASTAT *HuDataDirRead(HU_DATANUM dataNum)
     return readStat;
 }
 
-static HUDATASTAT *HuDataDirReadNum(HU_DATANUM dataNum, s32 num)
+static HUDATASTAT *HuDataDirReadNum(int dataNum, s32 num)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -171,7 +171,7 @@ static HUDATASTAT *HuDataDirReadNum(HU_DATANUM dataNum, s32 num)
                 return NULL;
             }
             readStat = &ReadDataStat[statId];
-            readStat->dirP = HuDvdDataFastReadNum(DataDirStat[dirId].fileId, num);
+            readStat->dirP = HuDvdDataFastReadNum(DataDirStat[dirId].entryNum, num);
             if(readStat->dirP) {
                 readStat->dirId = dirId;
                 readStat->used = TRUE;
@@ -184,7 +184,7 @@ static HUDATASTAT *HuDataDirReadNum(HU_DATANUM dataNum, s32 num)
     return readStat;
 }
 
-HUDATASTAT *HuDataDirSet(void *dirP, HU_DATANUM dataNum)
+HUDATASTAT *HuDataDirSet(void *dirP, int dataNum)
 {
     HUDATASTAT *readStat = HuDataGetStatus(dirP);
     s32 statId;
@@ -255,7 +255,7 @@ BOOL HuDataDirCloseAsync(s16 statId)
 }
 
 
-s32 HuDataDirReadAsync(HU_DATANUM dataNum)
+s32 HuDataDirReadAsync(int dataNum)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -280,7 +280,7 @@ s32 HuDataDirReadAsync(HU_DATANUM dataNum)
             readStat = &ReadDataStat[statId];
             readStat->status = 1;
             readStat->dirId = dirId;
-            readStat->dirP = HuDvdDataFastReadAsync(DataDirStat[dirId].fileId, readStat);
+            readStat->dirP = HuDvdDataFastReadAsync(DataDirStat[dirId].entryNum, readStat);
         }
     } else {
         statId = -1;
@@ -288,7 +288,7 @@ s32 HuDataDirReadAsync(HU_DATANUM dataNum)
     return statId;
 }
 
-s32 HuDataDirReadNumAsync(HU_DATANUM dataNum, s32 num)
+s32 HuDataDirReadNumAsync(int dataNum, s32 num)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -308,7 +308,7 @@ s32 HuDataDirReadNumAsync(HU_DATANUM dataNum, s32 num)
         readStat = &ReadDataStat[statId];
         readStat->used = TRUE;
         readStat->num = num;
-        readStat->dirP = HuDvdDataFastReadAsync(DataDirStat[dirId].fileId, readStat);
+        readStat->dirP = HuDvdDataFastReadAsync(DataDirStat[dirId].entryNum, readStat);
     } else {
         statId = -1;
     }
@@ -335,7 +335,7 @@ static void GetFileInfo(HUDATASTAT *readStat, s32 fileNum)
     readStat->fileDataP = ptr;
 }
 
-void *HuDataRead(HU_DATANUM dataNum)
+void *HuDataRead(int dataNum)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -355,7 +355,7 @@ void *HuDataRead(HU_DATANUM dataNum)
     return buf;
 }
 
-void *HuDataReadNum(HU_DATANUM dataNum, s32 num)
+void *HuDataReadNum(int dataNum, s32 num)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -375,7 +375,7 @@ void *HuDataReadNum(HU_DATANUM dataNum, s32 num)
     return buf;
 }
 
-void *HuDataSelHeapRead(HU_DATANUM dataNum, HUHEAPTYPE heap)
+void *HuDataSelHeapRead(int dataNum, HUHEAPTYPE heap)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -411,7 +411,7 @@ void *HuDataSelHeapRead(HU_DATANUM dataNum, HUHEAPTYPE heap)
     return buf;
 }
 
-void *HuDataSelHeapReadNum(HU_DATANUM dataNum, s32 num, HUHEAPTYPE heap)
+void *HuDataSelHeapReadNum(int dataNum, s32 num, HUHEAPTYPE heap)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -447,12 +447,12 @@ void *HuDataSelHeapReadNum(HU_DATANUM dataNum, s32 num, HUHEAPTYPE heap)
     return buf;
 }
 
-void **HuDataReadMulti(HU_DATANUM *dataNum)
+void **HuDataReadMulti(int *dataNum)
 {
     return HuDataReadMultiSub(dataNum, FALSE, 0);
 }
 
-static void **HuDataReadMultiSub(HU_DATANUM *dataNum, BOOL use_num, s32 num)
+static void **HuDataReadMultiSub(int *dataNum, BOOL use_num, s32 num)
 {
     s32 *dirIds;
     char **pathTbl;
@@ -524,7 +524,7 @@ static void **HuDataReadMultiSub(HU_DATANUM *dataNum, BOOL use_num, s32 num)
     return outList;
 }
 
-s32 HuDataGetSize(HU_DATANUM dataNum)
+s32 HuDataGetSize(int dataNum)
 {
     HUDATASTAT *readStat;
     s32 statId;
@@ -557,7 +557,7 @@ void HuDataCloseMulti(void **ptrs)
     }
 }
 
-void HuDataDirClose(s32 dataNum)
+void HuDataDirClose(int dataNum)
 {
     HUDATASTAT *readStat;
     s32 i;
@@ -592,14 +592,14 @@ void HuDataDirCloseNum(s32 num)
     }
 }
 
-static s32 HuDataDVDdirDirectOpen(HU_DATANUM dataNum, DVDFileInfo *fileInfo)
+static s32 HuDataDVDdirDirectOpen(int dataNum, DVDFileInfo *fileInfo)
 {
 	s32 dir = dataNum >> 16;
 	if(dir >= (s32)DataDirMax) {
 		OSReport("data.c: Data Number Error(0x%08x)\n", dataNum);
 		return 0;
 	}
-	if(!DVDFastOpen(DataDirStat[dir].fileId, fileInfo)) {
+	if(!DVDFastOpen(DataDirStat[dir].entryNum, fileInfo)) {
 		char panic_str[48];
 		sprintf(panic_str, "HuDataDVDdirDirectOpen: File Open Error(%08x)", dataNum);
 		OSPanic("data.c", 958, panic_str);
@@ -669,71 +669,71 @@ static void *HuDataDecodeIt(void *bufP, s32 bufOfs, s32 num, HUHEAPTYPE heap)
     return dest;
 }
 
-void *HuDataReadNumHeapShortForce(HU_DATANUM dataNum, s32 num, HUHEAPTYPE heap)
+void *HuDataReadNumHeapShortForce(int dataNum, s32 num, HUHEAPTYPE heap)
 {
 	DVDFileInfo fileInfo;
-	s32 *data_hdr;
-	s32 *file_data;
-	void *file_raw_buf;
-	s32 read_len;
-	s32 fileId;
-	s32 file_ofs;
-	s32 read_ofs;
-	s32 data_ofs;
+	s32 *dataHdr;
+	s32 *fileData;
+	void *fileBuf;
+	s32 readLen;
+	s32 fileNum;
+	s32 fileOfs;
+	s32 readOfs;
+	s32 dataOfs;
 	void *ret;
 	s32 dir;
-	s32 data_len;
-	s32 file_max;
+	s32 dvdLen;
+	s32 fileNumMax;
 
 	if(!HuDataDVDdirDirectOpen(dataNum, &fileInfo)) {
 		return NULL;
 	}
 	dir = (dataNum >> 16) & 0xFFFF0000;
-	fileId = dataNum & 0xFFFF;
-	file_ofs = (fileId*4)+4;
-	data_len = OSRoundUp32B(file_ofs+8);
-	file_data = HuMemDirectMalloc(HUHEAPTYPE_HEAP, data_len);
-	if(!HuDataDVDdirDirectRead(&fileInfo, file_data, data_len, 0)) {
-		HuMemDirectFree(file_data);
+	fileNum = dataNum & 0xFFFF;
+	fileOfs = (fileNum*4)+4;
+	dvdLen = OSRoundUp32B(fileOfs+8);
+	fileData = HuMemDirectMalloc(HUHEAPTYPE_HEAP, dvdLen);
+	if(!HuDataDVDdirDirectRead(&fileInfo, fileData, dvdLen, 0)) {
+		HuMemDirectFree(fileData);
 		DVDClose(&fileInfo);
 		return NULL;
 	}
-	file_max = *file_data;
-	if(file_max <= fileId) {
-		HuMemDirectFree(file_data);
+	fileNumMax = *fileData;
+	if(fileNumMax <= fileNum) {
+		HuMemDirectFree(fileData);
 		OSReport("data.c%d: Data Number Error(0x%08x)\n", 1068, dataNum);
 		DVDClose(&fileInfo);
 		return NULL;
 	}
-	data_hdr = file_data;
-	data_hdr += fileId+1;
-	file_ofs = *data_hdr;
-	read_ofs = OSRoundDown32B(file_ofs);
-	if(file_max <= fileId+1) {
-		read_len = fileInfo.length;
-		data_ofs = read_len-read_ofs;
+	dataHdr = fileData;
+	dataHdr += fileNum+1;
+	fileOfs = *dataHdr;
+	readOfs = OSRoundDown32B(fileOfs);
+	if(fileNumMax <= fileNum+1) {
+		readLen = fileInfo.length;
+		dataOfs = readLen-readOfs;
 	} else {
-		data_hdr++;
-		data_ofs = (*data_hdr)-read_ofs;
-		read_len = fileInfo.length;
+		dataHdr++;
+		dataOfs = (*dataHdr)-readOfs;
+		readLen = fileInfo.length;
 	}
-	read_len = OSRoundUp32B(data_ofs);
-	HuMemDirectFree(file_data);
-	file_raw_buf = HuMemDirectMalloc(HUHEAPTYPE_HEAP, (read_len+4) & ~0x3);
-	if(file_raw_buf == NULL) {
+	readLen = OSRoundUp32B(dataOfs);
+	HuMemDirectFree(fileData);
+	fileBuf = HuMemDirectMalloc(HUHEAPTYPE_HEAP, (readLen+4) & ~0x3);
+	if(fileBuf == NULL) {
 		OSReport("data.c: couldn't allocate read buffer(0x%08x)\n", dataNum);
 		DVDClose(&fileInfo);
 		return NULL;
 	}
-	if(!HuDataDVDdirDirectRead(&fileInfo, file_raw_buf, read_len, read_ofs)) {
-		HuMemDirectFree(file_raw_buf);
+	if(!HuDataDVDdirDirectRead(&fileInfo, fileBuf, readLen, readOfs)) {
+		HuMemDirectFree(fileBuf);
 		DVDClose(&fileInfo);
 		return NULL;
 	}
 	DVDClose(&fileInfo);
-	data_ofs = file_ofs-read_ofs;
-	ret = HuDataDecodeIt(file_raw_buf, data_ofs, num, heap);
-	HuMemDirectFree(file_raw_buf);
+	dataOfs = fileOfs-readOfs;
+	ret = HuDataDecodeIt(fileBuf, dataOfs, num, heap);
+	HuMemDirectFree(fileBuf);
     return ret;
 }
 

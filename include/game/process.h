@@ -25,7 +25,7 @@ struct Process_s {
     s32 sleep;
     u32 spBase;
     jmp_buf jump;
-    void (*dtor)(void);
+    void (*destructor)(void);
     void *property;
 };
 

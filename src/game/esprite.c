@@ -8,7 +8,7 @@ typedef struct esprite_s {
 } ESPRITE;
 
 typedef struct espanim_s {
-    /* 0x00 */ HU_DATANUM_U dataNum;
+    /* 0x00 */ unsigned int dataNum;
     /* 0x04 */ u16 useCnt;
     /* 0x08 */ ANIMDATA *anim;
 } ESPANIM;
@@ -31,7 +31,7 @@ void espInit(void) {
     }
 }
 
-s16 espEntry(HU_DATANUM_U dataNum, s16 prio, s16 bank)
+s16 espEntry(unsigned int dataNum, s16 prio, s16 bank)
 {
     ESPANIM *animFree;
     ESPANIM *anim;
@@ -95,19 +95,19 @@ void espKill(s16 espId)
     esprite[espId].animNo = -1;
 }
 
-s16 espGrpIDGet(void)
+HUSPRGRPID espGrpIDGet(void)
 {
     return gid;
 }
 
 void espDispOn(s16 espId)
 {
-    HuSprAttrReset(gid, esprite[espId].memberNo, 4);
+    HuSprAttrReset(gid, esprite[espId].memberNo, HUSPR_ATTR_DISPOFF);
 }
 
 void espDispOff(s16 espId)
 {
-    HuSprAttrSet(gid, esprite[espId].memberNo, 4);
+    HuSprAttrSet(gid, esprite[espId].memberNo, HUSPR_ATTR_DISPOFF);
 }
 
 void espAttrSet(s16 espId, u16 attr)
