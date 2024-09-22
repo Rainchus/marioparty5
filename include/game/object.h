@@ -88,6 +88,8 @@ OMOVL omCurrentOvlGet(void);
 void omCameraMoveInit(void);
 void omSysPauseEnable(u8 flag);
 
+extern s16 omSysExitReq;
+
 extern float SdWorkFloat[16];
 extern int SdWorkInt[16];
 

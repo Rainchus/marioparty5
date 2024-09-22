@@ -1,5 +1,5 @@
 #include "dolphin.h"
-#include "game/msm.h"
+#include "msm.h"
 #include "game/main.h"
 #include "game/pad.h"
 

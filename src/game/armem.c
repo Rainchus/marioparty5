@@ -41,8 +41,8 @@ void HuARInit(void) {
     for (i = 0; i < 64; i++) {
         ARInfo[i].aMemP = 0;
     }
-    size = ARGetSize() - 0x808000;
-    ARBase = 0x808000;
+    size = ARGetSize() - HU_AMEM_BASE;
+    ARBase = HU_AMEM_BASE;
     ARInfo[0].aMemP = ARBase;
     ARInfo[0].size = size;
     ARInfo[0].flag = 0;

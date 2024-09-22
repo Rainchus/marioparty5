@@ -178,6 +178,7 @@ cflags_base = [
     "-str reuse",
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-i include",
+    "-DMUSY_TARGET=MUSY_TARGET_DOLPHIN",
     f"-i build/{config.version}/include",
     f"-DVERSION={version_num}",
 ]
@@ -237,7 +238,6 @@ cflags_musyx = [
     "-nodefaults",
     "-nosyspath",
     "-i include",
-    "-i extern/musyx/include",
     "-inline auto",
     "-O4,p",
     "-fp hard",
@@ -297,12 +297,11 @@ def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
         "objects": objects,
     }
 
-def MusyX(objects, mw_version="GC/1.3.2", debug=False, major=1, minor=5, patch=4):
+def MusyX(objects, mw_version="GC/1.3.2", debug=False, major=2, minor=0, patch=4):
     cflags = cflags_musyx if not debug else cflags_musyx_debug
     return {
         "lib": "musyx",
         "mw_version": mw_version,
-        "src_dir": "extern/musyx/src",
         "host": False,
         "cflags": [
             *cflags,
@@ -364,7 +363,7 @@ config.libs = [
             Object(NonMatching, "game/objsysobj.c"),
             Object(Matching, "game/objdll.c"),
             Object(Matching, "game/frand.c"),
-            Object(NonMatching, "game/audio.c"),
+            Object(Matching, "game/audio.c"),
             Object(Matching, "game/EnvelopeExec.c"),
             Object(NonMatching, "game/gamemes.c"),
             Object(Matching, "game/ovllist.c"),
@@ -718,37 +717,37 @@ config.libs = [
     },
     MusyX(
         objects={
-            Object(NonMatching, "musyx/runtime/seq.c"),
+            Object(Matching, "musyx/runtime/seq.c"),
             Object(NonMatching, "musyx/runtime/synth.c"),
-            Object(NonMatching, "musyx/runtime/seq_api.c"),
-            Object(NonMatching, "musyx/runtime/snd_synthapi.c"),
+            Object(Matching, "musyx/runtime/seq_api.c"),
+            Object(Matching, "musyx/runtime/snd_synthapi.c"),
             Object(NonMatching, "musyx/runtime/stream.c"),
             Object(NonMatching, "musyx/runtime/synthdata.c"),
             Object(NonMatching, "musyx/runtime/synthmacros.c"),
             Object(NonMatching, "musyx/runtime/synthvoice.c"),
-            Object(NonMatching, "musyx/runtime/synth_ac.c"),
-            Object(NonMatching, "musyx/runtime/synth_dbtab.c"),
-            Object(NonMatching, "musyx/runtime/synth_adsr.c"),
-            Object(NonMatching, "musyx/runtime/synth_vsamples.c"),
+            Object(Matching, "musyx/runtime/synth_ac.c"),
+            Object(Matching, "musyx/runtime/synth_dbtab.c"),
+            Object(Matching, "musyx/runtime/synth_adsr.c"),
+            Object(Matching, "musyx/runtime/synth_vsamples.c"),
             Object(NonMatching, "musyx/runtime/s_data.c"),
             Object(NonMatching, "musyx/runtime/hw_dspctrl.c"),
-            Object(NonMatching, "musyx/runtime/hw_volconv.c"),
+            Object(Matching, "musyx/runtime/hw_volconv.c"),
             Object(NonMatching, "musyx/runtime/snd3d.c"),
             Object(NonMatching, "musyx/runtime/snd_init.c"),
-            Object(NonMatching, "musyx/runtime/snd_math.c"),
+            Object(Matching, "musyx/runtime/snd_math.c"),
             Object(NonMatching, "musyx/runtime/snd_midictrl.c"),
             Object(NonMatching, "musyx/runtime/snd_service.c"),
             Object(NonMatching, "musyx/runtime/hardware.c"),
             Object(NonMatching, "musyx/runtime/dsp_import.c"),
             Object(NonMatching, "musyx/runtime/hw_aramdma.c"),
-            Object(NonMatching, "musyx/runtime/hw_dolphin.c"),
-            Object(NonMatching, "musyx/runtime/hw_memory.c"),
-            Object(NonMatching, "musyx/runtime/CheapReverb/creverb_fx.c"),
-            Object(NonMatching, "musyx/runtime/CheapReverb/creverb.c"),
-            Object(NonMatching, "musyx/runtime/StdReverb/reverb_fx.c"),
+            Object(Matching, "musyx/runtime/hw_dolphin.c"),
+            Object(Matching, "musyx/runtime/hw_memory.c"),
+            Object(Matching, "musyx/runtime/CheapReverb/creverb_fx.c"),
+            Object(Matching, "musyx/runtime/CheapReverb/creverb.c"),
+            Object(Matching, "musyx/runtime/StdReverb/reverb_fx.c"),
             Object(NonMatching, "musyx/runtime/StdReverb/reverb.c"),
-            Object(NonMatching, "musyx/runtime/Delay/delay_fx.c"),
-            Object(NonMatching, "musyx/runtime/Chorus/chorus_fx.c"),
+            Object(Matching, "musyx/runtime/Delay/delay_fx.c"),
+            Object(Matching, "musyx/runtime/Chorus/chorus_fx.c"),
         }
     ),
     {
