@@ -1431,14 +1431,14 @@ musyx/runtime/snd3d.c:
 	.text       start:0x801962E8 end:0x80198520
 	.bss        start:0x8027CD40 end:0x8027DF90
 	.sbss       start:0x802893E8 end:0x80289408
-	.sdata2     start:0x8028BD88 end:0x8028BDD8
+	.sdata2     start:0x8028BD88 end:0x8028BDD0
 
 musyx/runtime/snd_init.c:
 	.text       start:0x80198520 end:0x8019867C
 
 musyx/runtime/snd_math.c:
 	.text       start:0x8019867C end:0x80198A3C
-	.sdata2     start:0x8028BDD8 end:0x8028BDF8
+	.sdata2     start:0x8028BDD0 end:0x8028BDF0
 
 musyx/runtime/snd_midictrl.c:
 	.text       start:0x80198A3C end:0x8019AD3C
@@ -1451,6 +1451,7 @@ musyx/runtime/snd_service.c:
 	.rodata     start:0x801AB470 end:0x801AB4A0
 	.data       start:0x801D50F0 end:0x801D5900
 	.sdata      start:0x80288578 end:0x80288580
+	.sdata2     start:0x8028BDF0 end:0x8028BDF8
 
 musyx/runtime/hardware.c:
 	.text       start:0x8019B010 end:0x8019C0A4

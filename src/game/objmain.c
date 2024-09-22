@@ -25,7 +25,7 @@ extern void HuWinAllKill(void);
 extern void SLMessWinReset(void);
 
 OMOBJ *omDBGSysKeyObj;
-HUPROCESS *omwatchproc;
+static HUPROCESS *omwatchproc;
 static OMOVL omnextovl;
 OMOVL omcurovl;
 s32 omcurdll;

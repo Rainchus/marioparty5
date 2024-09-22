@@ -6,6 +6,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define AI_STREAM_START 1
+#define AI_STREAM_STOP 0
+
 typedef void (*AISCallback)(u32 count);
 typedef void (*AIDCallback)();
 

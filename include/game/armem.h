@@ -5,6 +5,8 @@
 #include "game/memory.h"
 #include "game/data.h"
 
+#define HU_AMEM_BASE 0x808000
+
 typedef u32 AMEM_PTR;
 
 void HuARInit(void);
