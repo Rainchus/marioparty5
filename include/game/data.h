@@ -13,6 +13,8 @@
 #define HU_DECODE_TYPE_RLE 5
 #define HU_DECODE_TYPE_ZLIB 7
 
+#define HU_DATANUM_NONE 0xFFFFFFFF
+
 #include "dolphin/types.h"
 #include "dolphin/dvd.h"
 

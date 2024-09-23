@@ -13,15 +13,15 @@ void HuARInit(void);
 AMEM_PTR HuARMalloc(u32 size);
 void HuARFree(AMEM_PTR aMemP);
 void HuAMemDump(void);
-u32 HuAR_DVDtoARAM(u32 dir);
-AMEM_PTR HuAR_MRAMtoARAM(s32 dir);
-AMEM_PTR HuAR_MRAMtoARAM2(void *dir_ptr);
+AMEM_PTR HuAR_DVDtoARAM(unsigned int dir);
+AMEM_PTR HuAR_MRAMtoARAM(int dir);
+AMEM_PTR HuAR_MRAMtoARAM2(void *dirPtr);
 void HuAR_ARAMtoMRAM(AMEM_PTR aMemP);
 void *HuAR_ARAMtoMRAMNum(AMEM_PTR aMemP, s32 num);
 s32 HuARDMACheck(void);
-AMEM_PTR HuARDirCheck(u32 dir);
-void HuARDirFree(u32 dir);
-void *HuAR_ARAMtoMRAMFileRead(u32 dir, u32 num, HUHEAPTYPE heap);
+AMEM_PTR HuARDirCheck(unsigned int dir);
+void HuARDirFree(unsigned int dir);
+void *HuAR_ARAMtoMRAMFileRead(unsigned int dir, u32 num, HUHEAPTYPE heap);
 
 
 #endif
