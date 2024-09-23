@@ -3,12 +3,12 @@
 
 #define MSM_GRP_NONE -1
 #define MSM_GRP_INIT 0
-#define MSM_GRP_CMN1 1
-#define MSM_GRP_CMN2 2
-#define MSM_GRP_CMN3 3
-#define MSM_GRP_CMN4 4
-#define MSM_GRP_CMN5 5
-#define MSM_GRP_CMN6 6
+#define MSM_GRP_CMN 1
+#define MSM_GRP_CHAR 2
+#define MSM_GRP_CHARVOICE 3
+#define MSM_GRP_GUIDE 4
+#define MSM_GRP_BOARD 5
+#define MSM_GRP_INST 6
 #define MSM_GRP_MENU 7
 #define MSM_GRP_CARD 8
 #define MSM_GRP_DEFAULT 9

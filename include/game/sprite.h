@@ -25,6 +25,9 @@
 
 #include "game/animdata.h"
 
+#define HuSprDispOff(grpId, memberNo) HuSprAttrSet(grpId, memberNo, HUSPR_ATTR_DISPOFF)
+#define HuSprDispOn(grpId, memberNo) HuSprAttrReset(grpId, memberNo, HUSPR_ATTR_DISPOFF)
+
 typedef struct HuSprite_s HUSPRITE;
 
 typedef s16 HUSPRID;
@@ -95,32 +98,32 @@ HUSPRID HuSprCreate(ANIMDATA *anim, s16 prio, s16 bank);
 HUSPRID HuSprFuncCreate(HUSPRFUNC func, s16 prio);
 HUSPRGRPID HuSprGrpCreate(s16 sprNum);
 HUSPRGRPID HuSprGrpCopy(HUSPRGRPID grpId);
-void HuSprGrpMemberSet(HUSPRGRPID grpId, s16 member, HUSPRID sprId);
-void HuSprGrpMemberKill(HUSPRGRPID grpId, s16 member);
+void HuSprGrpMemberSet(HUSPRGRPID grpId, s16 memberNo, HUSPRID sprId);
+void HuSprGrpMemberKill(HUSPRGRPID grpId, s16 memberNo);
 void HuSprGrpKill(HUSPRGRPID grpId);
 void HuSprKill(HUSPRID sprId);
 void HuSprAnimKill(ANIMDATA *anim);
-void HuSprAttrSet(HUSPRGRPID grpId, s16 member, s32 attr);
-void HuSprAttrReset(HUSPRGRPID grpId, s16 member, s32 attr);
-void HuSprPosSet(HUSPRGRPID grpId, s16 member, float posX, float posY);
-void HuSprZRotSet(HUSPRGRPID grpId, s16 member, float z_rot);
-void HuSprScaleSet(HUSPRGRPID grpId, s16 member, float scaleX, float scaleY);
-void HuSprTPLvlSet(HUSPRGRPID grpId, s16 member, float tpLvl);
-void HuSprColorSet(HUSPRGRPID grpId, s16 member, u8 r, u8 g, u8 b);
-void HuSprSpeedSet(HUSPRGRPID grpId, s16 member, float speed);
-void HuSprBankSet(HUSPRGRPID grpId, s16 member, s16 bank);
+void HuSprAttrSet(HUSPRGRPID grpId, s16 memberNo, s32 attr);
+void HuSprAttrReset(HUSPRGRPID grpId, s16 memberNo, s32 attr);
+void HuSprPosSet(HUSPRGRPID grpId, s16 memberNo, float posX, float posY);
+void HuSprZRotSet(HUSPRGRPID grpId, s16 memberNo, float z_rot);
+void HuSprScaleSet(HUSPRGRPID grpId, s16 memberNo, float scaleX, float scaleY);
+void HuSprTPLvlSet(HUSPRGRPID grpId, s16 memberNo, float tpLvl);
+void HuSprColorSet(HUSPRGRPID grpId, s16 memberNo, u8 r, u8 g, u8 b);
+void HuSprSpeedSet(HUSPRGRPID grpId, s16 memberNo, float speed);
+void HuSprBankSet(HUSPRGRPID grpId, s16 memberNo, s16 bank);
 void HuSprGrpPosSet(HUSPRGRPID grpId, float posX, float posY);
 void HuSprGrpCenterSet(HUSPRGRPID grpId, float centerX, float centerY);
 void HuSprGrpZRotSet(HUSPRGRPID grpId, float z_rot);
 void HuSprGrpScaleSet(HUSPRGRPID grpId, float scaleX, float scaleY);
 void HuSprGrpTPLvlSet(HUSPRGRPID grpId, float tpLvl);
 void HuSprGrpDrawNoSet(HUSPRGRPID grpId, s32 drawNo);
-void HuSprDrawNoSet(HUSPRGRPID grpId, s16 member, s32 drawNo);
-void HuSprPriSet(HUSPRGRPID grpId, s16 member, s16 prio);
+void HuSprDrawNoSet(HUSPRGRPID grpId, s16 memberNo, s32 drawNo);
+void HuSprPriSet(HUSPRGRPID grpId, s16 memberNo, s16 prio);
 void HuSprGrpScissorSet(HUSPRGRPID grpId, s16 x, s16 y, s16 w, s16 h);
-void HuSprScissorSet(HUSPRGRPID grpId, s16 member, s16 x, s16 y, s16 w, s16 h);
+void HuSprScissorSet(HUSPRGRPID grpId, s16 memberNo, s16 x, s16 y, s16 w, s16 h);
 ANIMDATA *HuSprAnimMake(s16 sizeX, s16 sizeY, s16 dataFmt);
-void HuSprBGSet(HUSPRGRPID grpId, s16 member,  ANIMDATA *bg, s16 bgBank);
+void HuSprBGSet(HUSPRGRPID grpId, s16 memberNo,  ANIMDATA *bg, s16 bgBank);
 void HuSprSprBGSet(HUSPRID sprite, ANIMDATA *bg, s16 bgBank);
 void AnimDebug(ANIMDATA *anim);
 

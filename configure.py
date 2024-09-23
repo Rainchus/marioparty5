@@ -371,7 +371,7 @@ config.libs = [
             Object(Matching, "game/ClusterExec.c"),
             Object(Matching, "game/ShapeExec.c"),
             Object(NonMatching, "game/wipe.c"),
-            Object(NonMatching, "game/window.c"),
+            Object(Matching, "game/window.c"),
             Object(NonMatching, "game/messdata.c"),
             Object(Matching, "game/card.c"),
             Object(Matching, "game/armem.c"),

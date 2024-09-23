@@ -1,6 +1,11 @@
 #ifndef MSM_SE_H
 #define MSM_SE_H
 
+#define MSM_SE_CMN_01 0
+#define MSM_SE_CMN_02 1
+#define MSM_SE_CMN_03 2
+#define MSM_SE_CMN_25 24
+
 #define MSM_SE_MARIO 142
 #define MSM_SE_LUIGI 112
 #define MSM_SE_PEACH 292

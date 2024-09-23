@@ -19,6 +19,13 @@
 
 #define GW_MGNO_BASE 501
 
+#define GW_LANGUAGE_JPN 0
+#define GW_LANGUAGE_ENG 1
+#define GW_LANGUAGE_GER 2
+#define GW_LANGUAGE_FRA 3
+#define GW_LANGUAGE_ITA 4
+#define GW_LANGUAGE_SPA 5
+
 typedef struct GwPlayerConf_s {
     s16 charNo;
     s16 padNo;
