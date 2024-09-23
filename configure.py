@@ -372,7 +372,7 @@ config.libs = [
             Object(Matching, "game/ShapeExec.c"),
             Object(NonMatching, "game/wipe.c"),
             Object(Matching, "game/window.c"),
-            Object(NonMatching, "game/messdata.c"),
+            Object(Matching, "game/messdata.c"),
             Object(Matching, "game/card.c"),
             Object(Matching, "game/armem.c"),
             Object(NonMatching, "game/charman.c"),
