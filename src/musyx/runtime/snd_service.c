@@ -123,6 +123,110 @@ void* sndBSearch(void* key, void* base, s32 num, s32 len, SND_COMPARE cmp) {
   return NULL;
 }
 
+static const float sqrtConsts[3] = {
+    3, 0.5f, 0
+};
+
+float asm sndSqrt(float value)
+{
+    nofralloc
+    lis r3, sqrtConsts@ha
+    lfs f3, (sqrtConsts+0x8)@l(r3)
+    lfs f0, sqrtConsts@l(r3)
+    lfs f2, (sqrtConsts+0x4)@l(r3)
+    fcmpo cr0, f1, f3
+    frsqrte f3, f1
+    beqlr
+    fmul f4, f3, f3
+    fmul f3, f3, f2
+    fnmsub f4, f1, f4, f0
+    fmul f3, f3, f4
+    fmul f4, f3, f3
+    fmul f3, f3, f2
+    fnmsub f4, f1, f4, f0
+    fmul f3, f3, f4
+    fmul f4, f3, f3
+    fmul f3, f3, f2
+    fnmsub f4, f1, f4, f0
+    fmul f3, f3, f4
+    fmul f1, f1, f3
+    blr
+}
+
+static const float _sinConsts[9] = {
+    -0.16666667,
+    0.008333332,
+    -0.000198409,
+    0.0000027526,
+    0.63661975,
+    1.5707964,
+    0,
+    0.0000000239,
+    0
+};
+static const double i2fMagic = 4.503601774854144E15;
+
+float asm sndCos(float value)
+{
+    nofralloc
+    stwu r1, -0x10(r1)
+    lis r3, _sinConsts@ha
+    li r4, 0xc
+    addi r3, r3, _sinConsts@l
+    psq_l f6, 0x10(r3), 0, 0
+    psq_l f12, 0x18(r3), 0, 0
+    lis r7, i2fMagic@ha
+    ps_sum0 f1, f1, f1, f6
+    lfd f3, i2fMagic@l(r7)
+    ps_merge10 f11, f6, f6
+    fcmpo cr1, f1, f12
+    lis r6, 0x4330
+    psq_l f0, 0x0(r3), 0, 0
+    psq_l f2, 0x8(r3), 0, 0
+    fabs f1, f1
+    fmuls f1, f1, f6
+    stw r6, 0x8(r1)
+    fctiwz f7, f1
+    stfiwx f7, r1, r4
+    lwz r5, 0xc(r1)
+    srwi r7, r5, 1
+    xoris r6, r5, 0x8000
+    xor r7, r7, r5
+    stw r6, 0xc(r1)
+    andi. r7, r7, 0x1
+    lfd f7, 0x8(r1)
+    mcrf cr5, cr0
+    fsubs f7, f7, f3
+    fsubs f1, f1, f7
+    andi. r5, r5, 0x1
+    ps_muls1 f1, f1, f6
+    beq L_8019AF60
+    fsubs f1, f1, f11
+L_8019AF60:
+    fmuls f4, f1, f1
+    beq cr5, L_8019AF6C
+    ps_neg f1, f1
+L_8019AF6C:
+    fmuls f5, f4, f4
+    ps_muls0 f8, f0, f1
+    ps_muls0 f9, f2, f1
+    ps_muls1 f10, f1, f12
+    ps_muls0 f9, f9, f5
+    fmuls f10, f10, f5
+    ps_muls0 f9, f9, f4
+    fmadds f1, f8, f4, f1
+    fmuls f10, f10, f5
+    ps_madds1 f1, f5, f8, f1
+    fadds f1, f1, f9
+    ps_madds1 f1, f4, f9, f1
+    fmadds f1, f10, f4, f1
+    bge cr1, L_8019AFA8
+    ps_neg f1, f1
+L_8019AFA8:
+    addi r1, r1, 0x10
+    blr
+}
+
 void sndConvertMs(u32* time) { *time = *time * 256; }
 
 void sndConvertTicks(u32* out, SYNTH_VOICE* svoice) {
