@@ -870,3 +870,13 @@ extract:
 - symbol: wrongdisc_en
   binary: wrongdisc_en.bin
   header: wrongdisc_en.inc
+
+add_relocations:
+- source: .text:0x8019AE90
+  type: l
+  target: sqrtConsts!.rodata:0x801AB470
+  addend: 0
+- source: .text:0x8019AE94
+  type: l
+  target: sqrtConsts!.rodata:0x801AB470
+  addend: 4
