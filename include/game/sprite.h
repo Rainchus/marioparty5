@@ -24,9 +24,12 @@
 #define HUSPR_ATTR_INVCOL 0x100
 
 #include "game/animdata.h"
+#include "game/data.h"
 
 #define HuSprDispOff(grpId, memberNo) HuSprAttrSet(grpId, memberNo, HUSPR_ATTR_DISPOFF)
 #define HuSprDispOn(grpId, memberNo) HuSprAttrReset(grpId, memberNo, HUSPR_ATTR_DISPOFF)
+
+#define HuSprAnimDataRead(fileNum) HuSprAnimRead(HuDataSelHeapReadNum(fileNum, HU_MEMNUM_OVL, HUHEAPTYPE_MODEL))
 
 typedef struct HuSprite_s HUSPRITE;
 
@@ -40,7 +43,7 @@ struct HuSprite_s {
     u8 g;
     u8 b;
     u8 drawNo;
-    s16 frame;
+    s16 animNo;
     s16 bank;
     s16 attr;
     s16 dirty;

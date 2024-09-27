@@ -137,7 +137,7 @@ HUSPRITE *HuSprCall(void)
         if(sp->attr & HUSPR_ATTR_FUNC) {
             return sp;
         }
-        sp->frameP = &sp->data->bank[sp->bank].frame[sp->frame];
+        sp->frameP = &sp->data->bank[sp->bank].frame[sp->animNo];
         sp->patP = &sp->data->pat[sp->frameP->pat];
         return sp;
     } else {
@@ -148,26 +148,26 @@ HUSPRITE *HuSprCall(void)
 static inline void SpriteCalcFrame(HUSPRITE *sp, ANIMBANK *bank, ANIMFRAME **frame, s16 loopF)
 {
     if(sp->time >= (*frame)->time) {
-        sp->frame++;
+        sp->animNo++;
         sp->time -= (*frame)->time;
-        if(sp->frame >= bank->timeNum || (*frame)[1].time == -1) {
+        if(sp->animNo >= bank->timeNum || (*frame)[1].time == -1) {
             if(loopF) {
-                sp->frame = 0;
+                sp->animNo = 0;
             } else {
-                sp->frame = bank->timeNum-1;
+                sp->animNo = bank->timeNum-1;
             }
         }
-        *frame = &bank->frame[sp->frame];
+        *frame = &bank->frame[sp->animNo];
     } else if(sp->time < 0) {
-        sp->frame--;
-        if(sp->frame < 0) {
+        sp->animNo--;
+        if(sp->animNo < 0) {
             if(loopF) {
-                sp->frame = bank->timeNum-1;
+                sp->animNo = bank->timeNum-1;
             } else {
-                sp->frame = 0;
+                sp->animNo = 0;
             }
         }
-        *frame = &bank->frame[sp->frame];
+        *frame = &bank->frame[sp->animNo];
         sp->time += (*frame)->time;
     }
 }
@@ -188,7 +188,7 @@ void HuSprFinish(void)
             if(!HuSprPauseF || (sp->attr & HUSPR_ATTR_NOPAUSE)) {
                 anim = sp->data;
                 bank = &anim->bank[sp->bank];
-                frame = &bank->frame[sp->frame];
+                frame = &bank->frame[sp->animNo];
                 loopF = (sp->attr & HUSPR_ATTR_LOOP) ? 0 : 1;
                 if(!(sp->attr & HUSPR_ATTR_NOANIM)) {
                     timeInc = (sp->attr & HUSPR_ATTR_REVERSE) ? -1 : 1;
@@ -262,7 +262,7 @@ HUSPRID HuSprCreate(ANIMDATA *anim, s16 prio, s16 bank)
     }
     sp->data = anim;
     sp->speed = 1.0f;
-    sp->frame = 0;
+    sp->animNo = 0;
     sp->bank = bank;
     sp->time = 0.0f;
     sp->attr = 0;
@@ -495,15 +495,15 @@ void HuSprBankSet(HUSPRGRPID grpId, s16 memberNo, s16 bank)
     HUSPRITE *sp = &HuSprData[HuSprGrpData[grpId].sprId[memberNo]];
     ANIMDATA *anim = sp->data;
     ANIMBANK *bank_ptr = &anim->bank[sp->bank];
-    ANIMFRAME *frame_ptr = &bank_ptr->frame[sp->frame];
+    ANIMFRAME *frame_ptr = &bank_ptr->frame[sp->animNo];
     sp->bank = bank;
     if(sp->attr & HUSPR_ATTR_REVERSE) {
-        sp->frame = bank_ptr->timeNum-1;
-        frame_ptr = &bank_ptr->frame[sp->frame];
+        sp->animNo = bank_ptr->timeNum-1;
+        frame_ptr = &bank_ptr->frame[sp->animNo];
         sp->time = frame_ptr->time;
     } else {
         sp->time = 0;
-        sp->frame = 0;
+        sp->animNo = 0;
     }
 }
 
@@ -516,7 +516,7 @@ void HuSprAnimNoSet(HUSPRGRPID grpId, s16 memberNo, s16 animNo)
         OSReport("Error: AnimNoSet Over %d\n", animNo);
         animNo = 0;
     }
-    sp->frame = animNo;
+    sp->animNo = animNo;
     sp->time = 0;
 }
 
