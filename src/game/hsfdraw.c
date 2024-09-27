@@ -658,14 +658,14 @@ static void FaceDraw(HU3DDRAWOBJ *drawObj, HSFFACE *face)
                 if(attrP->animWorkP) {
                     texCol[i].a = 0;
                     animWorkP = attrP->animWorkP;
-                    texAnimP = &Hu3DTexAnimData[animWorkP->texAnimNo];
-                    if((animWorkP->attr & 0x1) && !(texAnimP->attr & 0x4)) {
+                    texAnimP = &Hu3DTexAnimData[animWorkP->animId];
+                    if((animWorkP->attr & HU3D_ATTRANIM_ATTR_ANIM2D) && !(texAnimP->attr & HU3D_ANIM_ATTR_NOUSE)) {
                         if(Hu3DAnimSet(drawObj->model, attrP, (s16)i)) {
                             BmpPtrBak[i] = PTR_INVALID;
                             totalTexCnt++;
                             continue;
                         }
-                    } else if(animWorkP->attr & 0x8) {
+                    } else if(animWorkP->attr & HU3D_ATTRANIM_ATTR_BMPANIM) {
                         bitMapPtr = animWorkP->bitMapPtr;
                         if(bitMapPtr->dataFmt != HSF_BMPFMT_CI_IA8) {
                             LoadTexture(drawObj->model, bitMapPtr, attrP, (s16)i);
@@ -1028,17 +1028,17 @@ void Hu3DTevStageTexSet(HU3DDRAWOBJ *drawObj, HSFMATERIAL *matP)
         if(attrP->unk20 == 1.0f) {
             if(attrP->animWorkP) {
                 animWorkP = attrP->animWorkP;
-                if(animWorkP->attr & 2) {
-                    GXLoadTexMtxImm(Hu3DTexScrData[animWorkP->texScrollNo].texMtx, GX_TEXMTX0, GX_MTX2x4);
+                if(animWorkP->attr & HU3D_ATTRANIM_ATTR_TEXMTX) {
+                    GXLoadTexMtxImm(Hu3DTexScrData[animWorkP->texScrId].texMtx, GX_TEXMTX0, GX_MTX2x4);
                     GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_TEXMTX0);
-                } else if(animWorkP->attr & 4) {
+                } else if(animWorkP->attr & HU3D_ATTRANIM_ATTR_ANIM3D) {
                     PSMTXTrans(mtx, animWorkP->trans3D.x, animWorkP->trans3D.y, animWorkP->trans3D.z);
                     mtxRotCat(mtx, animWorkP->rot.x, animWorkP->rot.y, animWorkP->rot.z);
                     mtxScaleCat(mtx, animWorkP->scale3D.x, animWorkP->scale3D.y, animWorkP->scale3D.z);
                     MTXInverse(mtx, mtx);
                     GXLoadTexMtxImm(mtx, GX_TEXMTX0, GX_MTX2x4);
                     GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_TEXMTX0);
-                } else if(animWorkP->attr & 1) {
+                } else if(animWorkP->attr & HU3D_ATTRANIM_ATTR_ANIM2D) {
                     PSMTXScale(mtx, animWorkP->scale.x, animWorkP->scale.y, 1.0f);
                     mtxTransCat(mtx, animWorkP->trans.x, animWorkP->trans.y, 0.0f);
                     GXLoadTexMtxImm(mtx, GX_TEXMTX0, GX_MTX2x4);
@@ -1205,12 +1205,12 @@ void Hu3DTevStageTexSet(HU3DDRAWOBJ *drawObj, HSFMATERIAL *matP)
             } else {
                 if(attrP->animWorkP) {
                     animWorkP = attrP->animWorkP;
-                    if(animWorkP->attr & 2) {
-                        GXLoadTexMtxImm(Hu3DTexScrData[animWorkP->texScrollNo].texMtx, texMtxTbl[texCoordId], GX_MTX2x4);
+                    if(animWorkP->attr & HU3D_ATTRANIM_ATTR_TEXMTX) {
+                        GXLoadTexMtxImm(Hu3DTexScrData[animWorkP->texScrId].texMtx, texMtxTbl[texCoordId], GX_MTX2x4);
                         GXSetTexCoordGen(texCoordId, GX_TG_MTX2x4, GX_TG_TEX0, texMtxTbl[texCoordId]);
                         tevTexCoordId = (u16) texCoordId;
                         texCoordId++;
-                    } else if(animWorkP->attr & 4) {
+                    } else if(animWorkP->attr & HU3D_ATTRANIM_ATTR_ANIM3D) {
                         PSMTXTrans(mtx, animWorkP->trans3D.x, animWorkP->trans3D.y, animWorkP->trans3D.z);
                         mtxRotCat(mtx, animWorkP->rot.x, animWorkP->rot.y, animWorkP->rot.z);
                         mtxScaleCat(mtx, animWorkP->scale3D.x, animWorkP->scale3D.y, animWorkP->scale3D.z);
@@ -1219,7 +1219,7 @@ void Hu3DTevStageTexSet(HU3DDRAWOBJ *drawObj, HSFMATERIAL *matP)
                         GXSetTexCoordGen(texCoordId, GX_TG_MTX2x4, GX_TG_TEX0, texMtxTbl[texCoordId]);
                         tevTexCoordId = (u16) texCoordId;
                         texCoordId++;
-                    } else if(animWorkP->attr & 1) {
+                    } else if(animWorkP->attr & HU3D_ATTRANIM_ATTR_ANIM2D) {
                         PSMTXScale(mtx, animWorkP->scale.x, animWorkP->scale.y, 1.0f);
                         mtxTransCat(mtx, animWorkP->trans.x, animWorkP->trans.y, 0.0f);
                         GXLoadTexMtxImm(mtx, texMtxTbl[texCoordId], GX_MTX2x4);
