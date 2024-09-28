@@ -80,4 +80,12 @@ void HuAudCharFXStop(s16 charNo, s16 seId);
 
 extern SNDGRPTBL sndGrpTable[];
 
+extern float Snd3DBackSurDisOffset;
+extern float Snd3DFrontSurDisOffset;
+extern float Snd3DStartDisOffset;
+extern float Snd3DSpeedOffset;
+extern float Snd3DDistOffset;
+extern BOOL musicOffF;
+extern u8 fadeStat;
+
 #endif

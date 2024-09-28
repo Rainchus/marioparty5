@@ -91,6 +91,8 @@ OMDLLINFO *omDLLLink(OMDLLINFO **dllInfoP, s16 dllno, s16 prologF)
 {
 	OMDLLINFO *dll;
 	OVLTBL *dllFile = &omDLLFileList[dllno];
+    static u8 ATTRIBUTE_ALIGN(32) strTable[1024]; //Needed for proper alignment of BSS in file
+    
 	OSReport("objdll>Link DLL:%s\n", dllFile->name);
 	dll = HuMemDirectMalloc(HUHEAPTYPE_HEAP, sizeof(OMDLLINFO));
 	*dllInfoP = dll;

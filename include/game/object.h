@@ -61,6 +61,27 @@ typedef struct ovlTbl_s {
     s32 entryNum;
 } OVLTBL;
 
+typedef struct omCameraView_s {
+    HuVecF center;
+    HuVecF rot;
+    float zoom;
+} OMCAMERAVIEW;
+
+#define omOvlCall(ovl, evtno, stat) omOvlCallEx(ovl, TRUE, evtno, stat)
+#define omOvlGoto(ovl, evtno, stat) omOvlGotoEx(ovl, TRUE, evtno, stat)
+#define omOvlReturn(hisOfs) omOvlReturnEx(hisOfs, TRUE)
+#define omAddObj(objman, prio, mdlcnt, mtncnt, objFunc) omAddObjEx(objman, prio, mdlcnt, mtncnt, OM_GRP_NONE, objFunc)
+#define omDelObj omDelObjEx
+#define omMakeGroup omMakeGroupEx
+#define omGetGroupMemberList omGetGroupMemberListEx
+
+#define OM_CAMERA_SINGLE 0x10000
+
+#define OM_CAMERAMOVE_SIMPLE 0
+#define OM_CAMERAMOVE_COS 1
+#define OM_CAMERAMOVE_LINEAR 2
+#define OM_CAMERAMOVE_COSSIN 2
+
 void omOvlCallEx(OMOVL ovl, s16 unlinkF, s32 evtno, s32 stat);
 void omOvlGotoEx(OMOVL ovl, s16 unlinkF, s32 evtno, s32 stat);
 void omOvlReturnEx(s16 hisOfs, s16 unlinkF);
@@ -85,12 +106,36 @@ void omAllPause(BOOL pauseF);
 char omPauseChk(void);
 OMOVL omCurrentOvlGet(void);
 
-void omCameraMoveInit(void);
+void omOutView(OMOBJ *obj);
+void omOutViewMulti(OMOBJ *obj);
+void omDBGSystemKeyCheckSetup(OMOBJMAN *objman);
+void omSystemKeyCheckSetup(OMOBJMAN *objman);
+void omSystemKeyCheck(OMOBJ *obj);
 void omSysPauseEnable(u8 flag);
+void omSysPauseCtrl(s16 flag);
+void omCameraViewInit(void);
+void omCameraViewSetMulti(s16 cameraBit, OMCAMERAVIEW *cameraView);
+void omCameraViewSet(OMCAMERAVIEW *cameraView);
+s16 omCameraViewMoveMulti(u32 camera, OMCAMERAVIEW *cameraView, s32 time, s16 moveType);
+s16 omCameraViewMove(OMCAMERAVIEW *cameraView, s32 time, s16 moveType);
+s16 omCameraViewMoveSimpleMulti(u32 camera, OMCAMERAVIEW *cameraView, s32 time);
+s16 omCameraViewMoveSimple(OMCAMERAVIEW *cameraView, s32 time);
+BOOL omCameraViewCheck(u32 cameraBit);
+
+s32 omOvlMgNoGet(s16 ovlNo);
 
 extern s16 omSysExitReq;
+extern OMOBJ *omDBGSysKeyObj;
+extern u8 omSysPauseEnableFlag;
+extern OMOVL omcurovl;
+extern s32 omcurdll;
+extern s32 omovlhisidx;
+extern s32 omovlevtno;
+extern s32 omovlstat;
+extern u8 omUPauseFlag;
+extern s16 omdispinfo;
 
-extern float SdWorkFloat[16];
-extern int SdWorkInt[16];
+extern float sdWorkFloat[16];
+extern int sdWorkInt[16];
 
 #endif
