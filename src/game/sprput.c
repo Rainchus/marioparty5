@@ -6,6 +6,8 @@
 #include "dolphin/gx.h"
 #include "dolphin/vi.h"
 
+void HuSprTexLoad(ANIMDATA *anim, s16 bmpNo, s16 texMapId, GXTexWrapMode wrapS, GXTexWrapMode wrapT, GXTexFilter filter);;
+
 typedef struct HuSprLayer_s {
     s16 drawNo;
     s16 layer;

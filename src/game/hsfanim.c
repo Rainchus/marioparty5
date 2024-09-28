@@ -1630,7 +1630,6 @@ static void WaterLayerHook(s16 layerNo)
     GXSetTevDirect(GX_TEVSTAGE0);
     GXSetTevDirect(GX_TEVSTAGE1);
     GXSetTexCoordScaleManually(GX_TEXCOORD0, GX_FALSE, 0, 0);
-    
 }
 
 void Hu3DTexLoad(void *buf, s16 w, s16 h, u32 format, GXTexWrapMode wrapS, GXTexWrapMode wrapT, BOOL filterF, GXTexMapID texMapId)
