@@ -5,6 +5,8 @@
 #include "game/data.h"
 #include "game/pad.h"
 #include "game/printfunc.h"
+#include "game/audio.h"
+#include "game/window.h"
 
 #include "game/esprite.h"
 #include "game/flag.h"
@@ -12,16 +14,13 @@
 #define OMOVLHIS_MAX 16
 
 //External definitions that should be cleaned up later
-extern u8 fadeStat;
-extern void HuAudDllSndGrpSet(u16 ovl);
-extern void HuAudFXListnerKill(void);
+
 extern void GMesPracticeCreate(void);
 extern void GMesClose(void);
 extern void MgActorInit(void);
 extern void MgActorClose(void);
 extern void MgScoreWinKill(void);
 extern void CharModelKill(s16 charNo);
-extern void HuWinAllKill(void);
 extern void SLMessWinReset(void);
 
 OMOBJ *omDBGSysKeyObj;
@@ -53,10 +52,10 @@ void omMasterInit(s32 watchPrio, OVLTBL *ovlTbl, OMOVL ovlMax, OMOVL ovlInit)
     HuPrcSetStat(omwatchproc, HU_PRC_STAT_PAUSE_ON|HU_PRC_STAT_UPAUSE_ON);
     omcurovl = DLL_NONE;
     omovlhisidx = -1;
-    omOvlCallEx(ovlInit, TRUE, 0, 0);
+    omOvlCall(ovlInit, 0, 0);
     omDBGSysKeyObj = NULL;
     for(i=0; i<16; i++) {
-        SdWorkInt[i] = SdWorkFloat[i] = 0;
+        sdWorkInt[i] = sdWorkFloat[i] = 0;
     }
     omSysPauseEnable(TRUE);
 }
@@ -257,7 +256,7 @@ OMOBJMAN *omInitObjMan(s16 objMax, s32 objManPrio)
     OSReport("objman>InitObjMan end\n");
     omUPauseFlag = FALSE;
     HuPrcAllUPause(0);
-    omCameraMoveInit();
+    omCameraViewInit();
     MgScoreWinKill();
     return objMan;
 }

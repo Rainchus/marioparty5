@@ -360,7 +360,7 @@ config.libs = [
             Object(Matching, "game/objmain.c"),
             Object(Matching, "game/fault.c"),
             Object(Matching, "game/gamework.c"),
-            Object(NonMatching, "game/objsysobj.c"),
+            Object(Matching, "game/objsysobj.c"),
             Object(Matching, "game/objdll.c"),
             Object(Matching, "game/frand.c"),
             Object(Matching, "game/audio.c"),
