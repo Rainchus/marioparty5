@@ -132,7 +132,8 @@ void AnimDebug(ANIMDATA *anim);
 
 void HuSprDispInit(void);
 void HuSprDisp(HUSPRITE *sprite);
-void HuSprTexLoad(ANIMDATA *anim, s16 bmpNo, s16 texMapId, GXTexWrapMode wrapS, GXTexWrapMode wrapT, GXTexFilter filter);
+//WipeImage breaks with this declaration
+//void HuSprTexLoad(ANIMDATA *anim, s16 bmpNo, s16 texMapId, GXTexWrapMode wrapS, GXTexWrapMode wrapT, GXTexFilter filter);
 void HuSprExecLayerInit(void);
 void HuSprExecLayerCameraSet(s16 drawNo, s16 camera, s16 layer);
 void HuSprExecLayerSet(s16 drawNo, s16 layer);
