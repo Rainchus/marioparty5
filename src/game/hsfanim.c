@@ -725,7 +725,7 @@ static void particleFunc(HU3DMODEL *modelP, Mtx *mtx)
         GXLoadPosMtxImm(*mtx, 0);
         GXSetNumTevStages(1);
         GXSetNumTexGens(1);
-        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY, GX_FALSE, GX_PTIDENTITY);
+        GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);
         GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
         if(shadowModelDrawF != 0) {
             GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ONE, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO);
