@@ -17,6 +17,8 @@ enum {
 
 #undef DATADIR
 
-#define DATANUM(dir, file) ((dir)+(file))
+#define DATANUM(dir, file) ((dir)|(file))
+
+#define FILENUM(dataNum) ((dataNum) & 0xFFFF)
 
 #endif
