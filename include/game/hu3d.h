@@ -195,6 +195,9 @@
 
 #define HU3D_WATER_ANIM_NONE ((ANIMDATA *)1)
 
+#define Hu3DModelDispOff(modelId) Hu3DModelAttrSet(modelId, HU3D_ATTR_DISPOFF)
+#define Hu3DModelDispOn(modelId) Hu3DModelAttrReset(modelId, HU3D_ATTR_DISPOFF)
+
 #define Hu3DModelCreateFile(dataNum) (Hu3DModelCreate(HuDataSelHeapReadNum((dataNum), MEMORY_DEFAULT_NUM, HEAP_DATA)))
 #define Hu3DJointMotionFile(model, dataNum) (Hu3DJointMotion((model), HuDataSelHeapReadNum((dataNum), MEMORY_DEFAULT_NUM, HEAP_DATA)))
 
@@ -753,7 +756,7 @@ void Hu3DParticleHookSet(HU3DMODELID modelId, HU3DPARTICLEHOOK hook);
 void Hu3DParticleAttrSet(HU3DMODELID modelId, u8 attr);
 void Hu3DParticleAttrReset(HU3DMODELID modelId, u8 attr);
 void Hu3DParticleCntSet(HU3DMODELID modelId, s16 count);
-void Hu3DParticleAnimModeSet(HU3DMODELID modelId, s16 animMode);
+void Hu3DParticleAnimModeSet(HU3DMODELID modelId, s16 animBank);
 void Hu3DParManInit(void);
 HU3DPARMANID Hu3DParManCreate(ANIMDATA *anim, s16 maxCnt, HU3DPARMANPARAM *param);
 HU3DPARMANID Hu3DParManLink(HU3DPARMANID linkParManId, HU3DPARMANPARAM *param);
@@ -826,6 +829,8 @@ extern ANIMDATA *Hu3DReflectModelAnim;
 extern float Hu3DAmbColR;
 extern float Hu3DAmbColG;
 extern float Hu3DAmbColB;
+extern HuVecF PGMaxPos;
+extern HuVecF PGMinPos;
 
 extern HU3DMOTION Hu3DMotion[HU3D_MOTION_MAX];
 
