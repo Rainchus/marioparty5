@@ -41,7 +41,7 @@ typedef struct GwPlayer_s {
     u16 field3 : 2;
     u16 dead : 1;
     u16 rollType : 6;
-    u16 teamNo : 1;
+    u16 grp : 1;
     u16 field6 : 1;
     s8 handicap;
     s8 padNo;
@@ -90,7 +90,7 @@ typedef struct GwSystem_s {
     u16 bonusStarF : 1;
     u16 mgInstF : 1;
     u16 mgComF : 1;
-    u16 mgList : 3;
+    u16 mgPack : 3;
     u16 messSpeed : 2;
     u16 saveMode : 2;
     u8 turnNo;
@@ -153,12 +153,12 @@ typedef struct GwCommon_s {
     u8 unk425_2 : 1;
     u8 storyMgInstDispF : 1;
     u8 storyMgComF : 1;
-    u8 storyMgList : 3;
+    u8 storyMgPack : 3;
     u8 storyMessSpeed : 2;
     u8 storySaveMode : 2;
     u8 partyMgInstDispF : 1;
     u8 partyMgComF : 1;
-    u8 partyMgList : 3;
+    u8 partyMgPack : 3;
     u8 partyMessSpeed : 2;
     u8 partySaveMode : 2;
     s32 sdPoint[4];
@@ -348,17 +348,17 @@ static inline void GWMessSpeedSet(s32 value)
 	}
 }
 
-static inline s32 GWMgListGet(void)
+static inline s32 GWMgPackGet(void)
 {
-    if (GwSystem.mgList == 5) {
-        GwSystem.mgList = 0;
+    if (GwSystem.mgPack == 5) {
+        GwSystem.mgPack = 0;
     }
-    return GwSystem.mgList;
+    return GwSystem.mgPack;
 }
 
-static inline void GWMgListSet(s32 value)
+static inline void GWMgPackSet(s32 value)
 {
-	GwSystem.mgList = value;
+	GwSystem.mgPack = value;
 }
 
 

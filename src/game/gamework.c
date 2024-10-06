@@ -1,5 +1,6 @@
 #include "game/gamework.h"
 #include "game/flag.h"
+#include "game/charman.h"
 
 extern s16 curSlotNo;
 extern u8 curBoxNo;
@@ -108,14 +109,14 @@ void GWCommonInit(void)
     commonP->unk424_3 = 0;
     commonP->storyMgInstDispF = commonP->partyMgInstDispF = TRUE;
     commonP->storyMgComF = commonP->partyMgComF = TRUE;
-    commonP->storyMgList = commonP->partyMgList = 0;
+    commonP->storyMgPack = commonP->partyMgPack = 0;
     commonP->storyMessSpeed = commonP->partyMessSpeed = 1;
     commonP->storySaveMode = commonP->partySaveMode = 0;
     for(i=0; i<4; i++) {
         commonP->sdPoint[i] = 0;
     }
     for(i=0; i<10; i++) {
-        commonP->decaScore[i].charNo = -1;
+        commonP->decaScore[i].charNo = CHARNO_NONE;
     }
     commonP->decaHighScore[0] = 2404;
     commonP->decaHighScore[1] = 1876;
@@ -367,8 +368,8 @@ void GWSdCommonInit(void)
     GwSdCommon.partFlag[2] = 0;
     GwSdCommon.partFlag[3] = 0;
     GwSdCommon.picNo = 0;
-    GwSdCommon.machine[0].charNo = -1;
-    GwSdCommon.machine[1].charNo = -1;
+    GwSdCommon.machine[0].charNo = CHARNO_NONE;
+    GwSdCommon.machine[1].charNo = CHARNO_NONE;
     for(i=0; i<10; i++) {
         GwSdCommon.picture[i].number = -1;
     }
