@@ -2,63 +2,86 @@
 #define _GAME_SAVELOAD_H
 
 #include "dolphin.h"
-#include "game/gamework_data.h"
+#include "game/gamework.h"
 
-#define SAVE_BUF_SIZE 16384
+#define SAVE_ROUNDUP(value, x) (((value) + (x-1)) & ~(x-1))
 
-typedef struct save_buf_data {
-	u8 comment[CARD_COMMENT_SIZE];
-	u8 banner[CARD_BANNER_WIDTH*CARD_BANNER_HEIGHT];
-	u8 bannerTlut[512];
-	u8 icon[CARD_ICON_WIDTH*CARD_ICON_HEIGHT*4];
-	u8 iconTlut[512];
-	GameStat stat;
-	SystemState system;
-	PlayerState player[4];
-	SystemState systemStory;
-	PlayerState playerStory[4];
-} SaveBufData;
+#define SAVE_SECTOR_SIZE 8192
 
-typedef union save_buf_all {
-	SaveBufData data;
-	u8 ATTRIBUTE_ALIGN(32) buf[SAVE_BUF_SIZE];
-} SaveBufAll;
+#define SAVE_COMMENT_OFS 0
+#define SAVE_BANNER_OFS (SAVE_COMMENT_OFS+CARD_COMMENT_SIZE)
+#define SAVE_COMMENT_DATE_OFS (CARD_COMMENT_SIZE/2)
 
-extern char *SaveFileNameTbl[];
-extern CARDFileInfo curFileInfo;
-extern SaveBufAll saveBuf;
-extern u64 SLSerialNo;
-extern s32 saveExecF;
-extern u8 curBoxNo;
-extern s16 curSlotNo;
+#define SAVE_BANNER_TLUT_OFS (SAVE_BANNER_OFS+(CARD_BANNER_WIDTH*CARD_BANNER_HEIGHT))
+#define SAVE_ICON_OFS (SAVE_BANNER_TLUT_OFS+512)
+#define SAVE_ICON_TLUT_OFS (SAVE_ICON_OFS+(CARD_ICON_WIDTH*CARD_ICON_HEIGHT*4))
+#define SAVE_MAIN_CHECKSUM_OFS (SAVE_ICON_TLUT_OFS+512)
 
-s32 SLFileOpen(char *fileName);
-s32 SLFileCreate(char *fileName, u32 size, void *addr);
-s32 SLFileWrite(s32 length, void *addr);
-s32 SLFileRead(s32 length, void *addr);
-s32 SLFileClose(void);
-void SLCurSlotNoSet(s16 slotno);
-void SLCurBoxNoSet(s16 boxno);
-void SLSaveFlagSet(s32 flag);
-s32 SLSaveFlagGet(void);
-void SLSaveDataMake(s32 erase, OSTime *time);
-void SLSaveDataInfoSet(OSTime *time);
+#define SAVE_BOX_SIZE (SAVE_ROUNDUP((sizeof(GWCOMMON)+(2*sizeof(GWSYSTEM))+(2*GW_PLAYER_MAX*sizeof(GWPLAYER))+sizeof(GWSDCOMMON)), 4)+2)
+
+#define SAVE_BOX_DATA_OFS (SAVE_MAIN_CHECKSUM_OFS+2)
+#define SAVE_BOX_OFS(boxNo) (SAVE_BOX_DATA_OFS+(SAVE_BOX_SIZE*(boxNo)))
+
+#define SAVE_BOX_MAX 3
+#define SAVE_BOXNO_BACKUP SAVE_BOX_MAX
+
+#define SAVE_BOXBACKUP_DATA_OFS SAVE_ROUNDUP(SAVE_BOX_OFS(SAVE_BOX_MAX), SAVE_SECTOR_SIZE)
+#define SAVE_BOXBACKUP_OFS(boxNo) (SAVE_BOXBACKUP_DATA_OFS+(SAVE_BOX_SIZE*(boxNo)))
+
+#define SAVE_BUF_SIZE SAVE_ROUNDUP(SAVE_BOXBACKUP_OFS(SAVE_BOX_MAX), SAVE_SECTOR_SIZE)
+
+
+extern u8 ATTRIBUTE_ALIGN(32) saveBuf[2][SAVE_BUF_SIZE];
+
+void SLCurSlotNoSet(s16 slotNo);
+s16 SLCurSlotNoGet(void);
+void SLCurBoxNoSet(s16 boxNo);
+s16 SLCurBoxNoGet(void);
+void SLSaveFlagSet(BOOL saveFlag);
+BOOL SLSaveFlagGet(void);
+void SLSaveEmptyMark(s16 slotNo, s16 boxNo);
+void SLSaveDataSlotMake(s16 slotNo, BOOL eraseF, OSTime *saveTime);
+void SLSaveDataMake(BOOL eraseF, OSTime *saveTime);
+void SLSaveDataInfoSet(s16 slotNo, OSTime *saveTime);
 void SLCommonSet(void);
-void SLSaveBoard(void);
-void SLSaveBoardStory(void);
+void SLCommonSaveCopy(GWCOMMON *commonP, s16 slotNo, s16 boxNo);
+void SLBoardSave(void);
+void SLBoardSaveStory(void);
+
 s32 SLSave(void);
 s32 SLLoad(void);
-void SLLoadGameStat(void);
-void SLLoadBoard(void);
-void SLLoadBoardStory(void);
+void SLCommonLoad(void);
+void SLCommonLoadCopy(GWCOMMON *commonP, s16 slotNo, s16 boxNo);
+void SLBoardLoad(void);
+void SLBoardLoadStory(void);
+void SLSdLoad(s16 slotNo, s16 boxNo, GWSDCOMMON *sdCommonP);
+void SLSdSave(s16 slotNo, s16 boxNo, GWSDCOMMON *sdCommonP);
+
 s32 SLSerialNoGet(void);
 BOOL SLSerialNoCheck(void);
-BOOL SLCheckSumCheck(void);
-u16 SLCheckSumGet(void);
-void SLCheckSumSet(void);
-s32 SLStatSet(s32 reportF);
+BOOL SLCheckSumBoxSlotCheck(s16 slotNo, s16 boxNo);
+BOOL SLCheckSumCheck(s16 slotNo, s16 boxNo);
+
+u16 SLCheckSumSlotGet(s16 slotNo, u32 begin, u32 size);
+u16 SLCheckSumGet(u32 begin, u32 size);
+void SLCheckSumBoxSet(void);
+void SLCheckSumBoxAllSet(void);
+void SLSaveBackup(void);
+void SLBoxBackupSlotLoad(s16 slotNo, s16 boxNo);
+void SLBoxBackupLoad(s16 boxNo);
+
+u32 SLBoxDataOffsetGet(s16 boxNo);
+s32 SLStatSet(BOOL errorOutF);
 s32 SLCardMount(s16 slotNo);
 s32 SLFormat(s16 slotNo);
-s16 SLMessOut(s16 mess);
+void SLWinIdSet(HUWINID winId);
+s16 SLMessOut(s16 messId);
+
+void SLSaveBoardTurnExec(void);
+void SLSaveBoardEndExec(void);
+void SLSaveStoryExec(void);
+void SLSaveStaffExec(void);
+void SLSaveModeExec(s16 sdModeF);
+s32 SLSaveSdBExec(void);
 
 #endif

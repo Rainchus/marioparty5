@@ -21,7 +21,7 @@ extern void MgActorInit(void);
 extern void MgActorClose(void);
 extern void MgScoreWinKill(void);
 extern void CharModelKill(s16 charNo);
-extern void SLMessWinReset(void);
+extern void SLWinClose(void);
 
 OMOBJ *omDBGSysKeyObj;
 static HUPROCESS *omwatchproc;
@@ -153,7 +153,7 @@ void omOvlKill(s16 unlinkF)
     HuDataDirCloseNum(HU_MEMNUM_OVL);
     HuMemDirectFreeNum(HUHEAPTYPE_DVD, HU_MEMNUM_OVL);
     HuMemDirectFreeNum(HUHEAPTYPE_MODEL, HU_MEMNUM_OVL);
-    SLMessWinReset();
+    SLWinClose();
     HuPadRumbleAllStop();
     HuAudFXListnerKill();
     OSReport("OvlKill %d\n", unlinkF);

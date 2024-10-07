@@ -90,7 +90,7 @@ void WipeCreate(s16 mode, s16 type, s16 maxTime)
     if(wipeData.mode == WIPE_MODE_OUT || wipeData.mode == WIPE_MODE_IN) {
         return;
     }
-    if(type == WIPE_TYPE_COPYTYPE) {
+    if(type == WIPE_TYPE_PREVTYPE) {
         type = wipeData.type;
     }
     if(type == WIPE_TYPE_WHITEFADE) {
