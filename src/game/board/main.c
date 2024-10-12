@@ -2,6 +2,8 @@
 #include "game/board/capsule.h"
 #include "game/board/status.h"
 #include "game/board/camera.h"
+#include "game/board/masu.h"
+#include "game/board/model.h"
 
 #include "game/saveload.h"
 #include "game/sprite.h"
@@ -11,7 +13,6 @@
 
 #include "humath.h"
 
-#include "game/board/masu.h"
 
 #include "game/flag.h"
 
@@ -23,8 +24,6 @@ void MBMgInit(void);
 void MBStarNoInit(void);
 void MBBankCoinReset(void);
 void MBCapsuleHookSet(void *func); //Fix input type as well
-void MBPauseWatchProcCreate(void);
-void MBPauseWatchProcStop(void);
 void MBTutorialWatchProcCreate(void);
 s32 MBStarNoRandGet(void);
 void MBStarNoSet(s32 no);
@@ -44,7 +43,6 @@ void MBStoryEndProcExec(void);
 void MBMgDataDirClose(void);
 
 void MBAudInit(void);
-void MBModelInit(void);
 void MBPauseInit(void);
 void MBWinInit(void);
 void MBGateInit(void);
@@ -67,7 +65,6 @@ void MBGateClose(void);
 void MBCapMachineClose(void);
 void MBScrollClose(void);
 void MBPlayerClose(void);
-void MBModelClose(void);
 void MBWinClose(void);
 
 static MBTURNHOOK postTurnHook;

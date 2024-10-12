@@ -75,6 +75,8 @@ typedef struct omCameraView_s {
 #define omMakeGroup omMakeGroupEx
 #define omGetGroupMemberList omGetGroupMemberListEx
 
+#define omObjGetWork(obj, type) ((type *)(&((obj)->work[0])))
+
 #define OM_CAMERA_SINGLE 0x10000
 
 #define OM_CAMERAMOVE_SIMPLE 0
