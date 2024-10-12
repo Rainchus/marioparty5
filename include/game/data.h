@@ -13,7 +13,8 @@
 #define HU_DECODE_TYPE_RLE 5
 #define HU_DECODE_TYPE_ZLIB 7
 
-#define HU_DATANUM_NONE 0xFFFFFFFF
+#define HU_DATANUM_NONE -1
+#define HU_DATA_STAT_NONE -1
 
 #include "dolphin/types.h"
 #include "dolphin/dvd.h"
@@ -39,19 +40,19 @@ HUDATASTAT *HuDataGetStatus(void *dirP);
 void *HuDataGetDirPtr(int dirNum);
 HUDATASTAT *HuDataDirRead(int dirNum);
 HUDATASTAT *HuDataDirReadNum(int dirNum, s32 num);
-HUDATASTAT *HuDataDirSet(void *dir_ptr, int data_num);
+HUDATASTAT *HuDataDirSet(void *dirP, int dataNum);
 void HuDataDirReadAsyncCallBack(s32 result, DVDFileInfo* fileInfo);
-s32 HuDataDirReadAsync(int data_num);
-s32 HuDataDirReadNumAsync(int data_num, s32 num);
+s32 HuDataDirReadAsync(int dataNum);
+s32 HuDataDirReadNumAsync(int dataNum, s32 num);
 BOOL HuDataGetAsyncStat(s32 statId);
-void *HuDataRead(int data_num);
-void *HuDataReadNum(int data_num, s32 num);
-void *HuDataSelHeapRead(int data_num, HUHEAPTYPE heap);
-void *HuDataSelHeapReadNum(int data_num, s32 num, HUHEAPTYPE heap);
-void **HuDataReadMulti(int *data_ids);
+void *HuDataRead(int dataNum);
+void *HuDataReadNum(int dataNum, s32 num);
+void *HuDataSelHeapRead(int dataNum, HUHEAPTYPE heap);
+void *HuDataSelHeapReadNum(int dataNum, s32 num, HUHEAPTYPE heap);
+void **HuDataReadMulti(int *dataNum);
 s32 HuDataGetSize(int dataNum);
 void HuDataClose(void *ptr);
-void HuDataCloseMulti(void **ptrs);
+void HuDataCloseMulti(void **ptrTbl);
 void HuDataDirClose(int dataNum);
 void HuDataDirCloseNum(s32 num);
 void *HuDataReadNumHeapShortForce(int dataNum, s32 num, HUHEAPTYPE heap);

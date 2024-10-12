@@ -1,10 +1,7 @@
 #include "game/gamework.h"
 #include "game/flag.h"
 #include "game/charman.h"
-
-extern s16 curSlotNo;
-extern u8 curBoxNo;
-extern void SLSdSave(s16 slotNo, s16 boxNo, GWSDCOMMON *sdCommon);
+#include "game/saveload.h"
 
 GWCARDCOMMON GwCardCommon;
 GWSDBATTLE GwSdBattle;
@@ -107,7 +104,7 @@ void GWCommonInit(void)
     commonP->veryHardUnlock = 0;
     commonP->m562VeryHardUnlock = 0;
     commonP->unk424_3 = 0;
-    commonP->storyMgInstDispF = commonP->partyMgInstDispF = TRUE;
+    commonP->storyMgInstF = commonP->partyMgInstF = TRUE;
     commonP->storyMgComF = commonP->partyMgComF = TRUE;
     commonP->storyMgPack = commonP->partyMgPack = 0;
     commonP->storyMessSpeed = commonP->partyMessSpeed = 1;
@@ -159,7 +156,7 @@ s32 GWComKeyDelayGet(void)
 
 void GWMgRecordSet(s32 id, u32 value)
 {
-    if(_CheckFlag(0x1000F)) {
+    if(_CheckFlag(FLAG_MG_PRACTICE)) {
         return;
     }
     GwCommon.mgRecord[id] = value;
@@ -293,7 +290,7 @@ s16 GWPlayerCoinGet(s32 playerNo)
 
 void GWPlayerCoinSet(s32 playerNo, s16 coin)
 {
-    if(_CheckFlag(0x1000F)) {
+    if(_CheckFlag(FLAG_MG_PRACTICE)) {
         return;
     }
     if(coin < 0) {

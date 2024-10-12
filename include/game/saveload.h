@@ -3,6 +3,7 @@
 
 #include "dolphin.h"
 #include "game/gamework.h"
+#include "game/window.h"
 
 #define SAVE_ROUNDUP(value, x) (((value) + (x-1)) & ~(x-1))
 
@@ -32,6 +33,15 @@
 
 
 extern u8 ATTRIBUTE_ALIGN(32) saveBuf[2][SAVE_BUF_SIZE];
+extern u64 SLSerialNo[2];
+extern BOOL SaveEnableF;
+extern char SLSaveFileName[];
+extern char SLEraseStr[];
+extern HUWINID SLWinId;
+extern CARDFileInfo curFileInfo;
+extern BOOL saveExecF;
+extern u8 curBoxNo;
+extern s16 curSlotNo;
 
 void SLCurSlotNoSet(s16 slotNo);
 s16 SLCurSlotNoGet(void);

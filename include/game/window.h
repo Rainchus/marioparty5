@@ -3,7 +3,6 @@
 
 #include "game/animdata.h"
 #include "game/sprite.h"
-#include "game/pad.h"
 
 #include "dolphin.h"
 
@@ -64,31 +63,31 @@
 #define HUWIN_STAT_KEYWAIT 2
 #define HUWIN_STAT_CHOICE 3
 
-#define WIN_SPEAKER_CHORL 0
-#define WIN_SPEAKER_NERL 1
-#define WIN_SPEAKER_TERL 2
-#define WIN_SPEAKER_NIRL 3
-#define WIN_SPEAKER_HARL 4
-#define WIN_SPEAKER_MARL 5
-#define WIN_SPEAKER_DARL 6
-#define WIN_SPEAKER_KOOPA 7
-#define WIN_SPEAKER_KURIBO 8
-#define WIN_SPEAKER_HEYHO 9
-#define WIN_SPEAKER_NOKO2 10
-#define WIN_SPEAKER_JUGEM 11
-#define WIN_SPEAKER_WAN2 12
-#define WIN_SPEAKER_UKKI 13
-#define WIN_SPEAKER_PATA2 14
-#define WIN_SPEAKER_HANACHAN 15
-#define WIN_SPEAKER_HANACHAN2 16
-#define WIN_SPEAKER_KAMEKKU 17
-#define WIN_SPEAKER_KOKAMEKKU 18
-#define WIN_SPEAKER_CHORO 19
-#define WIN_SPEAKER_CAPMACHINE 20
-#define WIN_SPEAKER_PUKU2 21
-#define WIN_SPEAKER_BATTAN 22
-#define WIN_SPEAKER_DOSSUN 23
-#define WIN_SPEAKER_NONE -1
+#define HUWIN_SPEAKER_CHORL 0
+#define HUWIN_SPEAKER_NERL 1
+#define HUWIN_SPEAKER_TERL 2
+#define HUWIN_SPEAKER_NIRL 3
+#define HUWIN_SPEAKER_HARL 4
+#define HUWIN_SPEAKER_MARL 5
+#define HUWIN_SPEAKER_DARL 6
+#define HUWIN_SPEAKER_KOOPA 7
+#define HUWIN_SPEAKER_KURIBO 8
+#define HUWIN_SPEAKER_HEYHO 9
+#define HUWIN_SPEAKER_NOKO2 10
+#define HUWIN_SPEAKER_JUGEM 11
+#define HUWIN_SPEAKER_WAN2 12
+#define HUWIN_SPEAKER_UKKI 13
+#define HUWIN_SPEAKER_PATA2 14
+#define HUWIN_SPEAKER_HANACHAN 15
+#define HUWIN_SPEAKER_HANACHAN2 16
+#define HUWIN_SPEAKER_KAMEKKU 17
+#define HUWIN_SPEAKER_KOKAMEKKU 18
+#define HUWIN_SPEAKER_CHORO 19
+#define HUWIN_SPEAKER_CAPMACHINE 20
+#define HUWIN_SPEAKER_PUKU2 21
+#define HUWIN_SPEAKER_BATTAN 22
+#define HUWIN_SPEAKER_DOSSUN 23
+#define HUWIN_SPEAKER_NONE -1
 
 
 typedef s16 HUWINID;
@@ -158,9 +157,9 @@ typedef struct Win_s {
     s16 activePadKey;
     s16 choiceEndSe;
     u8 ATTRIBUTE_ALIGN(32) mesPal[HUWIN_MESCOL_MAX][3];
-} WIN;
+} HUWIN;
 
-extern WIN winData[HUWIN_MAX];
+extern HUWIN winData[HUWIN_MAX];
 extern void *messDataPtr;
 
 void HuWindowInit(void);
@@ -175,8 +174,8 @@ void *HuWinMesDataPtrGet(void *messData, u32 messNum);
 
 void HuWinHomeClear(HUWINID winId);
 void HuWinKeyWaitEntry(HUWINID winId);
-u32 HuWinActivePadGet(WIN *winP);
-u32 HuWinActiveKeyGetX(WIN *winP);
+u32 HuWinActivePadGet(HUWIN *winP);
+u32 HuWinActiveKeyGetX(HUWIN *winP);
 void HuWinPosSet(HUWINID winId, float posX, float posY);
 void HuWinScaleSet(HUWINID winId, float scaleX, float scaleY);
 void HuWinZRotSet(HUWINID winId, float zRot);

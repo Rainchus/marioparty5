@@ -6,6 +6,7 @@
 #include "game/audio.h"
 #include "game/hu3d.h"
 #include "game/dvd.h"
+#include "game/pad.h"
 
 #include "game/disp.h"
 #include "datanum/win.h"
@@ -32,7 +33,7 @@ typedef struct winComKey_s {
 static u8 mesWInsert[HUWIN_INSERTMES_MAX];
 static WINCOMKEY winComKeyBuf[WIN_COMKEY_MAX];
 static u32 winKey[GW_PLAYER_MAX];
-WIN winData[HUWIN_MAX];
+HUWIN winData[HUWIN_MAX];
 
 static ANIMDATA *iconAnim;
 static ANIMDATA *cursorAnim;
@@ -177,14 +178,14 @@ static void MesDispFunc(HUSPRITE *sprP);
 static u8 winBGMake(ANIMDATA *bgAnim, ANIMDATA *frameAnim);
 static void HuWinProc(void);
 static void HuWinDrawMes(HUWINID winId);
-static BOOL HuWinCR(WIN *winP);
-static void _HuWinHomeClear(WIN *winP);
+static BOOL HuWinCR(HUWIN *winP);
+static void _HuWinHomeClear(HUWIN *winP);
 static void HuWinKeyWait(HUWINID winId);
-static s16 HuWinSpcFontEntry(WIN *winP, s16 entry, s16 x, s16 y);
-static void HuWinSpcFontClear(WIN *winP);
-static void HuWinChoice(WIN *winP);
+static s16 HuWinSpcFontEntry(HUWIN *winP, s16 entry, s16 x, s16 y);
+static void HuWinSpcFontClear(HUWIN *winP);
+static void HuWinChoice(HUWIN *winP);
 static void GetMesMaxSizeSub(u32 messNum);
-static s32 GetMesMaxSizeSub2(WIN *winP, void *data);
+static s32 GetMesMaxSizeSub2(HUWIN *winP, void *data);
 
 void HuWindowInit(void)
 {
@@ -248,7 +249,7 @@ HUWINID HuWinCreate(float posX, float posY, s16 winW, s16 winH, s16 frame)
     GXColor bgColor = { 64, 16, 128, 255 };
     HUWINID winId;
     s16 i;
-    WIN *winP;
+    HUWIN *winP;
     HUSPRGRPID grpId;
     HUSPRID sprId;
     ANIMDATA *bgAnim;
@@ -361,7 +362,7 @@ HUWINID HuWinCreate(float posX, float posY, s16 winW, s16 winH, s16 frame)
 
 void HuWinKill(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 i;
     
     if(winP->grpId == HUSPR_GRP_NONE) {
@@ -468,7 +469,7 @@ void *HuWinMesDataPtrGet(void *data, u32 messNum)
 
 static void MesDispFunc(HUSPRITE *sprP)
 {
-    WIN *winP = &winData[sprP->work[0]];
+    HUWIN *winP = &winData[sprP->work[0]];
     HUSPRGRP *sprGrpP;
     float uvMaxX;
     float uvMaxY;
@@ -612,7 +613,7 @@ static u8 winBGMake(ANIMDATA *bgAnim, ANIMDATA *frameAnim)
 
 static void HuWinProc(void)
 {
-    WIN *winP;
+    HUWIN *winP;
     HUWINID winId;
 
     while(1) {
@@ -648,7 +649,7 @@ static void HuWinProc(void)
 
 static void charEntry(s16 window, s16 x, s16 y, s16 charNo, s16 color)
 {
-    WIN *winP = &winData[window];
+    HUWIN *winP = &winData[window];
     WINCHARENTRY *winCharP = winP->charEntry;
 
     winCharP = &winP->charEntry[winP->charEntryNum];
@@ -664,7 +665,7 @@ static void charEntry(s16 window, s16 x, s16 y, s16 charNo, s16 color)
 }
 
 static void HuWinDrawMes(HUWINID winId) {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HUSPRGRP *sprGrpP = &HuSprGrpData[winP->grpId];
     s16 c;
     s16 i;
@@ -891,7 +892,7 @@ static void HuWinDrawMes(HUWINID winId) {
     }
 }
 
-static BOOL HuWinCR(WIN *winP)
+static BOOL HuWinCR(HUWIN *winP)
 {
     if(winP->mesY+48 > winP->mesRectH) {
         winP->mesY = 0;
@@ -904,7 +905,7 @@ static BOOL HuWinCR(WIN *winP)
     }
 }
 
-static void _HuWinHomeClear(WIN *winP)
+static void _HuWinHomeClear(HUWIN *winP)
 {
     s16 i;
 
@@ -920,7 +921,7 @@ static void _HuWinHomeClear(WIN *winP)
 
 void HuWinHomeClear(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 i;
     _HuWinHomeClear(winP);
     for(i=0; i<HUWIN_CHOICE_MAX; i++) {
@@ -933,7 +934,7 @@ void HuWinHomeClear(HUWINID winId)
 
 void HuWinKeyWaitEntry(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     if(winP->attr & HUWIN_ATTR_SKIP_KEYWAIT) {
         winP->stat = HUWIN_STAT_NONE;
     } else {
@@ -944,7 +945,7 @@ void HuWinKeyWaitEntry(HUWINID winId)
 
 static void HuWinKeyWait(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
 
     if(winP->pushKey & HuWinActivePadGet(winP)) {
         winP->activePadKey = HuWinActivePadGet(winP);
@@ -958,7 +959,7 @@ static void HuWinKeyWait(HUWINID winId)
     }
 }
 
-static s16 HuWinSpcFontEntry(WIN *winP, s16 entry, s16 x, s16 y)
+static s16 HuWinSpcFontEntry(HUWIN *winP, s16 entry, s16 x, s16 y)
 {
     HUSPRGRP *sprGrpP = &HuSprGrpData[winP->grpId];
     HUSPRID sprId;
@@ -978,13 +979,13 @@ static s16 HuWinSpcFontEntry(WIN *winP, s16 entry, s16 x, s16 y)
     return i;
 }
 
-static void HuWinSpcFontPosSet(WIN *winP, s16 sprNo, s16 x, s16 y)
+static void HuWinSpcFontPosSet(HUWIN *winP, s16 sprNo, s16 x, s16 y)
 {
     HUSPRGRP *sprGrpP = &HuSprGrpData[winP->grpId];
     HuSprPosSet(winP->grpId, sprNo, x-(winP->winW/2), y-(winP->winH/2));
 }
 
-static void HuWinSpcFontClear(WIN *winP)
+static void HuWinSpcFontClear(HUWIN *winP)
 {
     s16 i;
 
@@ -1003,7 +1004,7 @@ static void HuWinSpcFontClear(WIN *winP)
 #define WIN_CHOICEDIR_DOWN 3
 #define WIN_CHOICE_DIST_INVALID 100000.0f
 
-static void HuWinChoice(WIN *winP) {
+static void HuWinChoice(HUWIN *winP) {
     WINCHOICE *choiceP;
     float choiceDist;
     float minChoiceDist;
@@ -1191,7 +1192,7 @@ static void HuWinChoice(WIN *winP) {
 #undef WIN_CHOICEDIR_DOWN
 #undef WIN_CHOICE_DIST_INVALID 
 
-u32 HuWinActivePadGet(WIN *winP)
+u32 HuWinActivePadGet(HUWIN *winP)
 {
     s32 key;
     u32 i;
@@ -1205,7 +1206,7 @@ u32 HuWinActivePadGet(WIN *winP)
     return key;
 }
 
-u32 HuWinActiveKeyGetX(WIN *winP)
+u32 HuWinActiveKeyGetX(HUWIN *winP)
 {
     u32 btn;
     u32 i;
@@ -1231,7 +1232,7 @@ u32 HuWinActiveKeyGetX(WIN *winP)
 
 void HuWinPosSet(HUWINID winId, float posX, float posY)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     if(posX == HUWIN_POS_CENTER) {
         winP->pos.x = (HU_DISP_WIDTH-winP->winW)/2;
     } else {
@@ -1247,7 +1248,7 @@ void HuWinPosSet(HUWINID winId, float posX, float posY)
 
 void HuWinScaleSet(HUWINID winId, float scaleX, float scaleY)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->scale.x = scaleX;
     winP->scale.y = scaleY;
     HuSprGrpScaleSet(winP->grpId, scaleX, scaleY);
@@ -1255,33 +1256,33 @@ void HuWinScaleSet(HUWINID winId, float scaleX, float scaleY)
 
 void HuWinZRotSet(HUWINID winId, float zRot)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->zRot = zRot;
     HuSprGrpZRotSet(winP->grpId, zRot);
 }
 
 void HuWinCenterPosSet(HUWINID winId, float centerX, float centerY)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HuSprGrpCenterSet(winP->grpId, (winP->winW/2.0f)-centerX, (winP->winH/2.0f)-centerY);
 }
 
 void HuWinDrawNoSet(HUWINID winId, s16 drawNo)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->drawNo = drawNo;
     HuSprGrpDrawNoSet(winP->grpId, winP->drawNo);
 }
 
 void HuWinScissorSet(HUWINID winId, s16 x, s16 y, s16 w, s16 h)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HuSprGrpScissorSet(winP->grpId, x, y, w, h);
 }
 
 void HuWinPriSet(HUWINID winId, s16 prio)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 i;
     HuSprPriSet(winP->grpId, 0, prio);
     HuSprPriSet(winP->grpId, 1, prio);
@@ -1296,32 +1297,32 @@ void HuWinPriSet(HUWINID winId, s16 prio)
 
 void HuWinAttrSet(HUWINID winId, u32 attr)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->attr |= attr;
 }
 
 void HuWinAttrReset(HUWINID winId, u32 attr)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->attr &= ~attr;
 }
 
 s16 HuWinStatGet(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     return winP->stat;
 }
 
 void HuWinMesColSet(HUWINID winId, u8 mesCol)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->mesCol = mesCol;
     winP->attr |= HUWIN_ATTR_SETCOLOR;
 }
 
 void HuWinMesPalSet(HUWINID winId, u8 mesCol, u8 r, u8 g, u8 b)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->mesPal[mesCol][0] = r;
     winP->mesPal[mesCol][1] = g;
     winP->mesPal[mesCol][2] = b;
@@ -1329,20 +1330,20 @@ void HuWinMesPalSet(HUWINID winId, u8 mesCol, u8 r, u8 g, u8 b)
 
 void HuWinBGTPLvlSet(HUWINID winId, float tpLvl)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HuSprTPLvlSet(winP->grpId, 0, tpLvl);
     HuSprTPLvlSet(winP->grpId, 1, tpLvl);
 }
 
 void HuWinBGColSet(HUWINID winId, GXColor *bgCol)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HuSprColorSet(winP->grpId, 0, bgCol->r, bgCol->g, bgCol->b);
 }
 
 void HuWinMesSpeedSet(HUWINID winId, s16 mesSpeed)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->mesSpeed = mesSpeed;
 }
 
@@ -1369,7 +1370,7 @@ void HuWinMesRead(void)
 
 void HuWinMesSet(HUWINID winId, u32 messNum)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 messW;
     winP->stat = HUWIN_STAT_DRAWMES;
     if(!(messNum & 0x80000000)) {
@@ -1399,7 +1400,7 @@ void HuWinMesSet(HUWINID winId, u32 messNum)
 
 void HuWinInsertMesSet(HUWINID winId, u32 messNum, s16 insertMesNo)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 messW;
     if(!(messNum & 0x80000000)) {
         if(!messDataPtr) {
@@ -1417,7 +1418,7 @@ void HuWinInsertMesSet(HUWINID winId, u32 messNum, s16 insertMesNo)
 
 s16 HuWinChoiceSet(HUWINID winId, s16 choiceNo)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->attr |= HUWIN_ATTR_CHOICEON;
     while(winP->stat != HUWIN_STAT_NONE) {
         HuPrcVSleep();
@@ -1452,7 +1453,7 @@ s16 HuWinChoiceSet(HUWINID winId, s16 choiceNo)
 
 s16 HuWinChoiceGet(HUWINID winId, s16 choiceNo)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 result = HuWinChoiceSet(winId, choiceNo);
     if(result != 0) {
         return result;
@@ -1465,19 +1466,19 @@ s16 HuWinChoiceGet(HUWINID winId, s16 choiceNo)
 
 s16 HuWinChoiceNumGet(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     return winP->choiceNum;
 }
 
 void HuWinChoiceDisable(HUWINID winId, s16 choiceNo)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->choiceDisable[choiceNo] = TRUE;
 }
 
 s16 HuWinChoiceNowGet(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     if(winP->stat == HUWIN_STAT_CHOICE) {
         return winP->choice;
     } else {
@@ -1487,7 +1488,7 @@ s16 HuWinChoiceNowGet(HUWINID winId)
 
 void HuWinMesWait(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     while(winP->stat != HUWIN_STAT_NONE) {
         HuPrcVSleep();
     }
@@ -1495,14 +1496,14 @@ void HuWinMesWait(HUWINID winId)
 
 s16 HuWinAnimSet(HUWINID winId, ANIMDATA *anim, s16 animBank, float posX, float posY)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HUSPRID sprId = HuSprCreate(anim, winP->prio-1, animBank);
     return HuWinSprSet(winId, sprId, posX, posY);
 }
 
 s16 HuWinSprSet(HUWINID winId, HUSPRID sprId, float posX, float posY)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HUSPRGRP *sprGrpP = &HuSprGrpData[winP->grpId];
     s16 i;
     for(i=HUWIN_SPR_BEGIN; i<=HUWIN_SPR_END; i++){ 
@@ -1518,7 +1519,7 @@ s16 HuWinSprSet(HUWINID winId, HUSPRID sprId, float posX, float posY)
 
 void HuWinSprPosSet(HUWINID winId, s16 sprNo, float posX, float posY)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HUSPRGRP *sprGrpP = &HuSprGrpData[winP->grpId];
     HuSprPosSet(winP->grpId, sprNo, posX-sprGrpP->center.x, posY-sprGrpP->center.y);
 
@@ -1526,27 +1527,27 @@ void HuWinSprPosSet(HUWINID winId, s16 sprNo, float posX, float posY)
 
 void HuWinSprPriSet(HUWINID winId, s16 sprNo, s16 prio)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HUSPRGRP *sprGrpP = &HuSprGrpData[winP->grpId];
     HuSprPriSet(winP->grpId, sprNo, prio);
 }
 
 HUSPRID HuWinSprIDGet(HUWINID winId, s16 sprNo)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     return winP->sprId[sprNo];
 }
 
 void HuWinSprKill(HUWINID winId, s16 sprNo)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     HuSprGrpMemberKill(winP->grpId, sprNo);
     winP->sprId[sprNo] = HUSPR_NONE;
 }
 
 void HuWinDispOff(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 i;
     for(i=0; i<HUWIN_SPR_MAX; i++) {
         if(winP->sprId[i] != HUSPR_NONE) {
@@ -1558,7 +1559,7 @@ void HuWinDispOff(HUWINID winId)
 
 void HuWinDispOn(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 i;
     for(i=0; i<HUWIN_SPR_MAX; i++) {
         if(winP->sprId[i] != HUSPR_NONE) {
@@ -1596,7 +1597,7 @@ void _HuWinComKeySet(s32 keyP1, s32 keyP2, s32 keyP3, s32 keyP4, s16 time)
 
 void HuWinComKeyGet(HUWINID winId, u32 *key)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 i;
     if(comKeyIdx == comKeyIdxNow) {
         for(i=0; i<GW_PLAYER_MAX; i++) {
@@ -1790,7 +1791,7 @@ static void GetMesMaxSizeSub(u32 messNum)
     }
 }
 
-static s32 GetMesMaxSizeSub2(WIN *winP, void *data)
+static s32 GetMesMaxSizeSub2(HUWIN *winP, void *data)
 {
     s16 i;
     char *messDataOrig = NULL;
@@ -1891,19 +1892,19 @@ s16 HuWinKeyWaitNumGet(u32 messNum)
 
 void HuWinPushKeySet(HUWINID winId, s16 pushKey)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->pushKey = pushKey;
 }
 
 void HuWinDisablePlayerSet(HUWINID winId, u8 playerBit)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->disablePlayer |= playerBit;
 }
 
 void HuWinDisablePlayerReset(HUWINID winId, u8 playerBit)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     winP->disablePlayer &= ~playerBit;
 }
 
@@ -1943,7 +1944,7 @@ HUWINID HuWinExCreateFrame(float x, float y, s16 w, s16 h, s16 speakerNo, s16 fr
 {
     
     HUWINID winId;
-    WIN *winP;
+    HUWIN *winP;
     if(speakerNo >= 0) {
         h = (h < 84) ? 84 : h;
     }
@@ -1963,7 +1964,7 @@ HUWINID HuWinExCreateFrame(float x, float y, s16 w, s16 h, s16 speakerNo, s16 fr
 
 void HuWinExOpen(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 i;
     _HuWinHomeClear(winP);
     if(winP->sprId[HUWIN_SPR_BEGIN] == HUSPR_NONE) {
@@ -2002,7 +2003,7 @@ void HuWinExOpen(HUWINID winId)
 
 void HuWinExClose(HUWINID winId)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 i;
 
     _HuWinHomeClear(winP);
@@ -2036,7 +2037,7 @@ void HuWinExKill(HUWINID winId)
 
 void HuWinExSpeakerSet(HUWINID winId, s16 speakerNo)
 {
-    WIN *winP = &winData[winId];
+    HUWIN *winP = &winData[winId];
     s16 i;
 
     for(i=0; i<=10; i++) {
