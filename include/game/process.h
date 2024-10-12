@@ -31,10 +31,10 @@ struct Process_s {
 
 void HuPrcInit(void);
 void HuPrcEnd(void);
-HUPROCESS *HuPrcCreate(void (*func)(void), u16 prio, u32 stack_size, s32 extra_size);
+HUPROCESS *HuPrcCreate(void (*func)(void), u16 prio, u32 stackSize, s32 extraSize);
 void HuPrcChildLink(HUPROCESS *parent, HUPROCESS *child);
 void HuPrcChildUnlink(HUPROCESS *process);
-HUPROCESS *HuPrcChildCreate(void (*func)(void), u16 prio, u32 stack_size, s32 extra_size, HUPROCESS *parent);
+HUPROCESS *HuPrcChildCreate(void (*func)(void), u16 prio, u32 stackSize, s32 extraSize, HUPROCESS *parent);
 void HuPrcChildWatch(void);
 HUPROCESS *HuPrcCurrentGet(void);
 s32 HuPrcKill(HUPROCESS *process);

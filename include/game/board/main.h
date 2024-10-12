@@ -29,7 +29,17 @@ static inline s32 MBBoardNoGet(void)
 	return GwSystem.boardNo;
 }
 
+#define MBAddObj(prio, mdlcnt, mtncnt, objFunc) omAddObj(mbObjMan, prio, mdlcnt, mtncnt, objFunc)
+#define MBDelObj(obj) omDelObj(HuPrcCurrentGet(), obj)
+
+#define MBPrcCreate(func, prio, stackSize) HuPrcChildCreate(func, prio, stackSize, 0, mbMainProcess)
+
+void MBPauseWatchProcCreate(void);
+void MBPauseWatchProcStop(void);
+BOOL MBKillCheck(void);
+HUPROCESS *MBPauseWatchProcGet(void);
 void MBObjectSetup(s32 boardNo, MBCREATEHOOK createHook, MBKILLHOOK killHook);
+void MBOvlGoto(OMOVL ovl);
 BOOL MBEventMgCheck(void);
 void MBDataClose(void);
 void MBLightHookSet(MBLIGHTHOOK setHook, MBLIGHTHOOK resetHook);

@@ -198,6 +198,9 @@
 #define Hu3DModelDispOff(modelId) Hu3DModelAttrSet(modelId, HU3D_ATTR_DISPOFF)
 #define Hu3DModelDispOn(modelId) Hu3DModelAttrReset(modelId, HU3D_ATTR_DISPOFF)
 
+#define Hu3DModelZWriteOff(modelId) Hu3DModelAttrSet(modelId, HU3D_ATTR_ZWRITE_OFF)
+#define Hu3DModelZWriteOn(modelId) Hu3DModelAttrReset(modelId, HU3D_ATTR_ZWRITE_OFF)
+
 #define Hu3DModelCreateFile(dataNum) (Hu3DModelCreate(HuDataSelHeapReadNum((dataNum), MEMORY_DEFAULT_NUM, HEAP_DATA)))
 #define Hu3DJointMotionFile(model, dataNum) (Hu3DJointMotion((model), HuDataSelHeapReadNum((dataNum), MEMORY_DEFAULT_NUM, HEAP_DATA)))
 
