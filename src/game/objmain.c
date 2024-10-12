@@ -7,6 +7,8 @@
 #include "game/printfunc.h"
 #include "game/audio.h"
 #include "game/window.h"
+#include "game/saveload.h"
+#include "game/charman.h"
 
 #include "game/esprite.h"
 #include "game/flag.h"
@@ -20,8 +22,6 @@ extern void GMesClose(void);
 extern void MgActorInit(void);
 extern void MgActorClose(void);
 extern void MgScoreWinKill(void);
-extern void CharModelKill(s16 charNo);
-extern void SLWinClose(void);
 
 OMOBJ *omDBGSysKeyObj;
 static HUPROCESS *omwatchproc;
@@ -80,7 +80,7 @@ static void omWatchOverlayProc(void)
                 omovlevtno = omnextovlevtno;
                 omovlstat = omnextovlstat;
                 omnextovl = DLL_NONE;
-                if(_CheckFlag(FLAGNUM(1, 15))) {
+                if(_CheckFlag(FLAG_MG_PRACTICE)) {
                     GMesPracticeCreate();
                 }
                 omSysPauseEnable(TRUE);
@@ -143,7 +143,7 @@ void omOvlReturnEx(s16 hisOfs, s16 unlinkF)
 void omOvlKill(s16 unlinkF)
 {
     MgActorClose();
-    CharModelKill(-1);
+    CharModelKill(CHARNO_NONE);
     GMesClose();
     Hu3DAllKill();
     HuWinAllKill();

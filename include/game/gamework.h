@@ -4,6 +4,9 @@
 #include "dolphin.h"
 #include "game/flag.h"
 
+//HACK: to prevent prototype errors
+extern void HuPadRumbleAllStop(void);
+
 #define GW_PLAYER_MAX 4
 
 #define GW_TYPE_MAN 0
@@ -18,6 +21,7 @@
 #define GW_SD_BACKUP_MAX 12
 
 #define GW_MGNO_BASE 501
+#define GW_MGNO_NONE -1
 
 #define GW_LANGUAGE_JPN 0
 #define GW_LANGUAGE_ENG 1
@@ -45,7 +49,7 @@ typedef struct GwPlayer_s {
     u16 field6 : 1;
     s8 handicap;
     s8 padNo;
-    s8 capsuleNo[3];
+    s8 capsule[3];
     u16 color : 2;
     u16 moveF : 1;
     u16 jumpF : 1;
@@ -57,7 +61,7 @@ typedef struct GwPlayer_s {
     s16 masuNo;
     s16 masuNoPrev;
     s16 masuNoNext;
-    s16 capsuleNoUse;
+    s16 capsuleUse;
     s8 blueMasuNum;
     s8 redMasuNum;
     s8 donkeyMasuNum;
@@ -94,7 +98,7 @@ typedef struct GwSystem_s {
     u16 messSpeed : 2;
     u16 saveMode : 2;
     u8 turnNo;
-    u8 turnCnt;
+    u8 turnMax;
     u8 starFlag;
     u8 starTotal;
     u8 starPos : 3;
@@ -151,12 +155,12 @@ typedef struct GwCommon_s {
     u8 unk424_4 : 1;
     u8 unk425_1 : 1;
     u8 unk425_2 : 1;
-    u8 storyMgInstDispF : 1;
+    u8 storyMgInstF : 1;
     u8 storyMgComF : 1;
     u8 storyMgPack : 3;
     u8 storyMessSpeed : 2;
     u8 storySaveMode : 2;
-    u8 partyMgInstDispF : 1;
+    u8 partyMgInstF : 1;
     u8 partyMgComF : 1;
     u8 partyMgPack : 3;
     u8 partyMessSpeed : 2;
@@ -268,7 +272,7 @@ static inline void GWTeamFSet(BOOL flag)
 
 static inline void GWMgCoinBonusSet(s32 playerNo, s16 mgCoin)
 {
-    if(_CheckFlag(0x1000F)) {
+    if(_CheckFlag(FLAG_MG_PRACTICE)) {
         return;
     }
     GwPlayer[playerNo].mgCoinBonus = mgCoin;
@@ -276,7 +280,7 @@ static inline void GWMgCoinBonusSet(s32 playerNo, s16 mgCoin)
 
 static inline void GWMgCoinSet(s32 playerNo, s16 mgCoin)
 {
-    if(_CheckFlag(0x1000F)) {
+    if(_CheckFlag(FLAG_MG_PRACTICE)) {
         return;
     }
     GwPlayer[playerNo].mgCoin = mgCoin;

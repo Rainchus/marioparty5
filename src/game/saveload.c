@@ -207,7 +207,7 @@ s32 SLFileWrite(s32 length, void *addr)
     HuWinInit(1);
     HuWinInsertMesSizeGet(SL_CUR_SLOT_MESS, 0);
     HuWinMesMaxSizeGet(1, &size, MPSYSTEM_MES_CARD_WRITE);
-    winId = HuWinExCreateFrame(-10000, 200, size.x, size.y, WIN_SPEAKER_NONE, 2);
+    winId = HuWinExCreateFrame(-10000, 200, size.x, size.y, HUWIN_SPEAKER_NONE, 2);
     HuWinExOpen(winId);
     HuWinInsertMesSet(winId, SL_CUR_SLOT_MESS, 0);
     HuWinMesSet(winId, MPSYSTEM_MES_CARD_WRITE);
@@ -814,7 +814,7 @@ static HUWINID SLMessWinCreate(s32 mesNum, s32 insertMesNum1, s32 insertMesNum2,
     }
     HuWinMesMaxSizeGet(1, &size, mesNum);
     if(SLWinId == HUWIN_NONE) {
-        winId = HuWinExCreateFrame(-10000, posY, size.x, size.y, WIN_SPEAKER_NONE, 2);
+        winId = HuWinExCreateFrame(-10000, posY, size.x, size.y, HUWIN_SPEAKER_NONE, 2);
         HuWinExOpen(winId);
     } else {
         winId = SLWinId;
@@ -853,7 +853,7 @@ s16 SLMessOut(s16 messId)
     u32 insertMes = 0;
     BOOL choiceF = FALSE;
 
-    WIN *winP;
+    HUWIN *winP;
     if(SLWinId == HUWIN_NONE) {
         HuWinInit(1);
     }
@@ -940,7 +940,7 @@ s16 SLMessOut(s16 messId)
         HuVec2F size;
         size.x = 478;
         size.y = 94;
-        winId = HuWinExCreateFrame(-10000, 200, size.x, size.y, WIN_SPEAKER_NONE, 2);
+        winId = HuWinExCreateFrame(-10000, 200, size.x, size.y, HUWIN_SPEAKER_NONE, 2);
     } else {
         winId = SLWinId;
     }
@@ -1247,8 +1247,8 @@ s32 SLSaveSdBExec(void)
     }
     savefail:
     {
-        int winId = HuWinExCreateFrame(-10000, 200, 478, 94, WIN_SPEAKER_NONE, 2);
-        WIN *winP;
+        int winId = HuWinExCreateFrame(-10000, 200, 478, 94, HUWIN_SPEAKER_NONE, 2);
+        HUWIN *winP;
         HuWinAttrSet(winId, HUWIN_ATTR_NOCANCEL);
         winP = &winData[winId];
         winP->padMask = HUWIN_PLAYER_1;

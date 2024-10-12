@@ -49,7 +49,7 @@ void HuDataInit(void)
     }
     DataDirMax = i;
     for(i=0, readStat = ReadDataStat; i<DATA_MAX_READSTAT; i++, readStat++) {
-        readStat->dirId = -1;
+        readStat->dirId = HU_DATANUM_NONE;
         readStat->used = FALSE;
         readStat->status = 0;
     }
@@ -59,12 +59,12 @@ static s32 HuDataReadStatusGet(void)
 {
     s32 i;
     for(i=0; i<DATA_MAX_READSTAT; i++) {
-        if(ReadDataStat[i].dirId == -1) {
+        if(ReadDataStat[i].dirId == HU_DATANUM_NONE) {
             break;
         }
     }
     if(i >= DATA_MAX_READSTAT) {
-        i = -1;
+        i = HU_DATA_STAT_NONE;
     }
     return i;
 }
@@ -79,7 +79,7 @@ s32 HuDataReadChk(int dirNum)
         }
     }
     if(i >= DATA_MAX_READSTAT) {
-        i = -1;
+        i = HU_DATA_STAT_NONE;
     }
     return i;
 }
@@ -126,7 +126,7 @@ HUDATASTAT *HuDataDirRead(int dataNum)
             statId = HuDataReadChk(dataNum);
             readStat = &ReadDataStat[statId];
         } else {
-            if((statId = HuDataReadStatusGet()) == -1) {
+            if((statId = HuDataReadStatusGet()) == HU_DATA_STAT_NONE) {
                 OSReport("data.c: Data Work Max Error\n");
                 return NULL;
             }
@@ -166,7 +166,7 @@ static HUDATASTAT *HuDataDirReadNum(int dataNum, s32 num)
             readStat->num = num;
         } else {
             OSReport("data num %x\n", dataNum);
-            if((statId = HuDataReadStatusGet()) == -1) {
+            if((statId = HuDataReadStatusGet()) == HU_DATA_STAT_NONE) {
                 OSReport("data.c: Data Work Max Error\n");
                 return NULL;
             }
@@ -191,7 +191,7 @@ HUDATASTAT *HuDataDirSet(void *dirP, int dataNum)
     if((statId = HuDataReadChk(readStat->dirId << 16)) >= 0) {
         HuDataDirClose(dataNum);
     }
-    if((statId = HuDataReadStatusGet()) == -1) {
+    if((statId = HuDataReadStatusGet()) == HU_DATA_STAT_NONE) {
         OSReport("data.c: Data Work Max Error\n");
         return NULL;
     } else {
@@ -263,7 +263,7 @@ s32 HuDataDirReadAsync(int dataNum)
     dirId  = dataNum >> 16;
     if(DataDirMax <= dirId) {
         OSReport("data.c: Data Number Error(%d)\n", dataNum);
-        return -1;
+        return HU_DATA_STAT_NONE;
     }
     if((statId = HuDataReadChk(dataNum)) < 0) {
         AMEM_PTR dirAMemP;
@@ -273,9 +273,9 @@ s32 HuDataDirReadAsync(int dataNum)
             statId = STAT_ID_ARAM;
         } else {
             statId = HuDataReadStatusGet();
-            if(statId == -1) {
+            if(statId == HU_DATA_STAT_NONE) {
                 OSReport("data.c: Data Work Max Error\n");
-                return -1;
+                return HU_DATA_STAT_NONE;
             }
             readStat = &ReadDataStat[statId];
             readStat->status = 1;
@@ -283,7 +283,7 @@ s32 HuDataDirReadAsync(int dataNum)
             readStat->dirP = HuDvdDataFastReadAsync(DataDirStat[dirId].entryNum, readStat);
         }
     } else {
-        statId = -1;
+        statId = HU_DATA_STAT_NONE;
     }
     return statId;
 }
@@ -296,12 +296,12 @@ s32 HuDataDirReadNumAsync(int dataNum, s32 num)
     dirId  = dataNum >> 16;
     if(DataDirMax <= dirId) {
         OSReport("data.c: Data Number Error(%d)\n", dataNum);
-        return -1;
+        return HU_DATA_STAT_NONE;
     }
     if((statId = HuDataReadChk(dataNum)) < 0) {
-        if((statId = HuDataReadStatusGet()) == -1) {
+        if((statId = HuDataReadStatusGet()) == HU_DATA_STAT_NONE) {
             OSReport("data.c: Data Work Max Error\n");
-            return -1;
+            return HU_DATA_STAT_NONE;
         }
         ReadDataStat[statId].status = TRUE;
         ReadDataStat[statId].dirId = dirId;
@@ -310,7 +310,7 @@ s32 HuDataDirReadNumAsync(int dataNum, s32 num)
         readStat->num = num;
         readStat->dirP = HuDvdDataFastReadAsync(DataDirStat[dirId].entryNum, readStat);
     } else {
-        statId = -1;
+        statId = HU_DATA_STAT_NONE;
     }
     return statId;
 }
@@ -343,7 +343,7 @@ void *HuDataRead(int dataNum)
     if(!HuDataDirRead(dataNum)) {
         return NULL;
     }
-    if((statId = HuDataReadChk(dataNum)) == -1) {
+    if((statId = HuDataReadChk(dataNum)) == HU_DATA_STAT_NONE) {
         return NULL;
     }
     readStat = &ReadDataStat[statId];
@@ -363,7 +363,7 @@ void *HuDataReadNum(int dataNum, s32 num)
     if(!HuDataDirReadNum(dataNum, num)) {
         return NULL;
     }
-    if((statId = HuDataReadChk(dataNum)) == -1) {
+    if((statId = HuDataReadChk(dataNum)) == HU_DATA_STAT_NONE) {
         return NULL;
     }
     readStat = &ReadDataStat[statId];
@@ -383,7 +383,7 @@ void *HuDataSelHeapRead(int dataNum, HUHEAPTYPE heap)
     if(!HuDataDirRead(dataNum)) {
         return NULL;
     }
-    if((statId = HuDataReadChk(dataNum)) == -1) {
+    if((statId = HuDataReadChk(dataNum)) == HU_DATA_STAT_NONE) {
         return NULL;
     }
     readStat = &ReadDataStat[statId];
@@ -419,7 +419,7 @@ void *HuDataSelHeapReadNum(int dataNum, s32 num, HUHEAPTYPE heap)
     if(!HuDataDirReadNum(dataNum, num)) {
         return NULL;
     }
-    if((statId = HuDataReadChk(dataNum)) == -1) {
+    if((statId = HuDataReadChk(dataNum)) == HU_DATA_STAT_NONE) {
         return NULL;
     }
     readStat = &ReadDataStat[statId];
@@ -460,7 +460,7 @@ static void **HuDataReadMultiSub(int *dataNum, BOOL use_num, s32 num)
     void **outList;
     s32 i, count, numFiles;
     u32 dirId;
-    for(i=0, count=0; dataNum[i] != -1; i++) {
+    for(i=0, count=0; dataNum[i] != HU_DATANUM_NONE; i++) {
         dirId = dataNum[i] >> 16;
         if(DataDirMax <= dirId) {
             OSReport("data.c: Data Number Error(%d)\n", dataNum[i]);
@@ -473,28 +473,28 @@ static void **HuDataReadMultiSub(int *dataNum, BOOL use_num, s32 num)
     numFiles = i;
     dirIds = HuMemDirectMalloc(HUHEAPTYPE_HEAP, (count+1)*sizeof(s32));
     for(i=0; i<count+1; i++) {
-        dirIds[i] = -1;
+        dirIds[i] = HU_DATANUM_NONE;
     }
     pathTbl = HuMemDirectMalloc(HUHEAPTYPE_HEAP, (count+1)*sizeof(char *));
-    for(i=0, count=0; dataNum[i] != -1; i++) {
+    for(i=0, count=0; dataNum[i] != HU_DATANUM_NONE; i++) {
         dirId = dataNum[i] >> 16;
         if(HuDataReadChk(dataNum[i]) < 0) {
             s32 j;
-            for(j=0; dirIds[j] != -1; j++) {
+            for(j=0; dirIds[j] != HU_DATANUM_NONE; j++) {
                 if(dirIds[j] == dirId){
                     break;
                 }
             }
-            if(dirIds[j] == -1) {
+            if(dirIds[j] == HU_DATANUM_NONE) {
                 dirIds[j] = dirId;
                 pathTbl[count++] = DataDirStat[dirId].name;
             }
         }
     }
     dirP = HuDvdDataReadMulti(pathTbl);
-    for(i=0; dirIds[i] != -1; i++) {
+    for(i=0; dirIds[i] != HU_DATANUM_NONE; i++) {
         s32 statId;
-        if((statId = HuDataReadStatusGet()) == -1) {
+        if((statId = HuDataReadStatusGet()) == HU_DATA_STAT_NONE) {
             OSReport("data.c: Data Work Max Error\n");
             (void)count; //HACK to match HuDataReadMultiSub
             HuMemDirectFree(dirIds);
@@ -513,7 +513,7 @@ static void **HuDataReadMultiSub(int *dataNum, BOOL use_num, s32 num)
     } else {
         outList = HuMemDirectMalloc(HUHEAPTYPE_HEAP, (numFiles+1)*sizeof(void *));
     }
-    for(i=0; dataNum[i] != -1; i++) {
+    for(i=0; dataNum[i] != HU_DATANUM_NONE; i++) {
         if(use_num) {
             outList[i] = HuDataReadNum(dataNum[i], num);
         } else {
@@ -528,7 +528,7 @@ s32 HuDataGetSize(int dataNum)
 {
     HUDATASTAT *readStat;
     s32 statId;
-    if((statId = HuDataReadChk(dataNum)) == -1) {
+    if((statId = HuDataReadChk(dataNum)) == HU_DATA_STAT_NONE) {
         return -1;
     }
     readStat = &ReadDataStat[statId];
@@ -575,7 +575,7 @@ void HuDataDirClose(int dataNum)
         DVDCancel(&ReadDataStat[i].dvdFile.cb);
         while(ReadDataStat[i].status);
     }
-    readStat->dirId = -1;
+    readStat->dirId = HU_DATANUM_NONE;
     HuDvdDataClose(readStat->dirP);
     readStat->dirP = NULL;
     readStat->used = FALSE;
