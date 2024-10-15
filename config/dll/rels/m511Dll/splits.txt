@@ -38,11 +38,15 @@ REL/m511Dll/gamemaster.cpp:
 	.bss        start:0x00000A18 end:0x00000A38
 
 REL/m511Dll/particle.cpp:
-	.text       start:0x00008488 end:0x000097C8
-	.ctors      start:0x0000000C end:0x00000010
+	.text       start:0x00008488 end:0x00009734
 	.rodata     start:0x000001E8 end:0x00000248
 	.data       start:0x00000338 end:0x00000368
-	.bss        start:0x00000A38 end:0x00000A50
+	.bss        start:0x00000A38 end:0x00000A40
+
+REL/m511Dll/objectsetup.cpp:
+	.text       start:0x00009734 end:0x000097C8
+	.ctors      start:0x0000000C end:0x00000010
+	.bss        start:0x00000A40 end:0x00000A50
 
 REL/m511Dll/camera.cpp:
 	.text       start:0x000097C8 end:0x0000BD18
