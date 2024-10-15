@@ -5,3 +5,39 @@ Sections:
 	.rodata     type:rodata align:8
 	.data       type:data align:8
 	.bss        type:bss align:8
+
+REL/m514Dll/m514.c:
+	.text       start:0x00000000 end:0x00001D9C
+	.rodata     start:0x00000000 end:0x000000C8
+	.data       start:0x00000000 end:0x000000B8
+	.bss        start:0x00000000 end:0x00000070
+
+REL/m514Dll/player.c:
+	.text       start:0x00001D9C end:0x00004270
+	.rodata     start:0x000000C8 end:0x00000208
+	.data       start:0x000000B8 end:0x00000300
+	.bss        start:0x00000070 end:0x00000088
+
+REL/m514Dll/object.c:
+	.text       start:0x00004270 end:0x0000510C
+	.rodata     start:0x00000208 end:0x00000238
+	.data       start:0x00000300 end:0x000004A0
+	.bss        start:0x00000088 end:0x00000210
+
+REL/m514Dll/stage.c:
+	.text       start:0x0000510C end:0x00005B04
+	.rodata     start:0x00000238 end:0x00000268
+	.data       start:0x000004A0 end:0x000004D8
+	.bss        start:0x00000210 end:0x00000218
+
+REL/m514Dll/effect.c:
+	.text       start:0x00005B04 end:0x00008268
+	.rodata     start:0x00000268 end:0x000003B0
+	.data       start:0x000004D8 end:0x000004F8
+	.bss        start:0x00000218 end:0x00000220
+
+REL/m514Dll/score.c:
+	.text       start:0x00008268 end:0x0000995C
+	.rodata     start:0x000003B0 end:0x00000428
+	.data       start:0x000004F8 end:0x0000055C
+	.bss        start:0x00000220 end:0x00000224

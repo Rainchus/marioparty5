@@ -36,10 +36,13 @@ REL/m509Dll/startspr.cpp:
 	.bss        start:0x00000050 end:0x00000058
 
 REL/m509Dll/back.cpp:
-	.text       start:0x0000CED0 end:0x0000DEEC
-	.ctors      start:0x00000008 end:0x0000000C
+	.text       start:0x0000CED0 end:0x0000DDBC
 	.rodata     start:0x00000278 end:0x00000318
 	.data       start:0x00003398 end:0x000033D0
+
+REL/m509Dll/objectsetup.cpp:
+	.text       start:0x0000DDBC end:0x0000DEEC
+	.ctors      start:0x00000008 end:0x0000000C
 	.bss        start:0x00000058 end:0x00000068
 
 REL/m509Dll/camera.cpp:
